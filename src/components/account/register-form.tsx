@@ -123,7 +123,7 @@ export function RegisterForm({ locale }: RegisterFormProps) {
             },
           })}
           placeholder="090-1234-5678"
-          className={`max-w-[250px] ${errors.phone ? "border-destructive" : ""}`}
+          className={errors.phone ? "border-destructive" : ""}
         />
         {errors.phone && (
           <p className="text-xs text-destructive">{errors.phone.message}</p>

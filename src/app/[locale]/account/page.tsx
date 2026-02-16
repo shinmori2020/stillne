@@ -23,7 +23,7 @@ export default async function AccountPage({ params }: AccountPageProps) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 md:px-8">
-      <PageHeader title={t("myPage")} />
+      <PageHeader title={t("myPage")} className="text-center" />
       <div className="mt-8">
         <AccountDashboard locale={locale} />
       </div>

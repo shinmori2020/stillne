@@ -29,8 +29,15 @@ export function AccountDashboard({ locale }: AccountDashboardProps) {
     );
   }
 
-  // Not logged in
-  if (!customer) {
+  // Demo mode: show dummy data when Medusa is not configured
+  const demoCustomer = !isMedusaConfigured
+    ? { first_name: "太郎", last_name: "山田", email: "demo@stillne.com" }
+    : null;
+
+  const displayCustomer = customer || demoCustomer;
+
+  // Not logged in (only when Medusa is configured)
+  if (!displayCustomer) {
     return (
       <div className="space-y-6 text-center">
         <p className="text-muted-foreground">
@@ -87,9 +94,9 @@ export function AccountDashboard({ locale }: AccountDashboardProps) {
       <div className="rounded-lg border border-border p-6">
         <h2 className="text-lg font-medium">
           {t("welcome")}
-          {customer.first_name && `, ${customer.first_name}`}
+          {displayCustomer.first_name && `, ${displayCustomer.first_name}`}
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">{customer.email}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{displayCustomer.email}</p>
       </div>
 
       {/* Menu items */}
