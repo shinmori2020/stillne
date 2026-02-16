@@ -7,7 +7,7 @@ import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { PlaceholderImage } from "@/components/common/placeholder-image";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
 // Demo cart items for display
 const DEMO_CART_ITEMS = [
@@ -99,7 +99,7 @@ export default function CartPage() {
                         </p>
                       </div>
                       <p className="font-medium">
-                        {formatPrice(item.price * item.quantity)}
+                        {formatPrice(item.price * item.quantity, "jpy")}
                       </p>
                     </div>
 
@@ -149,7 +149,7 @@ export default function CartPage() {
               <div className="mt-6 space-y-4">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{t("subtotal")}</span>
-                  <span>{formatPrice(subtotal)}</span>
+                  <span>{formatPrice(subtotal, "jpy")}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{t("shipping")}</span>
@@ -160,7 +160,7 @@ export default function CartPage() {
                 <div className="border-t pt-4">
                   <div className="flex justify-between font-medium">
                     <span>{t("total")}</span>
-                    <span>{formatPrice(subtotal)}</span>
+                    <span>{formatPrice(subtotal, "jpy")}</span>
                   </div>
                 </div>
               </div>

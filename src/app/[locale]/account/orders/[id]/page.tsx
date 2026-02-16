@@ -6,7 +6,7 @@ import { ArrowLeft, Package, Truck, CheckCircle, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { PlaceholderImage } from "@/components/common/placeholder-image";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
 interface OrderDetailPageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -180,7 +180,7 @@ export default async function OrderDetailPage({
                     </p>
                   </div>
                   <p className="font-medium">
-                    {formatPrice(item.price * item.quantity)}
+                    {formatPrice(item.price * item.quantity, "jpy", locale)}
                   </p>
                 </div>
               ))}
@@ -191,7 +191,7 @@ export default async function OrderDetailPage({
                 <span className="text-muted-foreground">
                   {locale === "ja" ? "小計" : "Subtotal"}
                 </span>
-                <span>{formatPrice(order.subtotal)}</span>
+                <span>{formatPrice(order.subtotal, "jpy", locale)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
@@ -202,12 +202,12 @@ export default async function OrderDetailPage({
                     ? locale === "ja"
                       ? "無料"
                       : "Free"
-                    : formatPrice(order.shipping)}
+                    : formatPrice(order.shipping, "jpy", locale)}
                 </span>
               </div>
               <div className="flex justify-between font-medium">
                 <span>{locale === "ja" ? "合計" : "Total"}</span>
-                <span>{formatPrice(order.total)}</span>
+                <span>{formatPrice(order.total, "jpy", locale)}</span>
               </div>
             </div>
           </div>

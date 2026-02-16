@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Package, ShoppingCart, TrendingUp, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
 // Demo statistics
 const DEMO_STATS = {
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t("totalRevenue")}</p>
-                <p className="text-2xl font-bold">{formatPrice(DEMO_STATS.totalRevenue)}</p>
+                <p className="text-2xl font-bold">{formatPrice(DEMO_STATS.totalRevenue, "jpy")}</p>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function AdminDashboard() {
                   <p className="text-sm text-muted-foreground">{order.customer}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">{formatPrice(order.total)}</p>
+                  <p className="font-medium">{formatPrice(order.total, "jpy")}</p>
                   <span
                     className={`inline-block rounded-full px-2 py-0.5 text-xs ${
                       statusLabels[order.status]?.color

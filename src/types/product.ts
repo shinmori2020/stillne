@@ -41,7 +41,7 @@ export interface ProductOption {
  * Product variant price
  */
 export interface ProductVariantPrice {
-  id: string;
+  id?: string;
   currency_code: string;
   amount: number;
   min_quantity?: number;
@@ -59,13 +59,13 @@ export interface ProductVariant {
   ean?: string;
   upc?: string;
   inventory_quantity: number;
-  allow_backorder: boolean;
-  manage_inventory: boolean;
+  allow_backorder?: boolean;
+  manage_inventory?: boolean;
   weight?: number;
   length?: number;
   height?: number;
   width?: number;
-  options: ProductOptionValue[];
+  options?: Array<{ value: string; id?: string; option_id?: string; metadata?: Record<string, unknown> }>;
   prices: ProductVariantPrice[];
   metadata?: Record<string, unknown>;
 }
@@ -103,7 +103,7 @@ export interface Product {
   handle: string;
   subtitle?: string;
   description?: string;
-  is_giftcard: boolean;
+  is_giftcard?: boolean;
   status: "draft" | "proposed" | "published" | "rejected";
   thumbnail?: string;
   weight?: number;

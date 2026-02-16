@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { PlaceholderImage } from "@/components/common/placeholder-image";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
 // Demo products (same as in products.ts)
 const DEMO_PRODUCTS = [
@@ -173,7 +173,7 @@ export default function AdminProductsPage() {
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <span>{formatPrice(product.price)}</span>
+                      <span>{formatPrice(product.price, "jpy")}</span>
                     </td>
                     <td className="hidden px-4 py-3 md:table-cell">
                       <span

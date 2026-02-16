@@ -9,13 +9,13 @@ import type { Product } from "@/types/product";
 const isMedusaConfigured = !!process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
 
 // Dummy products for development/demo
-const DUMMY_PRODUCTS: Product[] = [
+const DUMMY_PRODUCTS = [
   {
     id: "prod_01",
     title: "セラミックフラワーベース A-001",
     handle: "ceramic-flower-vase-a001",
     description: "シンプルなフォルムが空間に溶け込む、日常使いのためのフラワーベース。マットな質感と柔らかな曲線が特徴です。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_interior", name: "インテリア雑貨", handle: "interior" }],
@@ -35,7 +35,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "キャンドルホルダー B-002",
     handle: "candle-holder-b002",
     description: "真鍮の上品な輝きが空間にアクセントを添える、モダンなキャンドルホルダー。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_interior", name: "インテリア雑貨", handle: "interior" }],
@@ -55,7 +55,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "マグカップ C-003",
     handle: "mug-cup-c003",
     description: "手に馴染む丸みを帯びたフォルム。毎日のコーヒータイムを特別なひとときに。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_tableware", name: "テーブルウェア", handle: "tableware" }],
@@ -75,7 +75,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "リネンクッションカバー D-004",
     handle: "linen-cushion-cover-d004",
     description: "上質なリネン100%のクッションカバー。ナチュラルな風合いがお部屋を優しく彩ります。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_fabric", name: "ファブリック", handle: "fabric" }],
@@ -95,7 +95,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "レザーノート E-005",
     handle: "leather-notebook-e005",
     description: "イタリアンレザーを使用した上質なノート。時間とともに深まる風合いをお楽しみください。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_stationery", name: "ステーショナリー", handle: "stationery" }],
@@ -115,7 +115,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "ガラスプレート F-006",
     handle: "glass-plate-f006",
     description: "透明感のある手吹きガラスのプレート。光を受けて美しく輝きます。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_tableware", name: "テーブルウェア", handle: "tableware" }],
@@ -135,7 +135,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "ウールブランケット G-007",
     handle: "wool-blanket-g007",
     description: "ニュージーランド産ウールを使用した軽くて暖かいブランケット。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_fabric", name: "ファブリック", handle: "fabric" }],
@@ -155,7 +155,7 @@ const DUMMY_PRODUCTS: Product[] = [
     title: "真鍮ペンスタンド H-008",
     handle: "brass-pen-stand-h008",
     description: "デスクを上品に彩る真鍮製のペンスタンド。経年変化も楽しめます。",
-    thumbnail: null,
+    thumbnail: undefined,
     images: [],
     status: "published",
     categories: [{ id: "cat_stationery", name: "ステーショナリー", handle: "stationery" }],
@@ -170,7 +170,7 @@ const DUMMY_PRODUCTS: Product[] = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   },
-];
+] as unknown as Product[];
 
 /**
  * Get dummy products filtered by category

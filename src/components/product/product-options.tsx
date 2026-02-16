@@ -20,7 +20,7 @@ export function ProductOptions({
   const selectedOptions: Record<string, string> = {};
   if (selectedVariant) {
     selectedVariant.options?.forEach((opt) => {
-      selectedOptions[opt.option_id] = opt.value;
+      if (opt.option_id) selectedOptions[opt.option_id] = opt.value;
     });
   }
 
@@ -31,7 +31,7 @@ export function ProductOptions({
     // Find variant that matches all selected options
     const matchingVariant = variants.find((variant) =>
       variant.options?.every(
-        (opt) => newSelectedOptions[opt.option_id] === opt.value
+        (opt) => opt.option_id ? newSelectedOptions[opt.option_id] === opt.value : false
       )
     );
 

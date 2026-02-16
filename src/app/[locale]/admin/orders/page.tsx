@@ -7,7 +7,7 @@ import { Search, Eye, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/format";
 
 // Demo orders
 const DEMO_ORDERS = [
@@ -130,13 +130,13 @@ export default function AdminOrdersPage() {
                 {locale === "ja" ? "すべてのステータス" : "All Status"}
               </option>
               <option value="processing">
-                {statusLabels.processing[locale === "ja" ? "ja" : "en"]}
+                {statusLabels["processing"]?.[locale === "ja" ? "ja" : "en"]}
               </option>
               <option value="shipped">
-                {statusLabels.shipped[locale === "ja" ? "ja" : "en"]}
+                {statusLabels["shipped"]?.[locale === "ja" ? "ja" : "en"]}
               </option>
               <option value="delivered">
-                {statusLabels.delivered[locale === "ja" ? "ja" : "en"]}
+                {statusLabels["delivered"]?.[locale === "ja" ? "ja" : "en"]}
               </option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
@@ -190,7 +190,7 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div>
-                        <p>{formatPrice(order.total)}</p>
+                        <p>{formatPrice(order.total, "jpy")}</p>
                         <p className="text-xs text-muted-foreground">
                           {order.itemCount} {locale === "ja" ? "点" : "items"}
                         </p>
