@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { Lamp, UtensilsCrossed, Armchair, PenLine } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 
 interface CategoryBannerProps {
@@ -15,8 +16,7 @@ const CATEGORIES = [
     labelEn: "Interior",
     descJa: "空間を彩るアイテム",
     descEn: "Items that color your space",
-    gradient: "from-amber-50 to-orange-100 dark:from-amber-950/30 dark:to-orange-900/20",
-    icon: "🏠",
+    icon: Lamp,
   },
   {
     handle: "tableware",
@@ -24,8 +24,7 @@ const CATEGORIES = [
     labelEn: "Tableware",
     descJa: "食卓を美しく",
     descEn: "Beautiful dining moments",
-    gradient: "from-sky-50 to-blue-100 dark:from-sky-950/30 dark:to-blue-900/20",
-    icon: "🍽",
+    icon: UtensilsCrossed,
   },
   {
     handle: "fabric",
@@ -33,8 +32,7 @@ const CATEGORIES = [
     labelEn: "Fabric",
     descJa: "心地よい肌触り",
     descEn: "Comfortable textures",
-    gradient: "from-rose-50 to-pink-100 dark:from-rose-950/30 dark:to-pink-900/20",
-    icon: "🧵",
+    icon: Armchair,
   },
   {
     handle: "stationery",
@@ -42,8 +40,7 @@ const CATEGORIES = [
     labelEn: "Stationery",
     descJa: "書く喜びを日常に",
     descEn: "Joy of writing daily",
-    gradient: "from-emerald-50 to-green-100 dark:from-emerald-950/30 dark:to-green-900/20",
-    icon: "✏️",
+    icon: PenLine,
   },
 ];
 
@@ -60,29 +57,30 @@ export function CategoryBanner({ locale }: CategoryBannerProps) {
         </ScrollFadeIn>
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-          {CATEGORIES.map((cat, index) => (
-            <ScrollFadeIn key={cat.handle} delay={index * 0.1}>
-              <Link
-                href={`/${locale}/products?category=${cat.handle}`}
-                className="group block"
-              >
-                <div
-                  className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${cat.gradient} p-6 transition-all duration-300 hover:shadow-lg md:p-8`}
+          {CATEGORIES.map((cat, index) => {
+            const Icon = cat.icon;
+            return (
+              <ScrollFadeIn key={cat.handle} delay={index * 0.1}>
+                <Link
+                  href={`/${locale}/products?category=${cat.handle}`}
+                  className="group block"
                 >
-                  <div className="mb-4 text-3xl md:text-4xl">{cat.icon}</div>
-                  <h3 className="font-heading text-base font-medium md:text-lg">
-                    {locale === "ja" ? cat.labelJa : cat.labelEn}
-                  </h3>
-                  <p className="mt-1 text-xs text-muted-foreground md:text-sm">
-                    {locale === "ja" ? cat.descJa : cat.descEn}
-                  </p>
-                  <div className="mt-4 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                    {t("viewAll")} →
+                  <div className="rounded-lg border bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-sm md:p-8">
+                    <Icon className="mb-4 h-6 w-6 text-muted-foreground transition-colors group-hover:text-primary" />
+                    <h3 className="font-heading text-base font-medium md:text-lg">
+                      {locale === "ja" ? cat.labelJa : cat.labelEn}
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground md:text-sm">
+                      {locale === "ja" ? cat.descJa : cat.descEn}
+                    </p>
+                    <span className="mt-4 inline-block text-xs text-muted-foreground/0 transition-colors group-hover:text-primary">
+                      {t("viewAll")} →
+                    </span>
                   </div>
-                </div>
-              </Link>
-            </ScrollFadeIn>
-          ))}
+                </Link>
+              </ScrollFadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
