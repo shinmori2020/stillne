@@ -21,6 +21,8 @@ export async function Footer({ locale }: FooterProps) {
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
     { label: t("contact"), href: "/contact" },
+    { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },
+    { label: locale === "ja" ? "管理画面" : "Admin", href: "/admin" },
   ] as const;
 
   return (
