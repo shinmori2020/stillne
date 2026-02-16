@@ -1,0 +1,243 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "back": "Back",
+    "search": "Search",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "all": "All"
+  },
+  "home": {
+    "hero": {
+      "title": "beautiful everyday objects",
+      "subtitle": "curated interior and lifestyle goods that blend into your life",
+      "cta": "shop now",
+      "secondaryCta": "our concept"
+    },
+    "heroTitle": "beautiful everyday objects",
+    "heroSubtitle": "curated interior and lifestyle goods that blend into your life",
+    "shopNow": "shop now",
+    "newArrivals": "new arrivals",
+    "featured": "featured",
+    "viewAll": "view all"
+  },
+  "product": {
+    "addToCart": "add to cart",
+    "addedToCart": "added",
+    "adding": "adding...",
+    "outOfStock": "out of stock",
+    "lowStock": "low stock",
+    "relatedProducts": "related products",
+    "allProducts": "all products",
+    "noProducts": "No products found",
+    "sku": "SKU",
+    "quantity": "Quantity",
+    "selectVariant": "Please select an option"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "continue shopping",
+    "checkout": "proceed to checkout",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingCalculated": "Calculated at checkout",
+    "total": "Total",
+    "drawerLabel": "Shopping cart",
+    "remove": "Remove",
+    "itemCount": "{count, plural, =0 {Cart is empty} one {1 item} other {{count} items}}"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping Address",
+    "shippingMethod": "Shipping Method",
+    "payment": "Payment",
+    "confirm": "Place Order",
+    "success": "Thank you for your order",
+    "orderNumber": "Order number",
+    "confirmationEmail": "A confirmation email has been sent",
+    "viewOrder": "View order history",
+    "demoNoticeTitle": "This is a demo order",
+    "demoNoticeBody": "No actual charges have been made. This was processed with a test card number."
+  },
+  "account": {
+    "login": "Log in",
+    "register": "Create account",
+    "logout": "Log out",
+    "loggingIn": "Logging in...",
+    "registering": "Creating account...",
+    "loggingOut": "Logging out...",
+    "profile": "Profile",
+    "orders": "Order history",
+    "addresses": "Addresses",
+    "myPage": "My account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone number",
+    "noOrders": "No orders yet",
+    "orderDate": "Order date",
+    "orderStatus": "Status",
+    "orderTotal": "Total",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginError": "Login failed. Please check your email and password.",
+    "registerError": "Registration failed. Please try a different email address.",
+    "welcome": "Welcome",
+    "editProfile": "Edit profile",
+    "saveChanges": "Save changes",
+    "saving": "Saving...",
+    "profileUpdated": "Profile updated",
+    "updateError": "Update failed"
+  },
+  "address": {
+    "postalCode": "Postal code",
+    "prefecture": "Prefecture / State",
+    "city": "City",
+    "address1": "Address line 1",
+    "address2": "Address line 2",
+    "phone": "Phone number"
+  },
+  "category": {
+    "interior": "Interior",
+    "tableware": "Tableware",
+    "fabric": "Fabric",
+    "stationery": "Stationery"
+  },
+  "sort": {
+    "newest": "Newest",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low"
+  },
+  "footer": {
+    "concept": "Curated products that quietly complement your life",
+    "categories": "Categories",
+    "help": "Help",
+    "shipping": "Shipping",
+    "contact": "Contact",
+    "legal": "Legal",
+    "social": "Social",
+    "copyright": "© {year} stillne. All rights reserved."
+  },
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "account": "Account",
+    "menu": "Menu",
+    "toggleTheme": "Toggle theme"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "minLength": "Must be at least {min} characters",
+    "passwordMismatch": "Passwords do not match",
+    "invalidPostalCode": "Please enter a valid postal code",
+    "invalidPhone": "Please enter a valid phone number"
+  },
+  "pages": {
+    "about": {
+      "title": "about stillne",
+      "subtitle": "beautiful everyday objects",
+      "concept": {
+        "title": "our concept",
+        "description": "stillne is an online store that delivers interior goods and daily essentials that blend into your everyday life while providing a small sense of satisfaction every time you reach for them. We carefully curate products that speak through their materials and form, without excessive decoration."
+      },
+      "values": {
+        "title": "our values",
+        "quality": {
+          "title": "commitment to quality",
+          "description": "We only carry products of proven quality that can be used for a long time."
+        },
+        "design": {
+          "title": "minimal design",
+          "description": "We pursue beautiful forms that are simple yet harmonize with any space."
+        },
+        "sustainability": {
+          "title": "sustainability",
+          "description": "We value environmentally conscious material selection and products built to last."
+        }
+      }
+    },
+    "shipping": {
+      "title": "shipping information",
+      "subtitle": "delivery guidelines",
+      "deliveryTime": {
+        "title": "delivery time",
+        "description": "Orders are typically shipped within 3-5 business days after confirmation. Delivery times vary by region, but items usually arrive within 1-3 days after shipment."
+      },
+      "shippingFee": {
+        "title": "shipping fee",
+        "description": "Flat rate shipping of ¥880 (tax included) nationwide. Free shipping on orders over ¥10,000.",
+        "note": "* Additional shipping charges may apply for Okinawa and remote islands."
+      },
+      "packaging": {
+        "title": "packaging",
+        "description": "Items are carefully packaged for delivery. If you would like gift wrapping, please let us know at the time of order."
+      },
+      "returns": {
+        "title": "returns & exchanges",
+        "description": "Returns and exchanges are accepted within 7 days of delivery for unused items only. If there are any defects or damage during shipping, please contact us."
+      }
+    },
+    "contact": {
+      "title": "contact us",
+      "subtitle": "feel free to reach out with any questions",
+      "form": {
+        "name": "name",
+        "email": "email",
+        "subject": "subject",
+        "message": "message",
+        "submit": "send",
+        "sending": "sending...",
+        "success": "Your inquiry has been received. Please allow 2-3 business days for a response.",
+        "error": "Failed to send. Please try again later."
+      },
+      "info": {
+        "title": "contact information",
+        "email": "contact@stillne.com",
+        "hours": "Business hours: Weekdays 10:00 - 18:00",
+        "note": "* Closed on weekends and holidays."
+      }
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product",
+    "deleteProduct": "Delete Product",
+    "productName": "Product Name",
+    "productDescription": "Description",
+    "productPrice": "Price",
+    "productCategory": "Category",
+    "productStatus": "Status",
+    "productStock": "Stock",
+    "published": "Published",
+    "draft": "Draft",
+    "confirmDelete": "Are you sure you want to delete this product?",
+    "saveSuccess": "Saved successfully",
+    "deleteSuccess": "Deleted successfully",
+    "totalProducts": "Products",
+    "totalOrders": "Orders",
+    "totalRevenue": "Revenue"
+  }
+}

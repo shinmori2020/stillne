@@ -1,0 +1,251 @@
+# Project: stillne
+
+## Overview
+- Minimal, refined interior & lifestyle goods EC shop
+- Stack: Next.js 15 (App Router) + Medusa v2 + Tailwind CSS + shadcn/ui + Stripe (test mode) + next-intl (ja/en)
+- This is a headless commerce project with Medusa backend and Next.js storefront
+- All content uses placeholder images and dummy text (demo/development stage)
+- Stripe runs in TEST MODE ONLY — never use live keys
+
+## Tech Stack
+- Frontend: Next.js 15 (App Router, React 19, Server Components)
+- Backend: Medusa v2 (headless commerce engine)
+- Styling: Tailwind CSS 4 + shadcn/ui (Radix-based)
+- State: React Query 5 (server) + Zustand 5 (client UI)
+- Payment: Stripe (test mode, sk_test_ / pk_test_ keys only)
+- i18n: next-intl (ja default + en, URL path routing: /[locale]/...)
+- Auth: Medusa standard (email + password, session cookie)
+- Forms: React Hook Form + Zod
+- Testing: Vitest + Testing Library (unit) + Playwright (E2E)
+- Deploy: Vercel (frontend) + Railway (Medusa + PostgreSQL + Redis)
+
+## Directory Structure
+```
+src/
+├── app/[locale]/           ← i18n routing (ja/en)
+│   ├── page.tsx            ← Home
+│   ├── products/page.tsx   ← Product list
+│   ├── products/[handle]/  ← Product detail
+│   ├── cart/               ← Cart
+│   ├── checkout/           ← Checkout + success
+│   ├── account/            ← Auth, profile, orders, addresses
+│   └── pages/[slug]/       ← Static pages
+├── components/
+│   ├── layout/             ← Header, Footer, MobileMenu, LanguageSwitcher, ThemeToggle
+│   ├── product/            ← ProductCard, ProductGrid, ProductDetail, ProductGallery, ProductVariantSelector
+│   ├── cart/               ← CartDrawer, CartItem, CartSummary, AddToCartButton, CartIcon
+│   ├── checkout/           ← CheckoutForm, ShippingAddressForm, PaymentSection, DemoNotice
+│   ├── account/            ← LoginForm, RegisterForm, ProfileForm, OrderList
+│   ├── home/               ← HeroBanner, FeaturedSection, NewArrivals, CategoryLinks
+│   ├── search/             ← SearchBar, CategoryFilter
+│   ├── common/             ← PlaceholderImage, EmptyState, Pagination, ScrollFadeIn
+│   └── ui/                 ← shadcn/ui (auto-generated, do not edit directly)
+├── hooks/                  ← useCart, useProducts, useCustomer, useCheckout
+├── lib/                    ← medusa.ts (SDK singleton), utils.ts (cn), format.ts, constants.ts
+├── types/                  ← product.ts, cart.ts, order.ts, customer.ts, common.ts
+├── providers/              ← CartProvider, QueryProvider, ThemeProvider
+├── messages/               ← ja.json, en.json
+└── scripts/seed.ts         ← Dummy data seeder (20-30 products)
+```
+
+## File Naming Conventions
+- Files: kebab-case (`product-card.tsx`)
+- Components: PascalCase (`ProductCard`)
+- Hooks: camelCase with `use` prefix (`useCart`)
+- Types: PascalCase (`ProductCardProps`)
+- Constants: SCREAMING_SNAKE_CASE (`MAX_CART_ITEMS`)
+- CSS variables: kebab-case with `--` prefix (`--accent`)
+- Exports: named export for all (except pages/layouts use default export)
+- NEVER use barrel exports (index.ts) — import directly from source files
+
+## Server / Client Component Rules
+- PREFER Server Components as default — no directive needed
+- Use `"use client"` ONLY when component needs: hooks, event handlers, browser APIs, React Query
+- Keep Client Components as small as possible — push data fetching to Server Components, pass via props
+- Server Components: ProductCard, ProductGrid, ProductDetail, ProductPrice, Footer, Breadcrumb, PlaceholderImage, DemoNotice, EmptyState
+- Client Components: Header, CartDrawer, CartItem, AddToCartButton, CartIcon, ProductGallery, ProductVariantSelector, CategoryFilter, SearchBar, CheckoutForm, PaymentSection, LanguageSwitcher, ThemeToggle, ScrollFadeIn, Pagination
+
+## Medusa Integration
+- Initialize SDK once in `lib/medusa.ts`, import from there everywhere
+- NEVER use raw `fetch()` to Medusa endpoints — always use Medusa JS SDK
+- Server Components: call SDK directly with `await sdk.store.product.list(...)`
+- Client Components: use React Query hooks (useQuery/useMutation) wrapping SDK calls
+- Cart ID stored in cookies (`stillne_cart_id`, 30-day expiry, sameSite: lax)
+- Create cart on first add-to-cart, not on page load
+- Auth flow: POST /auth/customer/emailpass → session cookie → authenticated API calls
+
+## Data Fetching Patterns
+- Server Components: `await sdk.store.product.list(...)` directly
+- Client Components: React Query hooks in `hooks/` directory
+- Filters, sort, pagination: URL search params (shareable, bookmarkable)
+- Product list: staleTime 60s | Cart: staleTime 0 | Categories: staleTime 5min
+- ALWAYS invalidate cart query after mutations (`queryClient.invalidateQueries(["cart"])`)
+- Every route segment with data fetching MUST have `loading.tsx` and `error.tsx`
+
+## State Management
+- Server data (products, orders, customer): React Query
+- Client UI state (cart drawer, mobile menu, search): Zustand (`lib/stores/ui-store.ts`)
+- URL state (filters, sort, page): `useSearchParams` + `useRouter`
+- Form state: React Hook Form + Zod schemas (in `schemas/` directory)
+- NEVER use localStorage for cart data — use server-side cart via Medusa + cookies
+
+## Styling Rules
+- ALWAYS use Tailwind utility classes — never inline styles (except dynamic computed values)
+- ALWAYS use CSS variables from design-guide (`bg-background`, `text-foreground`, `border-border`)
+- NEVER hardcode color values (`bg-[#FAFAF8]` is prohibited)
+- NEVER use `@apply`
+- Responsive: mobile-first order (base → `sm:` → `md:` → `lg:` → `xl:`)
+- Conditional classes: use `cn()` from `lib/utils.ts` (clsx + tailwind-merge)
+- shadcn/ui: customize via `className` prop only, never edit `components/ui/` source files
+
+## Design Tokens (from design-guide.md)
+- Fonts: `font-heading` (Cormorant Garamond), `font-body` (Source Sans 3 + Noto Sans JP), `font-ja` (Noto Sans JP), `font-mono` (JetBrains Mono)
+- Colors: warm off-white background, warm brown accent (`--accent: 25 30% 35%`), near-black foreground
+- Spacing: sections `py-16 md:py-24`, card gaps `gap-6 md:gap-8`, content `max-w-7xl px-4 md:px-8 lg:px-12`
+- Radius: buttons `rounded-md` (6px), cards `rounded-none`, inputs border-bottom only
+- Animations: hover 200ms ease, image scale 500ms ease-out, fade-in 600ms ease-out, drawer 300ms ease-out
+- Product cards: no border/shadow, image `aspect-square overflow-hidden`, hover `group-hover:scale-105`
+- Buttons: primary uses `bg-accent`, text `uppercase tracking-wide text-sm font-medium`
+- Dark mode: `next-themes`, system default, CSS variables swap via `.dark` class
+
+## i18n Rules
+- ALL UI text MUST use translation keys — no hardcoded Japanese or English strings
+- Server Components: `const t = await getTranslations("namespace")`
+- Client Components: `const t = useTranslations("namespace")`
+- Translation files: `messages/ja.json`, `messages/en.json`
+- Product data i18n: `metadata.title_en`, `metadata.description_en` for English variants
+- URL structure: `/ja/products/...`, `/en/products/...` (ja is default, can be omitted)
+- Language switcher in header: dropdown showing JA/EN, ghost button style
+
+## Image Rules
+- ALWAYS use `next/image` — NEVER use `<img>`
+- ALWAYS specify `width` and `height` (or use `fill` with `sizes`)
+- `priority` flag: only for above-the-fold images (hero banner, first product row)
+- Placeholder images: use `PlaceholderImage` component (bg-secondary + ImageIcon + size text)
+- Image sizes: thumbnail 480×480, detail 800×800, hero 1920×600, category 800×400, OGP 1200×630
+
+## TypeScript Conventions
+- `strict: true` and `noUncheckedIndexedAccess: true` in tsconfig
+- Object shapes: use `interface` (not `type`)
+- Unions/utilities: use `type`
+- Props types: define in same file, named export
+- Shared types: `types/` directory, re-export Medusa types from `@medusajs/types`
+- NEVER use `any` — use `unknown` + type guards
+- NEVER use `@ts-ignore` — use `@ts-expect-error` with explanation if unavoidable
+- NEVER use non-null assertion (`!`) — use `?.` and `??`
+
+## Stripe (Test Mode)
+- ONLY use test keys: `pk_test_xxx` / `sk_test_xxx`
+- NEVER configure live keys (`sk_live_xxx`)
+- Payment form: Stripe Elements (never custom card inputs)
+- Test card: `4242 4242 4242 4242` (any future date, any 3-digit CVC)
+- Order confirmation page MUST show `DemoNotice` component: "これはデモ注文です"
+- Production migration: swap env vars to live keys, remove DemoNotice, update webhook endpoint
+
+## Admin Widgets (Medusa Admin UI)
+- Standard Medusa Admin UI + 4 custom widgets (placed in `medusa-backend/src/admin/widgets/`)
+- ① Dashboard: sales summary cards + LineChart + PieChart (Recharts) on overview page
+- ② Inventory alerts: products below threshold (default 5), red for 0 stock, on product list
+- ③ Product sort: drag-and-drop (@dnd-kit/core), metadata.sort_order, featured toggle
+- ④ Bulk status change: checkbox select + batch fulfillment/cancel on order list
+
+## Testing Requirements
+- Unit tests: colocated with source (`component.test.tsx` next to `component.tsx`)
+- Test user behavior, not implementation details
+- Mock Medusa SDK at module level (`vi.mock("@/lib/medusa", ...)`)
+- E2E critical paths: purchase flow, auth flow, cart operations
+- E2E viewports: mobile (375px) and desktop (1280px)
+- Use `data-testid` for E2E selectors only
+- No snapshot tests
+
+## Performance
+- Core Web Vitals targets: LCP < 2.5s, FID/INP < 100ms, CLS < 0.1
+- Lazy load below-fold components with `dynamic()` (CartDrawer, MobileMenu, RelatedProducts)
+- Individual icon imports from lucide-react (`import { ShoppingBag }` not `import *`)
+- `generateMetadata` for dynamic SEO on every page
+- JSON-LD structured data: Product, BreadcrumbList
+
+## Accessibility
+- WCAG 2.2 AA compliance
+- All images: meaningful `alt` text (decorative: `alt=""`)
+- All form inputs: associated `<label>` (visible or sr-only)
+- Color contrast: 4.5:1 text, 3:1 large text and UI elements
+- Focus: `focus-visible` with accent ring — NEVER `outline: none` without replacement
+- Cart changes: `aria-live="polite"` or `"assertive"` announcements
+- Modals/drawers: `role="dialog"`, `aria-modal="true"`, focus trap
+- Navigation: `<nav>` with `aria-label`
+- ALWAYS respect `prefers-reduced-motion: reduce` (disable animations)
+- Touch targets: minimum 44×44px
+
+## Errors & Loading
+- Every data-fetching route: `loading.tsx` (Skeleton UI) + `error.tsx` (friendly message + retry)
+- Global fallback: `app/global-error.tsx`
+- 404: use `notFound()` function, handle in `not-found.tsx`
+- Forms: Zod validation + `aria-describedby` linking errors to inputs
+- API errors: user-friendly message in UI, technical details to server logs only
+
+## Git Conventions
+- Branch: `main` (production) ← `develop` ← `feat/xxx`, `fix/xxx`, `chore/xxx`
+- Commits: Conventional Commits (`feat(cart): add drawer component`)
+- Never push directly to `main`
+- Never commit `.env` files
+
+## Import Order
+Group imports with blank lines between groups:
+1. React / Next.js (`react`, `next/image`, `next/link`)
+2. External libraries (`@tanstack/react-query`, `lucide-react`)
+3. Internal modules (`@/lib/medusa`, `@/lib/utils`)
+4. Components (`@/components/ui/button`, `@/components/product/product-card`)
+5. Types (`import type { Product } from "@/types/product"`)
+
+## Environment Variables
+- `NEXT_PUBLIC_` prefix: client-exposed values only
+- Secret keys: no `NEXT_PUBLIC_` prefix
+- Required: `NEXT_PUBLIC_MEDUSA_BACKEND_URL`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`
+- NEVER hardcode URLs or API keys
+
+## PROHIBITED Patterns
+- NEVER use `any` type
+- NEVER use `@ts-ignore`
+- NEVER use non-null assertion (`!`)
+- NEVER use `<img>` element (use `next/image`)
+- NEVER use inline styles (use Tailwind classes)
+- NEVER hardcode color values (use CSS variables)
+- NEVER hardcode UI text strings (use translation keys)
+- NEVER use `console.log` in production code
+- NEVER commit `.env` files
+- NEVER hardcode URLs or API keys
+- NEVER use `useEffect` for data fetching in Server Components
+- NEVER use barrel exports (`index.ts`)
+- NEVER use `outline: none` without focus replacement
+- NEVER use raw `fetch()` for Medusa API (use SDK)
+- NEVER use `default export` except pages and layouts
+- NEVER use `@apply` in CSS
+- NEVER use Stripe live keys (`sk_live_`, `pk_live_`)
+- NEVER store cart data in localStorage (use Medusa server-side cart)
+- NEVER edit `components/ui/` source files directly (customize via className)
+
+## Code Generation Checklist
+Before generating any code, verify:
+- [ ] Server or Client Component? (`"use client"` only when needed)
+- [ ] Props have proper TypeScript interface?
+- [ ] All text uses translation keys (no hardcoded strings)?
+- [ ] Images use `next/image` with width/height?
+- [ ] PlaceholderImage fallback for missing images?
+- [ ] Proper aria attributes for accessibility?
+- [ ] Keyboard navigable?
+- [ ] Respects `prefers-reduced-motion`?
+- [ ] Responsive (mobile-first with Tailwind breakpoints)?
+- [ ] Uses design tokens from CSS variables (not hardcoded colors)?
+- [ ] Error and empty states handled?
+- [ ] Loading state handled (Skeleton or loading.tsx)?
+- [ ] Medusa SDK used (not raw fetch)?
+- [ ] Cart mutations invalidate query cache?
+- [ ] Forms use Zod schema validation?
+
+## Reference Documents
+For detailed specifications, refer to:
+- `docs/plan.md` — Project plan, features, data models, API design, dev phases
+- `docs/design-guide.md` — Colors, typography, spacing, component styles, animations, a11y
+- `docs/component-patterns.md` — Component architecture, Server/Client split, state management, code examples
+- `docs/coding-guide.md` — TypeScript rules, Next.js patterns, testing, git workflow, environment setup

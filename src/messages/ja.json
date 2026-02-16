@@ -1,0 +1,243 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "back": "戻る",
+    "search": "検索",
+    "close": "閉じる",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "confirm": "確認",
+    "all": "すべて"
+  },
+  "home": {
+    "hero": {
+      "title": "静かに佇む、美しい日用品",
+      "subtitle": "暮らしに溶け込む、厳選されたインテリア・雑貨",
+      "cta": "ショップを見る",
+      "secondaryCta": "コンセプトを見る"
+    },
+    "heroTitle": "静かに佇む、美しい日用品",
+    "heroSubtitle": "暮らしに溶け込む、厳選されたインテリア・雑貨",
+    "shopNow": "ショップを見る",
+    "newArrivals": "新着商品",
+    "featured": "特集",
+    "viewAll": "すべて見る"
+  },
+  "product": {
+    "addToCart": "カートに追加",
+    "addedToCart": "追加しました",
+    "adding": "追加中...",
+    "outOfStock": "在庫切れ",
+    "lowStock": "残りわずか",
+    "relatedProducts": "関連商品",
+    "allProducts": "すべての商品",
+    "noProducts": "商品が見つかりませんでした",
+    "sku": "SKU",
+    "quantity": "数量",
+    "selectVariant": "オプションを選択してください"
+  },
+  "cart": {
+    "title": "カート",
+    "empty": "カートに商品がありません",
+    "continueShopping": "買い物を続ける",
+    "checkout": "チェックアウトへ進む",
+    "subtotal": "小計",
+    "shipping": "送料",
+    "shippingCalculated": "チェックアウト時に計算",
+    "total": "合計",
+    "drawerLabel": "ショッピングカート",
+    "remove": "削除",
+    "itemCount": "{count, plural, =0 {カートは空です} one {1点} other {{count}点}}"
+  },
+  "checkout": {
+    "title": "チェックアウト",
+    "shippingAddress": "配送先情報",
+    "shippingMethod": "配送方法",
+    "payment": "お支払い",
+    "confirm": "注文を確定する",
+    "success": "ご注文ありがとうございます",
+    "orderNumber": "注文番号",
+    "confirmationEmail": "確認メールをお送りしました",
+    "viewOrder": "注文履歴を見る",
+    "demoNoticeTitle": "これはデモ注文です",
+    "demoNoticeBody": "実際の課金は発生していません。テスト用カード番号で処理されています。"
+  },
+  "account": {
+    "login": "ログイン",
+    "register": "新規登録",
+    "logout": "ログアウト",
+    "loggingIn": "ログイン中...",
+    "registering": "登録中...",
+    "loggingOut": "ログアウト中...",
+    "profile": "プロフィール",
+    "orders": "注文履歴",
+    "addresses": "住所管理",
+    "myPage": "マイページ",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード（確認）",
+    "firstName": "名",
+    "lastName": "姓",
+    "phone": "電話番号",
+    "noOrders": "注文履歴がありません",
+    "orderDate": "注文日",
+    "orderStatus": "ステータス",
+    "orderTotal": "合計",
+    "noAccount": "アカウントをお持ちでない方",
+    "hasAccount": "すでにアカウントをお持ちの方",
+    "loginError": "ログインに失敗しました。メールアドレスとパスワードを確認してください。",
+    "registerError": "登録に失敗しました。別のメールアドレスをお試しください。",
+    "welcome": "ようこそ",
+    "editProfile": "プロフィールを編集",
+    "saveChanges": "変更を保存",
+    "saving": "保存中...",
+    "profileUpdated": "プロフィールを更新しました",
+    "updateError": "更新に失敗しました"
+  },
+  "address": {
+    "postalCode": "郵便番号",
+    "prefecture": "都道府県",
+    "city": "市区町村",
+    "address1": "番地",
+    "address2": "建物名・部屋番号",
+    "phone": "電話番号"
+  },
+  "category": {
+    "interior": "インテリア雑貨",
+    "tableware": "テーブルウェア",
+    "fabric": "ファブリック",
+    "stationery": "ステーショナリー"
+  },
+  "sort": {
+    "newest": "新着順",
+    "priceAsc": "価格が安い順",
+    "priceDesc": "価格が高い順"
+  },
+  "footer": {
+    "concept": "暮らしに静かに寄り添う、厳選されたプロダクト",
+    "categories": "カテゴリ",
+    "help": "ヘルプ",
+    "shipping": "配送について",
+    "contact": "お問い合わせ",
+    "legal": "特定商取引法に基づく表記",
+    "social": "SNS",
+    "copyright": "© {year} stillne. All rights reserved."
+  },
+  "navigation": {
+    "home": "ホーム",
+    "products": "商品一覧",
+    "cart": "カート",
+    "account": "アカウント",
+    "menu": "メニュー",
+    "toggleTheme": "テーマを切り替え"
+  },
+  "breadcrumb": {
+    "home": "ホーム"
+  },
+  "notFound": {
+    "title": "ページが見つかりませんでした",
+    "message": "お探しのページは存在しないか、移動した可能性があります。",
+    "backHome": "トップページへ戻る"
+  },
+  "validation": {
+    "required": "この項目は必須です",
+    "email": "有効なメールアドレスを入力してください",
+    "minLength": "{min}文字以上で入力してください",
+    "passwordMismatch": "パスワードが一致しません",
+    "invalidPostalCode": "正しい郵便番号を入力してください",
+    "invalidPhone": "正しい電話番号を入力してください"
+  },
+  "pages": {
+    "about": {
+      "title": "stillneについて",
+      "subtitle": "静かに佇む、美しい日用品",
+      "concept": {
+        "title": "コンセプト",
+        "description": "stillneは、日常に溶け込みながらも、手に取るたびに小さな満足感を与えるインテリア・雑貨を届けるオンラインストアです。過剰な装飾を排し、素材と形状の美しさで語るプロダクトを厳選してお届けします。"
+      },
+      "values": {
+        "title": "私たちの価値観",
+        "quality": {
+          "title": "品質へのこだわり",
+          "description": "長く使い続けられる確かな品質の商品のみを取り扱っています。"
+        },
+        "design": {
+          "title": "ミニマルなデザイン",
+          "description": "シンプルでありながら、空間に調和する美しいフォルムを追求しています。"
+        },
+        "sustainability": {
+          "title": "サステナビリティ",
+          "description": "環境に配慮した素材選びと、長く使える商品づくりを大切にしています。"
+        }
+      }
+    },
+    "shipping": {
+      "title": "配送について",
+      "subtitle": "お届けに関するご案内",
+      "deliveryTime": {
+        "title": "配送日数",
+        "description": "ご注文確定後、通常3〜5営業日以内に発送いたします。配送日数は地域により異なりますが、発送後1〜3日程度でお届けいたします。"
+      },
+      "shippingFee": {
+        "title": "送料",
+        "description": "全国一律880円（税込）でお届けいたします。10,000円以上のご購入で送料無料となります。",
+        "note": "※ 沖縄・離島は別途送料がかかる場合がございます。"
+      },
+      "packaging": {
+        "title": "梱包について",
+        "description": "商品は丁寧に梱包してお届けいたします。ギフト包装をご希望の場合は、ご注文時にお申し付けください。"
+      },
+      "returns": {
+        "title": "返品・交換",
+        "description": "商品到着後7日以内であれば、未使用品に限り返品・交換を承ります。商品の不良や配送時の破損があった場合は、お手数ですがお問い合わせください。"
+      }
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "subtitle": "ご質問・ご要望はお気軽にどうぞ",
+      "form": {
+        "name": "お名前",
+        "email": "メールアドレス",
+        "subject": "件名",
+        "message": "メッセージ",
+        "submit": "送信する",
+        "sending": "送信中...",
+        "success": "お問い合わせを受け付けました。ご返信まで2〜3営業日ほどお待ちください。",
+        "error": "送信に失敗しました。時間をおいて再度お試しください。"
+      },
+      "info": {
+        "title": "お問い合わせ先",
+        "email": "contact@stillne.com",
+        "hours": "営業時間: 平日 10:00 - 18:00",
+        "note": "※ 土日祝日はお休みをいただいております。"
+      }
+    }
+  },
+  "admin": {
+    "title": "管理画面",
+    "dashboard": "ダッシュボード",
+    "products": "商品管理",
+    "orders": "注文管理",
+    "addProduct": "商品を追加",
+    "editProduct": "商品を編集",
+    "deleteProduct": "商品を削除",
+    "productName": "商品名",
+    "productDescription": "商品説明",
+    "productPrice": "価格",
+    "productCategory": "カテゴリ",
+    "productStatus": "ステータス",
+    "productStock": "在庫数",
+    "published": "公開中",
+    "draft": "下書き",
+    "confirmDelete": "この商品を削除してもよろしいですか？",
+    "saveSuccess": "保存しました",
+    "deleteSuccess": "削除しました",
+    "totalProducts": "商品数",
+    "totalOrders": "注文数",
+    "totalRevenue": "売上"
+  }
+}
