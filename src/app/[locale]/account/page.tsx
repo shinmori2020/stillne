@@ -22,7 +22,7 @@ export default async function AccountPage({ params }: AccountPageProps) {
   const t = await getTranslations({ locale, namespace: "account" });
 
   return (
-    <div className="py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8 md:px-8">
       <PageHeader title={t("myPage")} />
       <div className="mt-8">
         <AccountDashboard locale={locale} />
