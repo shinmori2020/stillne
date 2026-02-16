@@ -3,6 +3,9 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { HeroBanner } from "@/components/home/hero-banner";
 import { NewArrivals } from "@/components/home/new-arrivals";
+import { CategoryBanner } from "@/components/home/category-banner";
+import { BrandValues } from "@/components/home/brand-values";
+import { BrandStory } from "@/components/home/brand-story";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
 import { getNewArrivals } from "@/lib/api/products";
 
@@ -39,9 +42,12 @@ export default async function HomePage({ params }: HomePageProps) {
       <OrganizationJsonLd />
       <WebSiteJsonLd locale={locale} />
       <HeroBanner locale={locale} />
+      <CategoryBanner locale={locale} />
       {newArrivals.length > 0 && (
         <NewArrivals products={newArrivals} locale={locale} />
       )}
+      <BrandValues locale={locale} />
+      <BrandStory locale={locale} />
     </>
   );
 }
