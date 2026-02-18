@@ -54,10 +54,10 @@ export function BrandValues({ locale }: BrandValuesProps) {
             return (
               <ScrollFadeIn key={index} delay={index * 0.1}>
                 <div>
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-heading text-base font-medium md:text-lg">
+                  <h3 className="text-center font-heading text-base font-medium md:text-lg">
                     {locale === "ja" ? value.titleJa : value.titleEn}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
