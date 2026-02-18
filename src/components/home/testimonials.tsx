@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { Star } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 
@@ -82,8 +83,80 @@ const REVIEWS = [
   },
 ];
 
+const GAP = 16; // gap-4 = 1rem = 16px
+
 export function Testimonials({ locale }: TestimonialsProps) {
   const isJa = locale === "ja";
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(350);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Measure card width on mount and resize
+  useEffect(() => {
+    const measure = () => {
+      if (cardRef.current) {
+        setCardWidth(cardRef.current.offsetWidth);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // Auto-advance one card at a time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => prev + 1);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Seamless loop: when we reach the duplicate set, reset instantly
+  useEffect(() => {
+    if (currentIndex < REVIEWS.length) return;
+
+    const timeout = setTimeout(() => {
+      setIsTransitioning(false);
+      setCurrentIndex(0);
+      // Re-enable transition on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+        });
+      });
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
+
+  const step = cardWidth + GAP;
+  const translateX = -currentIndex * step;
+
+  const renderCard = (review: (typeof REVIEWS)[number], index: number) => (
+    <div
+      key={index}
+      ref={index === 0 ? cardRef : undefined}
+      className="w-[300px] shrink-0 rounded-lg border bg-card p-6 md:w-[350px]"
+    >
+      <div className="mb-3 flex gap-0.5">
+        {Array.from({ length: review.rating }).map((_, i) => (
+          <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+        ))}
+      </div>
+      <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+        {isJa ? review.textJa : review.textEn}
+      </p>
+      <div className="mt-4 border-t pt-4">
+        <p className="text-sm font-medium">
+          {isJa ? review.nameJa : review.nameEn}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {isJa ? review.productJa : review.productEn}
+        </p>
+      </div>
+    </div>
+  );
 
   return (
     <section className="border-y bg-secondary/30 py-16 md:py-24">
@@ -95,63 +168,22 @@ export function Testimonials({ locale }: TestimonialsProps) {
         </div>
       </ScrollFadeIn>
 
-      {/* Infinite scroll carousel */}
+      {/* Carousel */}
       <div className="overflow-hidden">
-        <div className="flex animate-scroll gap-4 hover:[animation-play-state:paused]">
-          {/* Original set */}
-          {REVIEWS.map((review, index) => (
-            <div
-              key={`a-${index}`}
-              className="w-[300px] shrink-0 rounded-lg border bg-card p-6 md:w-[350px]"
-            >
-              <div className="mb-3 flex gap-0.5">
-                {Array.from({ length: review.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-primary text-primary"
-                  />
-                ))}
-              </div>
-              <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                {isJa ? review.textJa : review.textEn}
-              </p>
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm font-medium">
-                  {isJa ? review.nameJa : review.nameEn}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {isJa ? review.productJa : review.productEn}
-                </p>
-              </div>
-            </div>
-          ))}
-          {/* Duplicate set for seamless loop */}
-          {REVIEWS.map((review, index) => (
-            <div
-              key={`b-${index}`}
-              className="w-[300px] shrink-0 rounded-lg border bg-card p-6 md:w-[350px]"
-            >
-              <div className="mb-3 flex gap-0.5">
-                {Array.from({ length: review.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-primary text-primary"
-                  />
-                ))}
-              </div>
-              <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                {isJa ? review.textJa : review.textEn}
-              </p>
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm font-medium">
-                  {isJa ? review.nameJa : review.nameEn}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {isJa ? review.productJa : review.productEn}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div
+          ref={trackRef}
+          className="flex gap-4"
+          style={{
+            transform: `translateX(calc(50vw - ${cardWidth / 2}px + ${translateX}px))`,
+            transition: isTransitioning
+              ? "transform 600ms ease-in-out"
+              : "none",
+          }}
+        >
+          {/* Original cards + duplicate for seamless loop */}
+          {[...REVIEWS, ...REVIEWS].map((review, index) =>
+            renderCard(review, index)
+          )}
         </div>
       </div>
     </section>
