@@ -45,17 +45,19 @@ const FAQ_ITEMS = [
 function FaqItem({
   question,
   answer,
+  isOpen,
+  onToggle,
 }: {
   question: string;
   answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="border-b">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between py-5 text-left text-base font-medium transition-colors hover:text-primary md:py-6"
+        onClick={onToggle}
+        className="flex w-full cursor-pointer items-center justify-between px-4 py-5 text-left text-base font-medium transition-colors hover:text-primary md:px-6 md:py-6"
       >
         {question}
         <ChevronDown
@@ -72,7 +74,7 @@ function FaqItem({
         )}
       >
         <div className="overflow-hidden">
-          <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+          <p className="px-4 text-sm leading-relaxed text-muted-foreground md:px-6 md:text-base">
             {answer}
           </p>
         </div>
@@ -83,6 +85,11 @@ function FaqItem({
 
 export function FaqSection({ locale }: FaqSectionProps) {
   const isJa = locale === "ja";
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="py-16 md:py-24">
@@ -105,6 +112,8 @@ export function FaqSection({ locale }: FaqSectionProps) {
                 key={index}
                 question={isJa ? item.questionJa : item.questionEn}
                 answer={isJa ? item.answerJa : item.answerEn}
+                isOpen={openIndex === index}
+                onToggle={() => handleToggle(index)}
               />
             ))}
           </div>
