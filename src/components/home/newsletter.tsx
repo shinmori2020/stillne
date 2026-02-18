@@ -52,7 +52,7 @@ export function Newsletter({ locale }: NewsletterProps) {
         <ScrollFadeIn>
           <Mail className="mx-auto mb-4 h-6 w-6 text-muted-foreground" />
           <h2 className="font-heading text-2xl lowercase tracking-wide md:text-3xl">
-            {isJa ? "ニュースレター" : "newsletter"}
+            {isJa ? "お知らせ配信" : "notifications"}
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             {isJa
@@ -90,8 +90,8 @@ export function Newsletter({ locale }: NewsletterProps) {
             </DialogTitle>
             <DialogDescription className="text-base">
               {isJa
-                ? `${submittedEmail} 宛に今後ニュースレターをお届けします。`
-                : `Newsletters will be sent to ${submittedEmail}.`}
+                ? `${submittedEmail} 宛にお知らせをお届けします。`
+                : `Notifications will be sent to ${submittedEmail}.`}
             </DialogDescription>
           </DialogHeader>
 

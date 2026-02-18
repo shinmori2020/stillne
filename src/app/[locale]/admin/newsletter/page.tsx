@@ -102,7 +102,7 @@ export default function NewsletterAdmin() {
         <div className="flex items-center gap-3">
           <Mail className="h-6 w-6 text-primary" />
           <h1 className="font-heading text-2xl md:text-3xl">
-            {isJa ? "ニュースレター管理" : "Newsletter Management"}
+            {isJa ? "お知らせ配信管理" : "Notification Management"}
           </h1>
         </div>
       </ScrollFadeIn>
