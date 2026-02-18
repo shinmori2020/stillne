@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { HeroBanner } from "@/components/home/hero-banner";
 import { NewArrivals } from "@/components/home/new-arrivals";
-import { CategoryBanner } from "@/components/home/category-banner";
 import { StaffPicks } from "@/components/home/staff-picks";
 import { BrandValues } from "@/components/home/brand-values";
 import { Testimonials } from "@/components/home/testimonials";
@@ -47,7 +46,6 @@ export default async function HomePage({ params }: HomePageProps) {
       <OrganizationJsonLd />
       <WebSiteJsonLd locale={locale} />
       <HeroBanner locale={locale} />
-      <CategoryBanner locale={locale} />
       {newArrivals.length > 0 && (
         <NewArrivals products={newArrivals} locale={locale} />
       )}
