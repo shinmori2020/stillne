@@ -24,7 +24,7 @@ export function BrandStory({ locale }: BrandStoryProps) {
         </ScrollFadeIn>
 
         <ScrollFadeIn delay={0.15}>
-          <div className="mt-10 space-y-6 text-center leading-relaxed text-muted-foreground md:mt-14">
+          <div className="mt-10 space-y-6 leading-relaxed text-muted-foreground md:mt-14">
             <p>
               {isJa
                 ? "stillne（スティルネ）は、「静けさ」を意味する北欧の言葉から生まれました。忙しない日常の中にそっと寄り添い、暮らしに穏やかな美しさをもたらす——そんな日用品を届けたいという想いから、このブランドは始まりました。"

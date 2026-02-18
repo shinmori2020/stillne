@@ -9,10 +9,10 @@ interface LifestyleGalleryProps {
 
 const GALLERY_ITEMS = [
   { labelJa: "リビングに佇む花瓶", labelEn: "Vase in the living room", color: "bg-stone-200 dark:bg-stone-800" },
-  { labelJa: "朝の食卓", labelEn: "Morning table setting", color: "bg-amber-100 dark:bg-amber-900/30" },
+  { labelJa: "朝の食卓", labelEn: "Morning table setting", color: "bg-stone-100 dark:bg-stone-800/60" },
   { labelJa: "窓辺のキャンドル", labelEn: "Candles by the window", color: "bg-stone-300 dark:bg-stone-700" },
   { labelJa: "リネンのある暮らし", labelEn: "Living with linen", color: "bg-stone-100 dark:bg-stone-800/50" },
-  { labelJa: "書斎の一角", labelEn: "A corner of the study", color: "bg-amber-50 dark:bg-amber-950/30" },
+  { labelJa: "書斎の一角", labelEn: "A corner of the study", color: "bg-stone-200/60 dark:bg-stone-700/30" },
   { labelJa: "夕暮れのダイニング", labelEn: "Evening dining", color: "bg-stone-200 dark:bg-stone-700/50" },
 ];
 

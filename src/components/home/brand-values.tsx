@@ -53,8 +53,8 @@ export function BrandValues({ locale }: BrandValuesProps) {
             const Icon = value.icon;
             return (
               <ScrollFadeIn key={index} delay={index * 0.1}>
-                <div className="text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                <div>
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-heading text-base font-medium md:text-lg">
