@@ -103,64 +103,62 @@ export function LifestyleGallery({ locale }: LifestyleGalleryProps) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={handleClose}
         >
-          {/* Close button */}
-          <button
-            onClick={handleClose}
-            className="absolute right-4 top-4 z-10 cursor-pointer rounded-full bg-background/20 p-2 text-white transition-colors hover:bg-background/40"
-          >
-            <X className="h-6 w-6" />
-          </button>
-
-          {/* Prev button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrev();
-            }}
-            className="absolute left-4 z-10 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40 md:left-8"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-
-          {/* Image area */}
+          {/* Content wrapper */}
           <div
-            className="mx-16 flex max-h-[80vh] w-full max-w-3xl flex-col items-center md:mx-24"
+            className="flex items-center gap-4 md:gap-6"
             onClick={(e) => e.stopPropagation()}
           >
-            {(() => {
-              const item = GALLERY_ITEMS[selectedIndex];
-              if (!item) return null;
-              return (
-                <>
-                  <div
-                    className={cn(
-                      "aspect-square w-full max-w-lg rounded-lg",
-                      item.color
-                    )}
-                  />
-                  <div className="mt-4 text-center">
-                    <p className="text-lg font-medium text-white">
-                      {isJa ? item.labelJa : item.labelEn}
-                    </p>
-                    <p className="mt-1 text-sm text-white/60">
-                      {selectedIndex + 1} / {GALLERY_ITEMS.length}
-                    </p>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
+            {/* Prev button */}
+            <button
+              onClick={handlePrev}
+              className="shrink-0 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
 
-          {/* Next button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNext();
-            }}
-            className="absolute right-4 z-10 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40 md:right-8"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
+            {/* Image area */}
+            <div className="flex max-h-[80vh] w-[70vw] max-w-lg flex-col items-center">
+              {(() => {
+                const item = GALLERY_ITEMS[selectedIndex];
+                if (!item) return null;
+                return (
+                  <>
+                    <div className="relative w-full">
+                      {/* Close button */}
+                      <button
+                        onClick={handleClose}
+                        className="absolute -right-3 -top-3 z-10 cursor-pointer rounded-full bg-background/90 p-1.5 text-foreground shadow-md transition-colors hover:bg-background"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                      <div
+                        className={cn(
+                          "aspect-square w-full rounded-lg",
+                          item.color
+                        )}
+                      />
+                    </div>
+                    <div className="mt-4 text-center">
+                      <p className="text-lg font-medium text-white">
+                        {isJa ? item.labelJa : item.labelEn}
+                      </p>
+                      <p className="mt-1 text-sm text-white/60">
+                        {selectedIndex + 1} / {GALLERY_ITEMS.length}
+                      </p>
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+
+            {/* Next button */}
+            <button
+              onClick={handleNext}
+              className="shrink-0 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
         </div>
       )}
     </section>
