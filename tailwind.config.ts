@@ -23,6 +23,15 @@ const config: Config = {
         xl: "1rem",
         "2xl": "1.5rem",
       },
+      keyframes: {
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        scroll: "scroll 40s linear infinite",
+      },
     },
   },
   plugins: [],
