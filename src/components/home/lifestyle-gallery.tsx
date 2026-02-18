@@ -1,7 +1,9 @@
 "use client";
 
-import { Instagram } from "lucide-react";
+import { useState, useCallback, useEffect } from "react";
+import { Instagram, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
+import { cn } from "@/lib/utils";
 
 interface LifestyleGalleryProps {
   locale: string;
@@ -18,6 +20,41 @@ const GALLERY_ITEMS = [
 
 export function LifestyleGallery({ locale }: LifestyleGalleryProps) {
   const isJa = locale === "ja";
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handlePrev = useCallback(() => {
+    setSelectedIndex((prev) =>
+      prev === null ? null : prev === 0 ? GALLERY_ITEMS.length - 1 : prev - 1
+    );
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setSelectedIndex((prev) =>
+      prev === null ? null : prev === GALLERY_ITEMS.length - 1 ? 0 : prev + 1
+    );
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setSelectedIndex(null);
+  }, []);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") handlePrev();
+      else if (e.key === "ArrowRight") handleNext();
+      else if (e.key === "Escape") handleClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedIndex, handlePrev, handleNext, handleClose]);
 
   return (
     <section className="py-16 md:py-24">
@@ -34,7 +71,10 @@ export function LifestyleGallery({ locale }: LifestyleGalleryProps) {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {GALLERY_ITEMS.map((item, index) => (
             <ScrollFadeIn key={index} delay={index * 0.05}>
-              <div className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg">
+              <div
+                className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg"
+                onClick={() => setSelectedIndex(index)}
+              >
                 <div className={`absolute inset-0 ${item.color}`} />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div className="rounded-full bg-background/90 px-4 py-2">
@@ -56,6 +96,73 @@ export function LifestyleGallery({ locale }: LifestyleGalleryProps) {
           </p>
         </ScrollFadeIn>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={handleClose}
+        >
+          {/* Close button */}
+          <button
+            onClick={handleClose}
+            className="absolute right-4 top-4 z-10 cursor-pointer rounded-full bg-background/20 p-2 text-white transition-colors hover:bg-background/40"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          {/* Prev button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrev();
+            }}
+            className="absolute left-4 z-10 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40 md:left-8"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+
+          {/* Image area */}
+          <div
+            className="mx-16 flex max-h-[80vh] w-full max-w-3xl flex-col items-center md:mx-24"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {(() => {
+              const item = GALLERY_ITEMS[selectedIndex];
+              if (!item) return null;
+              return (
+                <>
+                  <div
+                    className={cn(
+                      "aspect-square w-full max-w-lg rounded-lg",
+                      item.color
+                    )}
+                  />
+                  <div className="mt-4 text-center">
+                    <p className="text-lg font-medium text-white">
+                      {isJa ? item.labelJa : item.labelEn}
+                    </p>
+                    <p className="mt-1 text-sm text-white/60">
+                      {selectedIndex + 1} / {GALLERY_ITEMS.length}
+                    </p>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+
+          {/* Next button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext();
+            }}
+            className="absolute right-4 z-10 cursor-pointer rounded-full bg-background/20 p-3 text-white transition-colors hover:bg-background/40 md:right-8"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
