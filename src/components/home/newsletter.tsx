@@ -50,10 +50,12 @@ export function Newsletter({ locale }: NewsletterProps) {
     <section className="border-y bg-secondary/30 py-16 md:py-24">
       <div className="mx-auto max-w-xl px-4 text-center md:px-8">
         <ScrollFadeIn>
-          <Mail className="mx-auto mb-4 h-6 w-6 text-muted-foreground" />
-          <h2 className="font-heading text-2xl lowercase tracking-wide md:text-3xl">
-            {isJa ? "お知らせ配信" : "notifications"}
-          </h2>
+          <div className="flex items-center justify-center gap-3">
+            <Mail className="h-6 w-6 text-muted-foreground" />
+            <h2 className="font-heading text-2xl lowercase tracking-wide md:text-3xl">
+              {isJa ? "お知らせ配信" : "notifications"}
+            </h2>
+          </div>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             {isJa
               ? "新商品のお知らせやスタイリングのヒントをお届けします。"
