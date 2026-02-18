@@ -56,7 +56,7 @@ export function Newsletter({ locale }: NewsletterProps) {
               {isJa ? "お知らせ配信" : "notifications"}
             </h2>
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             {isJa
               ? "新商品のお知らせやスタイリングのヒントをお届けします。"
               : "Get notified about new arrivals and styling tips."}
