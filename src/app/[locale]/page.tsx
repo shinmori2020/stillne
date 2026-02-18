@@ -7,7 +7,6 @@ import { StaffPicks } from "@/components/home/staff-picks";
 import { BrandValues } from "@/components/home/brand-values";
 import { Testimonials } from "@/components/home/testimonials";
 import { LifestyleGallery } from "@/components/home/lifestyle-gallery";
-import { BrandStory } from "@/components/home/brand-story";
 import { FaqSection } from "@/components/home/faq-section";
 import { Newsletter } from "@/components/home/newsletter";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
@@ -53,7 +52,6 @@ export default async function HomePage({ params }: HomePageProps) {
       <Testimonials locale={locale} />
       <LifestyleGallery locale={locale} />
       <BrandValues locale={locale} />
-      <BrandStory locale={locale} />
       <FaqSection locale={locale} />
       <Newsletter locale={locale} />
     </>

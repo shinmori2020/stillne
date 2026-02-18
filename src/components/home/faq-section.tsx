@@ -55,7 +55,7 @@ function FaqItem({
     <div className="border-b">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between py-4 text-left text-sm font-medium transition-colors hover:text-primary"
+        className="flex w-full items-center justify-between py-5 text-left text-base font-medium transition-colors hover:text-primary md:py-6"
       >
         {question}
         <ChevronDown
@@ -68,11 +68,11 @@ function FaqItem({
       <div
         className={cn(
           "grid transition-all duration-200",
-          isOpen ? "grid-rows-[1fr] pb-4" : "grid-rows-[0fr]"
+          isOpen ? "grid-rows-[1fr] pb-5 md:pb-6" : "grid-rows-[0fr]"
         )}
       >
         <div className="overflow-hidden">
-          <p className="text-sm leading-relaxed text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
             {answer}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function FaqSection({ locale }: FaqSectionProps) {
 
   return (
     <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-2xl px-4 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12">
         <ScrollFadeIn>
           <div className="text-center">
             <p className="mb-2 text-sm uppercase tracking-widest text-muted-foreground">
