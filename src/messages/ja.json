@@ -238,6 +238,7 @@
     "deleteSuccess": "削除しました",
     "totalProducts": "商品数",
     "totalOrders": "注文数",
-    "totalRevenue": "売上"
+    "totalRevenue": "売上",
+    "newsletter": "ニュースレター"
   }
 }

@@ -238,6 +238,7 @@
     "deleteSuccess": "Deleted successfully",
     "totalProducts": "Products",
     "totalOrders": "Orders",
-    "totalRevenue": "Revenue"
+    "totalRevenue": "Revenue",
+    "newsletter": "Newsletter"
   }
 }

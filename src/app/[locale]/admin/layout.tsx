@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Package,
   ShoppingCart,
+  Mail,
   ArrowLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       href: `/${locale}/admin/orders`,
       label: t("orders"),
       icon: ShoppingCart,
+    },
+    {
+      href: `/${locale}/admin/newsletter`,
+      label: t("newsletter"),
+      icon: Mail,
     },
   ];
 
