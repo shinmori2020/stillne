@@ -99,26 +99,37 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
     []
   );
 
-  // Thumbnail slider navigation
-  const scrollThumbs = (direction: "left" | "right") => {
-    if (!thumbContainerRef.current) return;
-    const scrollAmount = 200;
-    thumbContainerRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
+  // Thumbnail slider navigation — also changes the selected image
+  const navigateThumbs = (direction: "left" | "right") => {
+    if (direction === "left") {
+      prevImage();
+    } else {
+      nextImage();
+    }
   };
 
-  // Image navigation
+  // Image navigation — also scrolls the thumbnail strip to keep the active one visible
+  const scrollToThumb = (index: number) => {
+    if (!thumbContainerRef.current) return;
+    const thumb = thumbContainerRef.current.children[index] as HTMLElement;
+    if (thumb) {
+      thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  };
+
   const prevImage = () => {
-    setSelectedImageIndex((prev) =>
-      prev === 0 ? displayImages.length - 1 : prev - 1
-    );
+    setSelectedImageIndex((prev) => {
+      const next = prev === 0 ? displayImages.length - 1 : prev - 1;
+      scrollToThumb(next);
+      return next;
+    });
   };
   const nextImage = () => {
-    setSelectedImageIndex((prev) =>
-      prev === displayImages.length - 1 ? 0 : prev + 1
-    );
+    setSelectedImageIndex((prev) => {
+      const next = prev === displayImages.length - 1 ? 0 : prev + 1;
+      scrollToThumb(next);
+      return next;
+    });
   };
 
   // Favorite toggle
@@ -195,9 +206,9 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
             <div className="relative">
               {/* Left arrow */}
               <button
-                onClick={() => scrollThumbs("left")}
-                className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-1 shadow-sm"
-                aria-label="Scroll thumbnails left"
+                onClick={() => navigateThumbs("left")}
+                className="absolute -left-1 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-1 shadow-sm hover:bg-background"
+                aria-label="Previous image"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -205,40 +216,46 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
               {/* Thumbnails */}
               <div
                 ref={thumbContainerRef}
-                className="flex gap-2 overflow-x-auto scroll-smooth px-6 pb-1 scrollbar-hide"
+                className="flex gap-3 overflow-x-auto scroll-smooth px-8 py-1 scrollbar-hide"
                 style={{ scrollbarWidth: "none" }}
               >
                 {displayImages.map((image, index) => (
                   <button
                     key={`thumb-${index}`}
-                    onClick={() => setSelectedImageIndex(index)}
+                    onClick={() => {
+                      setSelectedImageIndex(index);
+                      scrollToThumb(index);
+                    }}
                     className={cn(
-                      "relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-sm bg-secondary",
+                      "relative h-16 w-16 flex-shrink-0 rounded-sm bg-secondary",
                       "ring-offset-background transition-all",
-                      index === selectedImageIndex &&
-                        "ring-2 ring-primary ring-offset-2"
+                      index === selectedImageIndex
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "opacity-60 hover:opacity-100"
                     )}
                   >
-                    {image.url ? (
-                      <Image
-                        src={image.url}
-                        alt={image.alt ?? `${product.title} - ${index + 1}`}
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                      />
-                    ) : (
-                      <PlaceholderImage />
-                    )}
+                    <div className="h-full w-full overflow-hidden rounded-sm">
+                      {image.url ? (
+                        <Image
+                          src={image.url}
+                          alt={image.alt ?? `${product.title} - ${index + 1}`}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <PlaceholderImage />
+                      )}
+                    </div>
                   </button>
                 ))}
               </div>
 
               {/* Right arrow */}
               <button
-                onClick={() => scrollThumbs("right")}
-                className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-1 shadow-sm"
-                aria-label="Scroll thumbnails right"
+                onClick={() => navigateThumbs("right")}
+                className="absolute -right-1 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/90 p-1 shadow-sm hover:bg-background"
+                aria-label="Next image"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
