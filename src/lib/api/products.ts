@@ -8,6 +8,11 @@ import type { Product } from "@/types/product";
 // Check if Medusa backend is configured
 const isMedusaConfigured = !!process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
 
+// Helper to generate placeholder image URLs
+function dummyImg(label: string, bg: string, fg: string) {
+  return `https://placehold.co/600x600/${bg}/${fg}?text=${encodeURIComponent(label)}`;
+}
+
 // Dummy products for development/demo
 const DUMMY_PRODUCTS = [
   {
@@ -15,8 +20,18 @@ const DUMMY_PRODUCTS = [
     title: "セラミックフラワーベース A-001",
     handle: "ceramic-flower-vase-a001",
     description: "シンプルなフォルムが空間に溶け込む、日常使いのためのフラワーベース。マットな質感と柔らかな曲線が特徴です。",
-    thumbnail: undefined,
-    images: [],
+    material: "陶器（マット釉薬仕上げ）",
+    weight: 850,
+    width: 120,
+    height: 200,
+    length: 120,
+    thumbnail: dummyImg("Vase A-001", "f5f0eb", "8b7355"),
+    images: [
+      { id: "img_01a", url: dummyImg("Vase A-001", "f5f0eb", "8b7355"), alt: "フラワーベース 正面" },
+      { id: "img_01b", url: dummyImg("Vase Side", "ebe6e0", "7a6548"), alt: "フラワーベース 側面" },
+      { id: "img_01c", url: dummyImg("Vase Detail", "e0dbd5", "6b583d"), alt: "フラワーベース 質感" },
+      { id: "img_01d", url: dummyImg("Vase Scene", "d6d1cb", "5c4b33"), alt: "フラワーベース 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_interior", name: "インテリア雑貨", handle: "interior" }],
     variants: [{
@@ -35,8 +50,17 @@ const DUMMY_PRODUCTS = [
     title: "キャンドルホルダー B-002",
     handle: "candle-holder-b002",
     description: "真鍮の上品な輝きが空間にアクセントを添える、モダンなキャンドルホルダー。",
-    thumbnail: undefined,
-    images: [],
+    material: "真鍮（無垢）",
+    weight: 320,
+    width: 80,
+    height: 100,
+    length: 80,
+    thumbnail: dummyImg("Candle B-002", "f0ebe5", "8b7355"),
+    images: [
+      { id: "img_02a", url: dummyImg("Candle B-002", "f0ebe5", "8b7355"), alt: "キャンドルホルダー 正面" },
+      { id: "img_02b", url: dummyImg("Candle Detail", "e5e0da", "7a6548"), alt: "キャンドルホルダー ディテール" },
+      { id: "img_02c", url: dummyImg("Candle Scene", "dad5cf", "6b583d"), alt: "キャンドルホルダー 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_interior", name: "インテリア雑貨", handle: "interior" }],
     variants: [{
@@ -55,8 +79,17 @@ const DUMMY_PRODUCTS = [
     title: "マグカップ C-003",
     handle: "mug-cup-c003",
     description: "手に馴染む丸みを帯びたフォルム。毎日のコーヒータイムを特別なひとときに。",
-    thumbnail: undefined,
-    images: [],
+    material: "磁器",
+    weight: 280,
+    width: 85,
+    height: 90,
+    length: 110,
+    thumbnail: dummyImg("Mug C-003", "ebe8e3", "8b7355"),
+    images: [
+      { id: "img_03a", url: dummyImg("Mug C-003", "ebe8e3", "8b7355"), alt: "マグカップ 正面" },
+      { id: "img_03b", url: dummyImg("Mug Top", "e0ddd8", "7a6548"), alt: "マグカップ 上面" },
+      { id: "img_03c", url: dummyImg("Mug Scene", "d5d2cd", "6b583d"), alt: "マグカップ 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_tableware", name: "テーブルウェア", handle: "tableware" }],
     variants: [{
@@ -75,8 +108,16 @@ const DUMMY_PRODUCTS = [
     title: "リネンクッションカバー D-004",
     handle: "linen-cushion-cover-d004",
     description: "上質なリネン100%のクッションカバー。ナチュラルな風合いがお部屋を優しく彩ります。",
-    thumbnail: undefined,
-    images: [],
+    material: "リネン100%",
+    weight: 180,
+    width: 450,
+    height: 450,
+    thumbnail: dummyImg("Linen D-004", "f2ede7", "8b7355"),
+    images: [
+      { id: "img_04a", url: dummyImg("Linen D-004", "f2ede7", "8b7355"), alt: "クッションカバー 正面" },
+      { id: "img_04b", url: dummyImg("Linen Texture", "e7e2dc", "7a6548"), alt: "クッションカバー 質感" },
+      { id: "img_04c", url: dummyImg("Linen Scene", "dcd7d1", "6b583d"), alt: "クッションカバー 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_fabric", name: "ファブリック", handle: "fabric" }],
     variants: [{
@@ -95,8 +136,17 @@ const DUMMY_PRODUCTS = [
     title: "レザーノート E-005",
     handle: "leather-notebook-e005",
     description: "イタリアンレザーを使用した上質なノート。時間とともに深まる風合いをお楽しみください。",
-    thumbnail: undefined,
-    images: [],
+    material: "イタリアンレザー（牛革）",
+    weight: 220,
+    width: 148,
+    height: 210,
+    length: 15,
+    thumbnail: dummyImg("Note E-005", "ede8e2", "8b7355"),
+    images: [
+      { id: "img_05a", url: dummyImg("Note E-005", "ede8e2", "8b7355"), alt: "レザーノート 表紙" },
+      { id: "img_05b", url: dummyImg("Note Open", "e2ddd7", "7a6548"), alt: "レザーノート 見開き" },
+      { id: "img_05c", url: dummyImg("Note Detail", "d7d2cc", "6b583d"), alt: "レザーノート 革の質感" },
+    ],
     status: "published",
     categories: [{ id: "cat_stationery", name: "ステーショナリー", handle: "stationery" }],
     variants: [{
@@ -115,8 +165,17 @@ const DUMMY_PRODUCTS = [
     title: "ガラスプレート F-006",
     handle: "glass-plate-f006",
     description: "透明感のある手吹きガラスのプレート。光を受けて美しく輝きます。",
-    thumbnail: undefined,
-    images: [],
+    material: "手吹きガラス",
+    weight: 450,
+    width: 260,
+    height: 25,
+    length: 260,
+    thumbnail: dummyImg("Plate F-006", "eee9e3", "8b7355"),
+    images: [
+      { id: "img_06a", url: dummyImg("Plate F-006", "eee9e3", "8b7355"), alt: "ガラスプレート 正面" },
+      { id: "img_06b", url: dummyImg("Plate Side", "e3ded8", "7a6548"), alt: "ガラスプレート 側面" },
+      { id: "img_06c", url: dummyImg("Plate Scene", "d8d3cd", "6b583d"), alt: "ガラスプレート 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_tableware", name: "テーブルウェア", handle: "tableware" }],
     variants: [{
@@ -135,8 +194,16 @@ const DUMMY_PRODUCTS = [
     title: "ウールブランケット G-007",
     handle: "wool-blanket-g007",
     description: "ニュージーランド産ウールを使用した軽くて暖かいブランケット。",
-    thumbnail: undefined,
-    images: [],
+    material: "ニュージーランド産ウール100%",
+    weight: 900,
+    width: 1300,
+    height: 1800,
+    thumbnail: dummyImg("Blanket G-007", "e9e4de", "8b7355"),
+    images: [
+      { id: "img_07a", url: dummyImg("Blanket G-007", "e9e4de", "8b7355"), alt: "ウールブランケット 全体" },
+      { id: "img_07b", url: dummyImg("Blanket Texture", "ded9d3", "7a6548"), alt: "ウールブランケット 質感" },
+      { id: "img_07c", url: dummyImg("Blanket Scene", "d3cec8", "6b583d"), alt: "ウールブランケット 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_fabric", name: "ファブリック", handle: "fabric" }],
     variants: [{
@@ -155,8 +222,17 @@ const DUMMY_PRODUCTS = [
     title: "真鍮ペンスタンド H-008",
     handle: "brass-pen-stand-h008",
     description: "デスクを上品に彩る真鍮製のペンスタンド。経年変化も楽しめます。",
-    thumbnail: undefined,
-    images: [],
+    material: "真鍮（無垢）",
+    weight: 280,
+    width: 65,
+    height: 100,
+    length: 65,
+    thumbnail: dummyImg("Pen H-008", "f0ebe5", "8b7355"),
+    images: [
+      { id: "img_08a", url: dummyImg("Pen H-008", "f0ebe5", "8b7355"), alt: "ペンスタンド 正面" },
+      { id: "img_08b", url: dummyImg("Pen Detail", "e5e0da", "7a6548"), alt: "ペンスタンド ディテール" },
+      { id: "img_08c", url: dummyImg("Pen Scene", "dad5cf", "6b583d"), alt: "ペンスタンド 使用シーン" },
+    ],
     status: "published",
     categories: [{ id: "cat_stationery", name: "ステーショナリー", handle: "stationery" }],
     variants: [{
