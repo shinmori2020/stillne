@@ -89,7 +89,8 @@ export function Testimonials({ locale }: TestimonialsProps) {
   const isJa = locale === "ja";
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Start at REVIEWS.length so the prepended set fills the left side
+  const [currentIndex, setCurrentIndex] = useState(REVIEWS.length);
   const [cardWidth, setCardWidth] = useState(350);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
@@ -113,14 +114,13 @@ export function Testimonials({ locale }: TestimonialsProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Seamless loop: when we reach the duplicate set, reset instantly
+  // Seamless loop: when we reach the end of set 3, reset to set 2 start
   useEffect(() => {
-    if (currentIndex < REVIEWS.length) return;
+    if (currentIndex < REVIEWS.length * 2) return;
 
     const timeout = setTimeout(() => {
       setIsTransitioning(false);
-      setCurrentIndex(0);
-      // Re-enable transition on next frame
+      setCurrentIndex(REVIEWS.length);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsTransitioning(true);
@@ -180,8 +180,8 @@ export function Testimonials({ locale }: TestimonialsProps) {
               : "none",
           }}
         >
-          {/* Original cards + duplicate for seamless loop */}
-          {[...REVIEWS, ...REVIEWS].map((review, index) =>
+          {/* 3 sets: left fill + main + loop duplicate */}
+          {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((review, index) =>
             renderCard(review, index)
           )}
         </div>
