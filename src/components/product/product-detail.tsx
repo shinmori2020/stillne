@@ -71,13 +71,21 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
     );
   };
 
-  // Get all images
+  // Get all images (include entries even with empty URLs for slider display)
+  const hasRealThumbnail = product.thumbnail && product.thumbnail.length > 0;
   const allImages = [
-    ...(product.thumbnail
-      ? [{ url: product.thumbnail, alt: product.title }]
+    ...(hasRealThumbnail
+      ? [{ url: product.thumbnail!, alt: product.title }]
       : []),
-    ...(product.images ?? []).filter((img) => img.url !== product.thumbnail),
+    ...(product.images ?? []).filter(
+      (img) => !hasRealThumbnail || img.url !== product.thumbnail
+    ),
   ];
+  // If no images at all (no entries), use a single placeholder entry
+  const displayImages =
+    allImages.length > 0
+      ? allImages
+      : [{ url: "", alt: product.title }];
 
   // Image zoom handlers
   const handleMouseMove = useCallback(
@@ -104,12 +112,12 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
   // Image navigation
   const prevImage = () => {
     setSelectedImageIndex((prev) =>
-      prev === 0 ? allImages.length - 1 : prev - 1
+      prev === 0 ? displayImages.length - 1 : prev - 1
     );
   };
   const nextImage = () => {
     setSelectedImageIndex((prev) =>
-      prev === allImages.length - 1 ? 0 : prev + 1
+      prev === displayImages.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -134,10 +142,10 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
             onMouseLeave={() => setIsZooming(false)}
             onMouseMove={handleMouseMove}
           >
-            {allImages.length > 0 ? (
+            {displayImages[selectedImageIndex]?.url ? (
               <Image
-                src={allImages[selectedImageIndex]?.url ?? ""}
-                alt={allImages[selectedImageIndex]?.alt ?? product.title}
+                src={displayImages[selectedImageIndex].url}
+                alt={displayImages[selectedImageIndex]?.alt ?? product.title}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -152,11 +160,11 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
                 }
               />
             ) : (
-              <PlaceholderImage />
+              <PlaceholderImage label={displayImages[selectedImageIndex]?.alt} />
             )}
 
             {/* Image navigation arrows */}
-            {allImages.length > 1 && (
+            {displayImages.length > 1 && (
               <>
                 <button
                   onClick={(e) => {
@@ -183,7 +191,7 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
           </div>
 
           {/* Thumbnail Slider */}
-          {allImages.length > 1 && (
+          {displayImages.length > 1 && (
             <div className="relative">
               {/* Left arrow */}
               <button
@@ -200,9 +208,9 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
                 className="flex gap-2 overflow-x-auto scroll-smooth px-6 pb-1 scrollbar-hide"
                 style={{ scrollbarWidth: "none" }}
               >
-                {allImages.map((image, index) => (
+                {displayImages.map((image, index) => (
                   <button
-                    key={image.url}
+                    key={`thumb-${index}`}
                     onClick={() => setSelectedImageIndex(index)}
                     className={cn(
                       "relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-sm bg-secondary",
@@ -211,13 +219,17 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
                         "ring-2 ring-primary ring-offset-2"
                     )}
                   >
-                    <Image
-                      src={image.url}
-                      alt={image.alt ?? `${product.title} - ${index + 1}`}
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                    />
+                    {image.url ? (
+                      <Image
+                        src={image.url}
+                        alt={image.alt ?? `${product.title} - ${index + 1}`}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <PlaceholderImage />
+                    )}
                   </button>
                 ))}
               </div>
