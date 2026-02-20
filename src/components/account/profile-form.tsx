@@ -64,24 +64,10 @@ export function ProfileForm({ locale }: ProfileFormProps) {
     }
   };
 
-  if (!customer) {
-    return null;
-  }
+  const isDemo = !customer;
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {success && (
-        <div className="rounded-md bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900 dark:text-green-200">
-          {t("profileUpdated")}
-        </div>
-      )}
-
-      {error && (
-        <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-          {error}
-        </div>
-      )}
-
+  const formContent = (
+    <>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="lastName">{t("lastName")}</Label>
@@ -89,6 +75,8 @@ export function ProfileForm({ locale }: ProfileFormProps) {
             id="lastName"
             {...register("lastName", { required: tValidation("required") })}
             className={errors.lastName ? "border-destructive" : ""}
+            disabled={isDemo}
+            defaultValue={isDemo ? "山田" : undefined}
           />
           {errors.lastName && (
             <p className="text-xs text-destructive">{errors.lastName.message}</p>
@@ -101,6 +89,8 @@ export function ProfileForm({ locale }: ProfileFormProps) {
             id="firstName"
             {...register("firstName", { required: tValidation("required") })}
             className={errors.firstName ? "border-destructive" : ""}
+            disabled={isDemo}
+            defaultValue={isDemo ? "太郎" : undefined}
           />
           {errors.firstName && (
             <p className="text-xs text-destructive">{errors.firstName.message}</p>
@@ -121,6 +111,8 @@ export function ProfileForm({ locale }: ProfileFormProps) {
             },
           })}
           className={errors.email ? "border-destructive" : ""}
+          disabled={isDemo}
+          defaultValue={isDemo ? "demo@stillne.com" : undefined}
         />
         {errors.email && (
           <p className="text-xs text-destructive">{errors.email.message}</p>
@@ -140,11 +132,44 @@ export function ProfileForm({ locale }: ProfileFormProps) {
           })}
           placeholder="090-1234-5678"
           className={`max-w-[250px] ${errors.phone ? "border-destructive" : ""}`}
+          disabled={isDemo}
+          defaultValue={isDemo ? "090-1234-5678" : undefined}
         />
         {errors.phone && (
           <p className="text-xs text-destructive">{errors.phone.message}</p>
         )}
       </div>
+    </>
+  );
+
+  if (isDemo) {
+    return (
+      <div className="space-y-6">
+        <div className="rounded-lg border border-dashed border-muted-foreground/30 bg-muted/50 px-4 py-3 text-center text-sm text-muted-foreground">
+          {locale === "ja"
+            ? "これはデモ表示です。実際のユーザーデータではありません。"
+            : "This is a demo view. This is not real user data."}
+        </div>
+        {formContent}
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {success && (
+        <div className="rounded-md bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900 dark:text-green-200">
+          {t("profileUpdated")}
+        </div>
+      )}
+
+      {error && (
+        <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+          {error}
+        </div>
+      )}
+
+      {formContent}
 
       <Button
         type="submit"
