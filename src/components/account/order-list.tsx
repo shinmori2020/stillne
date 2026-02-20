@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Package } from "lucide-react";
+import { ImageOff, Package } from "lucide-react";
 import { useOrders } from "@/hooks/use-orders";
 import { useCustomer } from "@/hooks/use-auth";
 import { EmptyState } from "@/components/common/empty-state";
@@ -168,15 +168,17 @@ function OrderCard({ order, locale, isDemo }: { order: Order; locale: string; is
           const handle = item.product?.handle;
           const thumb = (
             <div
-              className="h-12 w-12 rounded-sm bg-secondary"
+              className="flex h-12 w-12 items-center justify-center rounded-sm bg-secondary"
               title={item.title}
             >
-              {item.thumbnail && (
+              {item.thumbnail ? (
                 <img
                   src={item.thumbnail}
                   alt={item.title}
                   className="h-full w-full rounded-sm object-cover"
                 />
+              ) : (
+                <ImageOff className="h-5 w-5 text-muted-foreground/50" />
               )}
             </div>
           );
