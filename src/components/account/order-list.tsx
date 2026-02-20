@@ -164,21 +164,34 @@ function OrderCard({ order, locale, isDemo }: { order: Order; locale: string; is
 
       {/* Order items preview */}
       <div className="mt-4 flex flex-wrap gap-2">
-        {order.items.slice(0, 3).map((item) => (
-          <div
-            key={item.id}
-            className="h-12 w-12 rounded-sm bg-secondary"
-            title={item.title}
-          >
-            {item.thumbnail && (
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="h-full w-full rounded-sm object-cover"
-              />
-            )}
-          </div>
-        ))}
+        {order.items.slice(0, 3).map((item) => {
+          const handle = item.product?.handle;
+          const thumb = (
+            <div
+              className="h-12 w-12 rounded-sm bg-secondary"
+              title={item.title}
+            >
+              {item.thumbnail && (
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  className="h-full w-full rounded-sm object-cover"
+                />
+              )}
+            </div>
+          );
+          return handle ? (
+            <Link
+              key={item.id}
+              href={`/${locale}/products/${handle}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {thumb}
+            </Link>
+          ) : (
+            <div key={item.id}>{thumb}</div>
+          );
+        })}
         {order.items.length > 3 && (
           <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-secondary text-xs text-muted-foreground">
             +{order.items.length - 3}
