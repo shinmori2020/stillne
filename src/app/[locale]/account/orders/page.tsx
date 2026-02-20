@@ -25,7 +25,7 @@ export default async function OrdersPage({ params }: OrdersPageProps) {
   const t = await getTranslations({ locale, namespace: "account" });
 
   return (
-    <div className="py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8 md:px-8">
       <div className="mb-8 flex items-center gap-4">
         <Button asChild variant="ghost" size="sm">
           <Link href={`/${locale}/account`}>
