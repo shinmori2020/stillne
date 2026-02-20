@@ -144,41 +144,47 @@ export function ProfileForm({ locale }: ProfileFormProps) {
 
   if (isDemo) {
     return (
-      <div className="space-y-6">
-        <div className="rounded-lg border border-dashed border-muted-foreground/30 bg-muted/50 px-4 py-3 text-center text-sm text-muted-foreground">
+      <div>
+        <div className="mb-6 rounded-lg border border-dashed border-muted-foreground/30 bg-muted/50 px-4 py-3 text-center text-sm text-muted-foreground">
           {locale === "ja"
             ? "これはデモ表示です。実際のユーザーデータではありません。"
             : "This is a demo view. This is not real user data."}
         </div>
-        {formContent}
+        <div className="rounded-lg border border-border p-6">
+          <div className="space-y-6">
+            {formContent}
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {success && (
-        <div className="rounded-md bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900 dark:text-green-200">
-          {t("profileUpdated")}
-        </div>
-      )}
+    <div className="rounded-lg border border-border p-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {success && (
+          <div className="rounded-md bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900 dark:text-green-200">
+            {t("profileUpdated")}
+          </div>
+        )}
 
-      {error && (
-        <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-          {error}
-        </div>
-      )}
+        {error && (
+          <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+            {error}
+          </div>
+        )}
 
-      {formContent}
+        {formContent}
 
-      <Button
-        type="submit"
-        disabled={isSubmitting || updateCustomer.isPending}
-      >
-        {isSubmitting || updateCustomer.isPending
-          ? t("saving")
-          : t("saveChanges")}
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          disabled={isSubmitting || updateCustomer.isPending}
+        >
+          {isSubmitting || updateCustomer.isPending
+            ? t("saving")
+            : t("saveChanges")}
+        </Button>
+      </form>
+    </div>
   );
 }

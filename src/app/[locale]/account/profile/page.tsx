@@ -37,7 +37,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
       <PageHeader title={t("profile")} />
 
-      <div className="mt-8 rounded-lg border border-border p-6">
+      <div className="mt-8">
         <ProfileForm locale={locale} />
       </div>
     </div>
