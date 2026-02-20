@@ -43,15 +43,87 @@ export function AddressList({ locale }: AddressListProps) {
     );
   }
 
-  // Not logged in
+  // Not logged in — show demo data
   if (!customer) {
+    const demoAddresses: CustomerAddress[] = [
+      {
+        id: "demo-addr-1",
+        first_name: "太郎",
+        last_name: "山田",
+        address_1: "丸の内1-1-1",
+        address_2: "stillneビル 3F",
+        city: "千代田区",
+        province: "東京都",
+        postal_code: "100-0005",
+        country_code: "jp",
+        phone: "03-1234-5678",
+        company: "",
+        is_default_shipping: true,
+        is_default_billing: true,
+      },
+      {
+        id: "demo-addr-2",
+        first_name: "太郎",
+        last_name: "山田",
+        address_1: "梅田2-2-2",
+        city: "北区",
+        province: "大阪府",
+        postal_code: "530-0001",
+        country_code: "jp",
+        phone: "06-9876-5432",
+        company: "",
+        is_default_shipping: false,
+        is_default_billing: false,
+      },
+    ];
+
     return (
-      <div className="text-center">
-        <p className="text-muted-foreground">
+      <div>
+        <div className="mb-6 rounded-lg border border-dashed border-muted-foreground/30 bg-muted/50 px-4 py-3 text-center text-sm text-muted-foreground">
           {locale === "ja"
-            ? "住所を管理するにはログインしてください"
-            : "Please log in to manage your addresses"}
-        </p>
+            ? "これはデモ表示です。実際の住所データではありません。"
+            : "This is a demo view. These are not real addresses."}
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {demoAddresses.map((address) => (
+            <div
+              key={address.id}
+              className={cn(
+                "relative rounded-lg border p-4",
+                address.is_default_shipping
+                  ? "border-primary"
+                  : "border-border"
+              )}
+            >
+              {address.is_default_shipping && (
+                <span className="absolute -top-2 left-4 bg-background px-2 text-xs font-medium text-primary">
+                  {locale === "ja" ? "デフォルト" : "Default"}
+                </span>
+              )}
+              <address className="not-italic text-sm">
+                <p className="font-medium">
+                  {address.last_name} {address.first_name}
+                </p>
+                <p className="mt-2 text-muted-foreground">
+                  〒{address.postal_code}
+                </p>
+                <p className="text-muted-foreground">
+                  {address.province}
+                  {address.city}
+                  {address.address_1}
+                </p>
+                {address.address_2 && (
+                  <p className="text-muted-foreground">{address.address_2}</p>
+                )}
+                {address.phone && (
+                  <p className="mt-2 text-muted-foreground">
+                    TEL: {address.phone}
+                  </p>
+                )}
+              </address>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
