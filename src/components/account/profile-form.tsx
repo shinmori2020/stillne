@@ -131,7 +131,7 @@ export function ProfileForm({ locale }: ProfileFormProps) {
             },
           })}
           placeholder="090-1234-5678"
-          className={`max-w-[250px] ${errors.phone ? "border-destructive" : ""}`}
+          className={errors.phone ? "border-destructive" : ""}
           disabled={isDemo}
           defaultValue={isDemo ? "090-1234-5678" : undefined}
         />
