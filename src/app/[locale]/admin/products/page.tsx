@@ -179,7 +179,7 @@ export default function AdminProductsPage() {
                       <span
                         className={
                           product.stock < 5
-                            ? "text-red-600 dark:text-red-400"
+                            ? "font-semibold text-primary"
                             : ""
                         }
                       >
@@ -190,8 +190,8 @@ export default function AdminProductsPage() {
                       <span
                         className={`inline-block rounded-full px-2 py-0.5 text-xs ${
                           product.status === "published"
-                            ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                            : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400"
+                            ? "bg-primary/10 text-primary dark:bg-primary/15"
+                            : "bg-muted text-muted-foreground"
                         }`}
                       >
                         {product.status === "published"

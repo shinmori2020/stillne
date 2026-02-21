@@ -127,8 +127,8 @@ export default function NewsletterAdmin() {
         <ScrollFadeIn>
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                <Send className="h-6 w-6 text-blue-500" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <Send className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
@@ -144,8 +144,8 @@ export default function NewsletterAdmin() {
         <ScrollFadeIn>
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-                <Mail className="h-6 w-6 text-green-500" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <Mail className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
@@ -206,7 +206,7 @@ export default function NewsletterAdmin() {
                           <span>{isJa ? "開封率" : "Open rate"} {nl.openRate}%</span>
                         </>
                       ) : (
-                        <span className="rounded-full bg-yellow-100 px-2 py-0.5 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                        <span className="rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
                           {isJa ? "下書き" : "Draft"}
                         </span>
                       )}
@@ -245,7 +245,7 @@ export default function NewsletterAdmin() {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-muted-foreground">{sub.date}</span>
-                    <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                    <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary dark:bg-primary/15">
                       {isJa ? "有効" : "Active"}
                     </span>
                   </div>
@@ -259,7 +259,7 @@ export default function NewsletterAdmin() {
           <div className="rounded-lg border bg-card p-6">
             {showComposed ? (
               <div className="text-center">
-                <Send className="mx-auto mb-4 h-10 w-10 text-green-600 dark:text-green-400" />
+                <Send className="mx-auto mb-4 h-10 w-10 text-primary" />
                 <h3 className="font-heading text-lg">
                   {isJa ? "下書きを保存しました" : "Draft Saved"}
                 </h3>

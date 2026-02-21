@@ -69,22 +69,22 @@ export default function AdminOrdersPage() {
     processing: {
       ja: "処理中",
       en: "Processing",
-      color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+      color: "bg-muted text-foreground",
     },
     shipped: {
       ja: "発送済み",
       en: "Shipped",
-      color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
+      color: "bg-primary/15 text-primary dark:bg-primary/20",
     },
     delivered: {
       ja: "配達完了",
       en: "Delivered",
-      color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+      color: "bg-primary/10 text-primary dark:bg-primary/15",
     },
     cancelled: {
       ja: "キャンセル",
       en: "Cancelled",
-      color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+      color: "bg-muted text-muted-foreground",
     },
   };
 

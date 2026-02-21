@@ -46,9 +46,9 @@ export default function AdminDashboard() {
   const locale = params.locale as string;
 
   const statusLabels: Record<string, { ja: string; en: string; color: string }> = {
-    processing: { ja: "処理中", en: "Processing", color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400" },
-    shipped: { ja: "発送済み", en: "Shipped", color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400" },
-    delivered: { ja: "配達完了", en: "Delivered", color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" },
+    processing: { ja: "処理中", en: "Processing", color: "bg-muted text-foreground" },
+    shipped: { ja: "発送済み", en: "Shipped", color: "bg-primary/15 text-primary dark:bg-primary/20" },
+    delivered: { ja: "配達完了", en: "Delivered", color: "bg-primary/10 text-primary dark:bg-primary/15" },
   };
 
   return (
@@ -76,8 +76,8 @@ export default function AdminDashboard() {
         <ScrollFadeIn>
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                <ShoppingCart className="h-6 w-6 text-blue-500" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <ShoppingCart className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t("totalOrders")}</p>
@@ -90,8 +90,8 @@ export default function AdminDashboard() {
         <ScrollFadeIn>
           <div className="rounded-lg border bg-card p-6 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-                <TrendingUp className="h-6 w-6 text-green-500" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <TrendingUp className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t("totalRevenue")}</p>
