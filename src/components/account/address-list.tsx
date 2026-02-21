@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { MapPin, Plus, Pencil, Trash2 } from "lucide-react";
+import { MapPin, Phone, Plus, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCustomer } from "@/hooks/use-auth";
 import {
@@ -70,7 +70,7 @@ export function AddressList({ locale }: AddressListProps) {
         first_name: "太郎",
         last_name: "山田",
         address_1: "梅田2-2-2",
-        address_2: null,
+        address_2: "グランフロント大阪 12F",
         city: "北区",
         province: "大阪府",
         postal_code: "530-0001",
@@ -96,36 +96,40 @@ export function AddressList({ locale }: AddressListProps) {
             <div
               key={address.id}
               className={cn(
-                "relative rounded-lg border p-4",
+                "relative rounded-lg border p-5 transition-shadow duration-200 hover:shadow-md",
                 address.is_default_shipping
                   ? "border-primary"
                   : "border-border"
               )}
             >
-              {address.is_default_shipping && (
-                <span className="absolute -top-2 left-4 bg-background px-2 text-xs font-medium text-primary">
-                  {locale === "ja" ? "デフォルト" : "Default"}
-                </span>
-              )}
-              <address className="not-italic text-sm">
+              <div className="mb-3 flex items-center justify-between">
                 <p className="font-medium">
                   {address.last_name} {address.first_name}
                 </p>
-                <p className="mt-2 text-muted-foreground">
-                  〒{address.postal_code}
-                </p>
-                <p className="text-muted-foreground">
-                  {address.province}
-                  {address.city}
-                  {address.address_1}
-                </p>
-                {address.address_2 && (
-                  <p className="text-muted-foreground">{address.address_2}</p>
+                {address.is_default_shipping && (
+                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                    {locale === "ja" ? "デフォルト" : "Default"}
+                  </span>
                 )}
+              </div>
+              <address className="not-italic text-sm">
+                <div className="flex items-start gap-2 text-muted-foreground">
+                  <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                  <div>
+                    <p>〒{address.postal_code}</p>
+                    <p>
+                      {address.province}
+                      {address.city}
+                      {address.address_1}
+                    </p>
+                    {address.address_2 && <p>{address.address_2}</p>}
+                  </div>
+                </div>
                 {address.phone && (
-                  <p className="mt-2 text-muted-foreground">
-                    TEL: {address.phone}
-                  </p>
+                  <div className="mt-3 flex items-center gap-2 text-muted-foreground">
+                    <Phone className="h-3.5 w-3.5 shrink-0" />
+                    <p>{address.phone}</p>
+                  </div>
                 )}
               </address>
             </div>
