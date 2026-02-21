@@ -9,7 +9,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetClose,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useUIStore } from "@/lib/stores/ui-store";
@@ -29,7 +28,7 @@ export function CartDrawer() {
 
   return (
     <Sheet open={isCartOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent className="flex w-full flex-col sm:max-w-md">
+      <SheetContent hideClose className="flex w-full flex-col sm:max-w-md">
         <SheetHeader className="border-b border-border pb-4">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg font-medium">
@@ -40,12 +39,13 @@ export function CartDrawer() {
                 </span>
               )}
             </SheetTitle>
-            <SheetClose asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
-                <X className="h-4 w-4" />
-                <span className="sr-only">{t("drawerLabel")}</span>
-              </Button>
-            </SheetClose>
+            <button
+              onClick={closeCart}
+              className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
         </SheetHeader>
 
