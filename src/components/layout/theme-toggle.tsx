@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -16,9 +16,28 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  const toggleTheme = useCallback(() => {
+    const body = document.body;
+    // Fade out
+    body.classList.add("theme-fade");
+    body.classList.remove("theme-fade-in");
+
+    setTimeout(() => {
+      // Switch theme while faded out
+      setTheme(theme === "dark" ? "light" : "dark");
+
+      // Fade in
+      requestAnimationFrame(() => {
+        body.classList.remove("theme-fade");
+        body.classList.add("theme-fade-in");
+
+        // Clean up class after animation
+        setTimeout(() => {
+          body.classList.remove("theme-fade-in");
+        }, 250);
+      });
+    }, 250);
+  }, [theme, setTheme]);
 
   if (!mounted) {
     // Render placeholder to avoid layout shift
