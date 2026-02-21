@@ -48,6 +48,7 @@ export function AddressList({ locale }: AddressListProps) {
     const demoAddresses: CustomerAddress[] = [
       {
         id: "demo-addr-1",
+        customer_id: "demo-customer",
         first_name: "太郎",
         last_name: "山田",
         address_1: "丸の内1-1-1",
@@ -60,12 +61,16 @@ export function AddressList({ locale }: AddressListProps) {
         company: "",
         is_default_shipping: true,
         is_default_billing: true,
+        created_at: "2025-01-01T00:00:00Z",
+        updated_at: "2025-01-01T00:00:00Z",
       },
       {
         id: "demo-addr-2",
+        customer_id: "demo-customer",
         first_name: "太郎",
         last_name: "山田",
         address_1: "梅田2-2-2",
+        address_2: null,
         city: "北区",
         province: "大阪府",
         postal_code: "530-0001",
@@ -74,6 +79,8 @@ export function AddressList({ locale }: AddressListProps) {
         company: "",
         is_default_shipping: false,
         is_default_billing: false,
+        created_at: "2025-02-01T00:00:00Z",
+        updated_at: "2025-02-01T00:00:00Z",
       },
     ];
 
