@@ -112,6 +112,11 @@
     "fabric": "ファブリック",
     "stationery": "ステーショナリー"
   },
+  "search": {
+    "placeholder": "商品を検索...",
+    "noResults": "該当する商品が見つかりませんでした",
+    "inputLabel": "検索キーワード"
+  },
   "sort": {
     "newest": "新着順",
     "priceAsc": "価格が安い順",

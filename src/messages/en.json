@@ -112,6 +112,11 @@
     "fabric": "Fabric",
     "stationery": "Stationery"
   },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found",
+    "inputLabel": "Search keyword"
+  },
   "sort": {
     "newest": "Newest",
     "priceAsc": "Price: Low to High",

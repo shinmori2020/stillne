@@ -350,6 +350,29 @@ export async function getProductByHandle(
 }
 
 /**
+ * Search products by query string (works with dummy data locally)
+ */
+export function searchProducts(query: string): Product[] {
+  if (!query.trim()) return [];
+
+  const normalizedQuery = query.toLowerCase().trim();
+
+  return DUMMY_PRODUCTS.filter((product) => {
+    const searchableFields = [
+      product.title,
+      product.description,
+      product.material,
+      ...(product.categories?.map((c) => c.name) ?? []),
+      ...(product.variants?.map((v) => v.title) ?? []),
+    ]
+      .filter(Boolean)
+      .map((field) => (field as string).toLowerCase());
+
+    return searchableFields.some((field) => field.includes(normalizedQuery));
+  });
+}
+
+/**
  * Fetch new arrival products (sorted by created_at desc)
  */
 export async function getNewArrivals(limit: number = 8): Promise<Product[]> {

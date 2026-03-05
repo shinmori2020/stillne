@@ -16,6 +16,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { SearchModal } from "@/components/search/search-modal";
 import type { SupportedLocale } from "@/lib/constants";
 
 interface LocaleLayoutProps {
@@ -113,6 +114,7 @@ export default async function LocaleLayout({
                 <Header />
                 <MobileMenu />
                 <CartDrawer />
+                <SearchModal />
                 <main className="min-h-screen">{children}</main>
                 <Footer locale={locale} />
               </NextIntlClientProvider>
