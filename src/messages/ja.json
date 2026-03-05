@@ -51,6 +51,7 @@
     "total": "合計",
     "drawerLabel": "ショッピングカート",
     "remove": "削除",
+    "quantity": "数量",
     "itemCount": "{count, plural, =0 {カートは空です} one {1点} other {{count}点}}"
   },
   "checkout": {
@@ -58,13 +59,20 @@
     "shippingAddress": "配送先情報",
     "shippingMethod": "配送方法",
     "payment": "お支払い",
+    "orderReview": "注文確認",
     "confirm": "注文を確定する",
+    "backToShipping": "配送先に戻る",
     "success": "ご注文ありがとうございます",
     "orderNumber": "注文番号",
     "confirmationEmail": "確認メールをお送りしました",
     "viewOrder": "注文履歴を見る",
     "demoNoticeTitle": "これはデモ注文です",
-    "demoNoticeBody": "実際の課金は発生していません。テスト用カード番号で処理されています。"
+    "demoNoticeBody": "実際の課金は発生していません。テスト用カード番号で処理されています。",
+    "reviewShippingAddress": "配送先",
+    "reviewPaymentMethod": "お支払い方法",
+    "creditCard": "クレジットカード（デモ）",
+    "reviewItems": "ご注文内容",
+    "edit": "変更"
   },
   "account": {
     "login": "ログイン",

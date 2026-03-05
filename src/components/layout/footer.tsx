@@ -13,9 +13,14 @@ export async function Footer({ locale }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
 
+  const tCart = await getTranslations("cart");
+  const tCheckout = await getTranslations("checkout");
+
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
     { label: t("contact"), href: "/contact" },
+    { label: tCart("title"), href: "/cart" },
+    { label: tCheckout("title"), href: "/checkout" },
     { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },
     { label: locale === "ja" ? "管理画面" : "Admin", href: "/admin" },
   ] as const;

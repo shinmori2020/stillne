@@ -3,17 +3,66 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { ArrowLeft, ShoppingBag, MapPin, CreditCard, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { PageHeader } from "@/components/common/page-header";
 import { EmptyState } from "@/components/common/empty-state";
+import { PlaceholderImage } from "@/components/common/placeholder-image";
+import { formatPrice } from "@/lib/format";
 import { ShippingForm } from "./shipping-form";
 import { OrderSummary } from "./order-summary";
 import { CheckoutSteps } from "./checkout-steps";
-import type { CartAddress } from "@/types/cart";
+import type { Cart, CartAddress } from "@/types/cart";
 
-type CheckoutStep = "shipping" | "payment" | "confirmation";
+type CheckoutStep = "shipping" | "review" | "confirmation";
+
+// Demo cart data for when Medusa is not configured
+const DEMO_CART: Cart = {
+  id: "demo_cart_01",
+  items: [
+    {
+      id: "item_01",
+      cart_id: "demo_cart_01",
+      title: "セラミックフラワーベース A-001",
+      thumbnail: "",
+      quantity: 1,
+      variant_id: "var_01",
+      unit_price: 580000,
+      subtotal: 580000,
+      total: 580000,
+      tax_total: 0,
+      discount_total: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: "item_02",
+      cart_id: "demo_cart_01",
+      title: "マグカップ C-003",
+      thumbnail: "",
+      quantity: 2,
+      variant_id: "var_03",
+      unit_price: 280000,
+      subtotal: 560000,
+      total: 560000,
+      tax_total: 0,
+      discount_total: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+  ],
+  region_id: "reg_jp",
+  currency_code: "jpy",
+  subtotal: 1140000,
+  tax_total: 0,
+  shipping_total: 0,
+  discount_total: 0,
+  total: 1140000,
+  item_count: 3,
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+};
 
 interface CheckoutClientProps {
   locale: string;
@@ -30,6 +79,9 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
   // Check if Medusa is configured
   const isMedusaConfigured = !!process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
 
+  // Use demo cart when Medusa is not configured
+  const activeCart = isMedusaConfigured ? cart : DEMO_CART;
+
   // Loading state (only show if Medusa is configured)
   if (isLoading && isMedusaConfigured) {
     return (
@@ -39,8 +91,8 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
     );
   }
 
-  // Empty cart state (show when no cart or Medusa not configured)
-  if (!cart || cart.items.length === 0) {
+  // Empty cart state
+  if (!activeCart || activeCart.items.length === 0) {
     return (
       <div className="py-12">
         <EmptyState
@@ -57,11 +109,10 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
 
   const handleShippingSubmit = (address: CartAddress) => {
     setShippingAddress(address);
-    setCurrentStep("payment");
+    setCurrentStep("review");
   };
 
-  const handlePaymentSubmit = () => {
-    // In a real app, this would process payment
+  const handlePlaceOrder = () => {
     setCurrentStep("confirmation");
   };
 
@@ -94,10 +145,12 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
             />
           )}
 
-          {currentStep === "payment" && (
-            <PaymentSection
-              onSubmit={handlePaymentSubmit}
-              onBack={handleBackToShipping}
+          {currentStep === "review" && (
+            <OrderReviewSection
+              cart={activeCart}
+              shippingAddress={shippingAddress}
+              onPlaceOrder={handlePlaceOrder}
+              onBackToShipping={handleBackToShipping}
               locale={locale}
             />
           )}
@@ -109,31 +162,115 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
 
         {/* Order summary sidebar */}
         <div className="lg:col-span-1">
-          <OrderSummary cart={cart} />
+          <OrderSummary cart={activeCart} />
         </div>
       </div>
     </div>
   );
 }
 
-// Payment section (simplified for demo)
-function PaymentSection({
-  onSubmit,
-  onBack,
+// Order Review section (注文確認)
+function OrderReviewSection({
+  cart,
+  shippingAddress,
+  onPlaceOrder,
+  onBackToShipping,
   locale,
 }: {
-  onSubmit: () => void;
-  onBack: () => void;
+  cart: Cart;
+  shippingAddress: CartAddress | null;
+  onPlaceOrder: () => void;
+  onBackToShipping: () => void;
   locale: string;
 }) {
   const t = useTranslations("checkout");
+  const tCart = useTranslations("cart");
 
   return (
-    <div className="space-y-6 rounded-lg border border-border p-6">
-      <h2 className="text-lg font-medium">{t("payment")}</h2>
+    <div className="space-y-6">
+      {/* Shipping Address Review */}
+      <div className="rounded-lg border border-border p-6">
+        <div className="flex items-center justify-between">
+          <h2 className="flex items-center gap-2 text-lg font-medium">
+            <MapPin className="h-5 w-5" />
+            {t("reviewShippingAddress")}
+          </h2>
+          <Button variant="ghost" size="sm" onClick={onBackToShipping}>
+            <Pencil className="mr-1 h-3.5 w-3.5" />
+            {t("edit")}
+          </Button>
+        </div>
+        {shippingAddress && (
+          <div className="mt-4 text-sm text-muted-foreground">
+            <p className="font-medium text-foreground">
+              {shippingAddress.last_name} {shippingAddress.first_name}
+            </p>
+            <p className="mt-1">〒{shippingAddress.postal_code}</p>
+            <p>{shippingAddress.province} {shippingAddress.city}</p>
+            <p>{shippingAddress.address_1}</p>
+            {shippingAddress.address_2 && <p>{shippingAddress.address_2}</p>}
+            <p className="mt-1">TEL: {shippingAddress.phone}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Payment Method */}
+      <div className="rounded-lg border border-border p-6">
+        <h2 className="flex items-center gap-2 text-lg font-medium">
+          <CreditCard className="h-5 w-5" />
+          {t("reviewPaymentMethod")}
+        </h2>
+        <p className="mt-4 text-sm text-muted-foreground">
+          {t("creditCard")}
+        </p>
+      </div>
+
+      {/* Order Items Review */}
+      <div className="rounded-lg border border-border p-6">
+        <h2 className="text-lg font-medium">{t("reviewItems")}</h2>
+        <div className="mt-4 space-y-4">
+          {cart.items.map((item) => (
+            <div key={item.id} className="flex gap-4">
+              <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md">
+                <PlaceholderImage className="h-full w-full" />
+              </div>
+              <div className="flex flex-1 items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {tCart("quantity") ?? "Qty"}: {item.quantity}
+                  </p>
+                </div>
+                <p className="font-mono text-sm">
+                  {formatPrice(item.subtotal, "jpy")}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 border-t border-border pt-4">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">{tCart("subtotal")}</span>
+            <span className="font-mono">{formatPrice(cart.subtotal, "jpy")}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">{tCart("shipping")}</span>
+            <span className="text-sm text-muted-foreground">
+              {cart.shipping_total
+                ? formatPrice(cart.shipping_total, "jpy")
+                : locale === "ja" ? "無料" : "Free"}
+            </span>
+          </div>
+          <div className="mt-2 flex justify-between font-medium">
+            <span>{tCart("total")}</span>
+            <span className="font-mono">{formatPrice(cart.total, "jpy")}</span>
+          </div>
+        </div>
+      </div>
 
       {/* Demo notice */}
-      <div className="rounded-md bg-amber-50 p-4 dark:bg-amber-950">
+      <div className="rounded-md border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
         <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
           {t("demoNoticeTitle")}
         </p>
@@ -142,11 +279,12 @@ function PaymentSection({
         </p>
       </div>
 
+      {/* Actions */}
       <div className="flex gap-4">
-        <Button variant="outline" onClick={onBack}>
-          {locale === "ja" ? "戻る" : "Back"}
+        <Button variant="outline" onClick={onBackToShipping}>
+          {t("backToShipping")}
         </Button>
-        <Button onClick={onSubmit} className="flex-1">
+        <Button onClick={onPlaceOrder} className="flex-1">
           {t("confirm")}
         </Button>
       </div>
@@ -154,7 +292,7 @@ function PaymentSection({
   );
 }
 
-// Confirmation section
+// Confirmation section (注文完了)
 function ConfirmationSection({ locale }: { locale: string }) {
   const t = useTranslations("checkout");
 
@@ -187,11 +325,28 @@ function ConfirmationSection({ locale }: { locale: string }) {
         <p className="text-sm text-muted-foreground">{t("confirmationEmail")}</p>
       </div>
 
-      <Button asChild className="mt-4">
-        <Link href={`/${locale}/products`}>
-          {locale === "ja" ? "買い物を続ける" : "Continue Shopping"}
-        </Link>
-      </Button>
+      {/* Demo notice */}
+      <div className="rounded-md border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
+        <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+          {t("demoNoticeTitle")}
+        </p>
+        <p className="mt-1 text-sm text-amber-700 dark:text-amber-300">
+          {t("demoNoticeBody")}
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <Button asChild>
+          <Link href={`/${locale}/account/orders`}>
+            {t("viewOrder")}
+          </Link>
+        </Button>
+        <Button asChild variant="outline">
+          <Link href={`/${locale}/products`}>
+            {locale === "ja" ? "買い物を続ける" : "Continue Shopping"}
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }

@@ -4,21 +4,21 @@ import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type CheckoutStep = "shipping" | "payment" | "confirmation";
+type CheckoutStep = "shipping" | "review" | "confirmation";
 
 interface CheckoutStepsProps {
   currentStep: CheckoutStep;
 }
 
-const STEPS: CheckoutStep[] = ["shipping", "payment", "confirmation"];
+const STEPS: CheckoutStep[] = ["shipping", "review", "confirmation"];
 
 export function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
   const t = useTranslations("checkout");
 
   const stepLabels: Record<CheckoutStep, string> = {
     shipping: t("shippingAddress"),
-    payment: t("payment"),
-    confirmation: t("confirm"),
+    review: t("orderReview"),
+    confirmation: t("success"),
   };
 
   const currentIndex = STEPS.indexOf(currentStep);

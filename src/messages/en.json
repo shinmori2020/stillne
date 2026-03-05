@@ -51,6 +51,7 @@
     "total": "Total",
     "drawerLabel": "Shopping cart",
     "remove": "Remove",
+    "quantity": "Qty",
     "itemCount": "{count, plural, =0 {Cart is empty} one {1 item} other {{count} items}}"
   },
   "checkout": {
@@ -58,13 +59,20 @@
     "shippingAddress": "Shipping Address",
     "shippingMethod": "Shipping Method",
     "payment": "Payment",
+    "orderReview": "Order Review",
     "confirm": "Place Order",
+    "backToShipping": "Back to Shipping",
     "success": "Thank you for your order",
     "orderNumber": "Order number",
     "confirmationEmail": "A confirmation email has been sent",
     "viewOrder": "View order history",
     "demoNoticeTitle": "This is a demo order",
-    "demoNoticeBody": "No actual charges have been made. This was processed with a test card number."
+    "demoNoticeBody": "No actual charges have been made. This was processed with a test card number.",
+    "reviewShippingAddress": "Shipping Address",
+    "reviewPaymentMethod": "Payment Method",
+    "creditCard": "Credit Card (Demo)",
+    "reviewItems": "Order Items",
+    "edit": "Edit"
   },
   "account": {
     "login": "Log in",
