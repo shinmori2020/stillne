@@ -2,22 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, User, ShoppingBag, Menu } from "lucide-react";
+import { Search, User, ShoppingBag, Menu, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useUIStore } from "@/lib/stores/ui-store";
 import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
+import { CATEGORIES } from "@/lib/categories";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggle } from "./theme-toggle";
-
-const NAV_ITEMS = [
-  { key: "all", href: "/products" },
-  { key: "interior", href: "/products?category=interior" },
-  { key: "tableware", href: "/products?category=tableware" },
-  { key: "fabric", href: "/products?category=fabric" },
-  { key: "stationery", href: "/products?category=stationery" },
-] as const;
 
 export function Header() {
   const pathname = usePathname();
@@ -29,6 +28,9 @@ export function Header() {
   const locale = pathname.split("/")[1] ?? "ja";
 
   const itemCount = cart?.items?.length ?? 0;
+
+  // Check if current page is a category page
+  const isProductsPage = pathname.startsWith(`/${locale}/products`);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
@@ -54,22 +56,38 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex lg:items-center lg:gap-8" aria-label="Main navigation">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={`/${locale}${item.href}`}
-              className={cn(
-                "text-sm transition-colors hover:text-foreground",
-                pathname === `/${locale}${item.href}`
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              )}
-            >
-              {item.key === "all"
-                ? t("common.all")
-                : t(`category.${item.key}`)}
-            </Link>
-          ))}
+          <Link
+            href={`/${locale}/products`}
+            className={cn(
+              "text-sm transition-colors hover:text-foreground",
+              isProductsPage ? "text-foreground" : "text-muted-foreground"
+            )}
+          >
+            {t("common.all")}
+          </Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {t("navigation.categories")}
+                <ChevronDown className="h-3.5 w-3.5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className="min-w-[160px]">
+              {CATEGORIES.map((cat) => (
+                <DropdownMenuItem key={cat.key} asChild>
+                  <Link
+                    href={`/${locale}/products?category=${cat.handle}`}
+                    className="cursor-pointer"
+                  >
+                    {t(`category.${cat.key}`)}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         {/* Right side icons */}

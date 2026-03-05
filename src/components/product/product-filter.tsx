@@ -9,14 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const CATEGORIES = [
-  { key: "all", value: "" },
-  { key: "interior", value: "interior" },
-  { key: "tableware", value: "tableware" },
-  { key: "fabric", value: "fabric" },
-  { key: "stationery", value: "stationery" },
-] as const;
+import { CATEGORIES } from "@/lib/categories";
 
 interface ProductFilterProps {
   locale: string;
@@ -58,12 +51,15 @@ export function ProductFilter({ locale, currentCategory }: ProductFilterProps) {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="all">
+            {tCommon("all")}
+          </SelectItem>
           {CATEGORIES.map((category) => (
             <SelectItem
               key={category.key}
-              value={category.value || "all"}
+              value={category.handle}
             >
-              {category.key === "all" ? tCommon("all") : t(category.key)}
+              {t(category.key)}
             </SelectItem>
           ))}
         </SelectContent>

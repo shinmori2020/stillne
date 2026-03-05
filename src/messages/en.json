@@ -110,7 +110,10 @@
     "interior": "Interior",
     "tableware": "Tableware",
     "fabric": "Fabric",
-    "stationery": "Stationery"
+    "stationery": "Stationery",
+    "furniture": "Furniture",
+    "lighting": "Lighting",
+    "kitchen": "Kitchen"
   },
   "search": {
     "placeholder": "Search products...",
@@ -138,7 +141,8 @@
     "cart": "Cart",
     "account": "Account",
     "menu": "Menu",
-    "toggleTheme": "Toggle theme"
+    "toggleTheme": "Toggle theme",
+    "categories": "Categories"
   },
   "breadcrumb": {
     "home": "Home"

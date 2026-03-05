@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { CATEGORIES } from "@/lib/categories";
 
 interface FooterProps {
   locale: string;
@@ -11,12 +12,6 @@ export async function Footer({ locale }: FooterProps) {
 
   const currentYear = new Date().getFullYear();
 
-  const categoryLinks = [
-    { key: "interior", href: "/products?category=interior" },
-    { key: "tableware", href: "/products?category=tableware" },
-    { key: "fabric", href: "/products?category=fabric" },
-    { key: "stationery", href: "/products?category=stationery" },
-  ] as const;
 
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
@@ -46,13 +41,13 @@ export async function Footer({ locale }: FooterProps) {
           <div>
             <h3 className="text-sm font-medium">{t("categories")}</h3>
             <ul className="mt-4 space-y-3">
-              {categoryLinks.map((link) => (
-                <li key={link.key}>
+              {CATEGORIES.map((cat) => (
+                <li key={cat.key}>
                   <Link
-                    href={`/${locale}${link.href}`}
+                    href={`/${locale}/products?category=${cat.handle}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    {tCategory(link.key)}
+                    {tCategory(cat.key)}
                   </Link>
                 </li>
               ))}

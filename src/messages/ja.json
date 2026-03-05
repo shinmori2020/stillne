@@ -110,7 +110,10 @@
     "interior": "インテリア雑貨",
     "tableware": "テーブルウェア",
     "fabric": "ファブリック",
-    "stationery": "ステーショナリー"
+    "stationery": "ステーショナリー",
+    "furniture": "家具",
+    "lighting": "照明",
+    "kitchen": "キッチン"
   },
   "search": {
     "placeholder": "商品を検索...",
@@ -138,7 +141,8 @@
     "cart": "カート",
     "account": "アカウント",
     "menu": "メニュー",
-    "toggleTheme": "テーマを切り替え"
+    "toggleTheme": "テーマを切り替え",
+    "categories": "カテゴリ"
   },
   "breadcrumb": {
     "home": "ホーム"

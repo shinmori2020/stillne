@@ -11,16 +11,9 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { useUIStore } from "@/lib/stores/ui-store";
+import { CATEGORIES } from "@/lib/categories";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggle } from "./theme-toggle";
-
-const NAV_ITEMS = [
-  { key: "all", href: "/products" },
-  { key: "interior", href: "/products?category=interior" },
-  { key: "tableware", href: "/products?category=tableware" },
-  { key: "fabric", href: "/products?category=fabric" },
-  { key: "stationery", href: "/products?category=stationery" },
-] as const;
 
 export function MobileMenu() {
   const pathname = usePathname();
@@ -50,17 +43,24 @@ export function MobileMenu() {
         </SheetHeader>
 
         <nav className="mt-8 flex flex-col space-y-1" aria-label="Mobile navigation">
+          {/* All Products */}
+          <Link
+            href={`/${locale}/products`}
+            onClick={handleLinkClick}
+            className="rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary"
+          >
+            {t("common.all")}
+          </Link>
+
           {/* Category Links */}
-          {NAV_ITEMS.map((item) => (
+          {CATEGORIES.map((cat) => (
             <Link
-              key={item.key}
-              href={`/${locale}${item.href}`}
+              key={cat.key}
+              href={`/${locale}/products?category=${cat.handle}`}
               onClick={handleLinkClick}
               className="rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary"
             >
-              {item.key === "all"
-                ? t("common.all")
-                : t(`category.${item.key}`)}
+              {t(`category.${cat.key}`)}
             </Link>
           ))}
 
