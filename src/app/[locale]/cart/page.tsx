@@ -27,6 +27,30 @@ const DEMO_CART_ITEMS = [
     quantity: 2,
     handle: "mug-cup-c003",
   },
+  {
+    id: "item_03",
+    title: "リネンクッションカバー D-004",
+    variant: "ベージュ",
+    price: 380000,
+    quantity: 1,
+    handle: "linen-cushion-cover-d004",
+  },
+  {
+    id: "item_04",
+    title: "テーブルランプ J-010",
+    variant: "ナチュラル",
+    price: 1850000,
+    quantity: 1,
+    handle: "table-lamp-j010",
+  },
+  {
+    id: "item_05",
+    title: "木製カッティングボード K-011",
+    variant: "ナチュラル",
+    price: 580000,
+    quantity: 1,
+    handle: "wooden-cutting-board-k011",
+  },
 ];
 
 export default function CartPage() {

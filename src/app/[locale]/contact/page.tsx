@@ -7,7 +7,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Mail, Clock, CheckCircle, AlertCircle } from "lucide-react";
+
+const INQUIRY_CATEGORIES = [
+  "general",
+  "product",
+  "order",
+  "return",
+  "other",
+] as const;
 
 export default function ContactPage() {
   const t = useTranslations("pages.contact");
@@ -68,17 +83,30 @@ export default function ContactPage() {
             </div>
           ) : (
             <>
+              {/* Name */}
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="name">{t("form.name")}</Label>
+                  <Label htmlFor="lastName">{t("form.lastName")}</Label>
                   <Input
-                    id="name"
-                    name="name"
+                    id="lastName"
+                    name="lastName"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">{t("form.firstName")}</Label>
+                  <Input
+                    id="firstName"
+                    name="firstName"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
 
+              {/* Email & Phone */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email">{t("form.email")}</Label>
                   <Input
@@ -89,8 +117,35 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">{t("form.phone")}</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    disabled={isSubmitting}
+                  />
+                </div>
               </div>
 
+              {/* Inquiry Category */}
+              <div className="space-y-2">
+                <Label htmlFor="category">{t("form.category")}</Label>
+                <Select name="category" required disabled={isSubmitting}>
+                  <SelectTrigger className="sm:max-w-[320px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {INQUIRY_CATEGORIES.map((cat) => (
+                      <SelectItem key={cat} value={cat}>
+                        {t(`form.categoryOptions.${cat}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Subject */}
               <div className="space-y-2">
                 <Label htmlFor="subject">{t("form.subject")}</Label>
                 <Input
@@ -101,6 +156,7 @@ export default function ContactPage() {
                 />
               </div>
 
+              {/* Message */}
               <div className="space-y-2">
                 <Label htmlFor="message">{t("form.message")}</Label>
                 <Textarea

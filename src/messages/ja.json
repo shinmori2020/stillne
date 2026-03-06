@@ -217,8 +217,18 @@
       "title": "お問い合わせ",
       "subtitle": "ご質問・ご要望はお気軽にどうぞ",
       "form": {
-        "name": "お名前",
+        "lastName": "姓",
+        "firstName": "名",
         "email": "メールアドレス",
+        "phone": "電話番号",
+        "category": "お問い合わせ種別",
+        "categoryOptions": {
+          "general": "一般的なお問い合わせ",
+          "product": "商品について",
+          "order": "注文・配送について",
+          "return": "返品・交換について",
+          "other": "その他"
+        },
         "subject": "件名",
         "message": "メッセージ",
         "submit": "送信する",
