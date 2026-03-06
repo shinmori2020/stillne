@@ -28,9 +28,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16">
+    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
       <ScrollFadeIn>
-        <header className="mb-12 text-center">
+        <header className="mb-12">
           <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">
             {t("title")}
           </h1>
@@ -40,34 +40,35 @@ export default function ContactPage() {
         </header>
       </ScrollFadeIn>
 
-      <div className="grid gap-12 md:grid-cols-2">
-        <ScrollFadeIn>
-          <div className="rounded-lg border bg-card p-6 md:p-8">
-            <h2 className="mb-6 font-heading text-xl">{t("info.title")}</h2>
-
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-muted-foreground" />
-                <span className="text-muted-foreground">{t("info.email")}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-muted-foreground" />
-                <span className="text-muted-foreground">{t("info.hours")}</span>
-              </div>
-              <p className="text-sm text-muted-foreground/80">{t("info.note")}</p>
+      {/* Contact Info */}
+      <ScrollFadeIn>
+        <div className="mb-10 rounded-lg border bg-card p-6 md:p-8">
+          <h2 className="mb-4 font-heading text-lg">{t("info.title")}</h2>
+          <div className="flex flex-wrap gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <Mail className="h-4 w-4 text-muted-foreground" />
+              <span className="text-muted-foreground">{t("info.email")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-muted-foreground" />
+              <span className="text-muted-foreground">{t("info.hours")}</span>
             </div>
           </div>
-        </ScrollFadeIn>
+          <p className="mt-3 text-sm text-muted-foreground/80">{t("info.note")}</p>
+        </div>
+      </ScrollFadeIn>
 
-        <ScrollFadeIn>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {submitStatus === "success" ? (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center dark:border-green-800 dark:bg-green-900/20">
-                <CheckCircle className="mx-auto mb-3 h-10 w-10 text-green-600 dark:text-green-400" />
-                <p className="text-green-800 dark:text-green-200">{t("form.success")}</p>
-              </div>
-            ) : (
-              <>
+      {/* Contact Form */}
+      <ScrollFadeIn>
+        <form onSubmit={handleSubmit} className="space-y-6 rounded-lg border bg-card p-6 md:p-8">
+          {submitStatus === "success" ? (
+            <div className="rounded-lg border border-green-200 bg-green-50 p-8 text-center dark:border-green-800 dark:bg-green-900/20">
+              <CheckCircle className="mx-auto mb-3 h-10 w-10 text-green-600 dark:text-green-400" />
+              <p className="text-green-800 dark:text-green-200">{t("form.success")}</p>
+            </div>
+          ) : (
+            <>
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="name">{t("form.name")}</Label>
                   <Input
@@ -88,43 +89,43 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                   />
                 </div>
+              </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="subject">{t("form.subject")}</Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    required
-                    disabled={isSubmitting}
-                  />
+              <div className="space-y-2">
+                <Label htmlFor="subject">{t("form.subject")}</Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">{t("form.message")}</Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  rows={8}
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+
+              {submitStatus === "error" && (
+                <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-red-800 dark:border-red-800 dark:bg-red-900/20 dark:text-red-200">
+                  <AlertCircle className="h-5 w-5" />
+                  <span className="text-sm">{t("form.error")}</span>
                 </div>
+              )}
 
-                <div className="space-y-2">
-                  <Label htmlFor="message">{t("form.message")}</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                {submitStatus === "error" && (
-                  <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-red-800 dark:border-red-800 dark:bg-red-900/20 dark:text-red-200">
-                    <AlertCircle className="h-5 w-5" />
-                    <span className="text-sm">{t("form.error")}</span>
-                  </div>
-                )}
-
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? t("form.sending") : t("form.submit")}
-                </Button>
-              </>
-            )}
-          </form>
-        </ScrollFadeIn>
-      </div>
+              <Button type="submit" className="w-full sm:w-auto sm:min-w-[200px]" disabled={isSubmitting}>
+                {isSubmitting ? t("form.sending") : t("form.submit")}
+              </Button>
+            </>
+          )}
+        </form>
+      </ScrollFadeIn>
     </div>
   );
 }

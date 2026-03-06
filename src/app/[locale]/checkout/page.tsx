@@ -25,7 +25,7 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
   setRequestLocale(locale);
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-12">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12 lg:px-12">
       <CheckoutClient locale={locale} />
     </div>
   );

@@ -56,11 +56,18 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:px-8 md:py-16">
+    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
       <ScrollFadeIn>
-        <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">
-          {t("title")}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">
+            {t("title")}
+          </h1>
+          <Button asChild variant="ghost" size="sm">
+            <Link href={`/${locale}/products`}>
+              {t("continueShopping")}
+            </Link>
+          </Button>
+        </div>
       </ScrollFadeIn>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
@@ -69,16 +76,16 @@ export default function CartPage() {
           <div className="space-y-4">
             {cartItems.map((item) => (
               <ScrollFadeIn key={item.id}>
-                <div className="flex gap-4 rounded-lg border bg-card p-4">
+                <div className="flex gap-4 rounded-lg border bg-card p-4 md:p-6">
                   {/* Product Image */}
                   <Link
                     href={`/${locale}/products/${item.handle}`}
                     className="shrink-0"
                   >
-                    <div className="h-24 w-24 overflow-hidden rounded-md">
+                    <div className="h-24 w-24 overflow-hidden rounded-md md:h-28 md:w-28">
                       <PlaceholderImage
-                        width={96}
-                        height={96}
+                        width={112}
+                        height={112}
                         className="h-full w-full"
                       />
                     </div>
@@ -86,7 +93,7 @@ export default function CartPage() {
 
                   {/* Product Info */}
                   <div className="flex flex-1 flex-col">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-4">
                       <div>
                         <Link
                           href={`/${locale}/products/${item.handle}`}
@@ -98,7 +105,7 @@ export default function CartPage() {
                           {item.variant}
                         </p>
                       </div>
-                      <p className="font-medium">
+                      <p className="shrink-0 font-mono font-medium">
                         {formatPrice(item.price * item.quantity, "jpy")}
                       </p>
                     </div>
@@ -114,7 +121,7 @@ export default function CartPage() {
                         >
                           <Minus className="h-4 w-4" />
                         </Button>
-                        <span className="w-8 text-center">{item.quantity}</span>
+                        <span className="w-8 text-center text-sm">{item.quantity}</span>
                         <Button
                           variant="outline"
                           size="icon"
@@ -143,24 +150,24 @@ export default function CartPage() {
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <ScrollFadeIn>
-            <div className="rounded-lg border bg-card p-6">
-              <h2 className="font-heading text-lg">{t("title")}</h2>
+            <div className="rounded-lg border bg-card p-6 lg:sticky lg:top-24">
+              <h2 className="font-heading text-lg">{t("subtotal")}</h2>
 
-              <div className="mt-6 space-y-4">
+              <div className="mt-6 space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{t("subtotal")}</span>
-                  <span>{formatPrice(subtotal, "jpy")}</span>
+                  <span className="font-mono">{formatPrice(subtotal, "jpy")}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{t("shipping")}</span>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-muted-foreground">
                     {t("shippingCalculated")}
                   </span>
                 </div>
-                <div className="border-t pt-4">
-                  <div className="flex justify-between font-medium">
+                <div className="border-t pt-3">
+                  <div className="flex justify-between text-base font-medium">
                     <span>{t("total")}</span>
-                    <span>{formatPrice(subtotal, "jpy")}</span>
+                    <span className="font-mono">{formatPrice(subtotal, "jpy")}</span>
                   </div>
                 </div>
               </div>
@@ -168,16 +175,6 @@ export default function CartPage() {
               <Button asChild className="mt-6 w-full" size="lg">
                 <Link href={`/${locale}/checkout`}>
                   {t("checkout")}
-                </Link>
-              </Button>
-
-              <Button
-                asChild
-                variant="outline"
-                className="mt-3 w-full"
-              >
-                <Link href={`/${locale}/products`}>
-                  {t("continueShopping")}
                 </Link>
               </Button>
             </div>
