@@ -20,7 +20,7 @@ export async function Footer({ locale }: FooterProps) {
     { label: t("shipping"), href: "/shipping" },
     { label: t("contact"), href: "/contact" },
     { label: tCart("title"), href: "/cart" },
-    { label: tCheckout("title"), href: "/checkout" },
+    { label: tCheckout("shippingAddress"), href: "/checkout" },
     { label: tCheckout("orderReview"), href: "/checkout" },
     { label: tCheckout("success"), href: "/checkout/success" },
     { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },

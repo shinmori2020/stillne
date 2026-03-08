@@ -109,6 +109,20 @@ const DEMO_CART: Cart = {
   updated_at: new Date().toISOString(),
 };
 
+// Demo user address (simulates data from My Page profile)
+// In production, this would come from the logged-in user's saved address via Medusa API
+const DEMO_USER_ADDRESS: CartAddress = {
+  first_name: "太郎",
+  last_name: "山田",
+  postal_code: "150-0001",
+  province: "東京都",
+  city: "渋谷区神宮前",
+  address_1: "1-2-3 スティルネビル 401",
+  address_2: "",
+  phone: "090-1234-5678",
+  country_code: "jp",
+};
+
 interface CheckoutClientProps {
   locale: string;
 }
@@ -119,10 +133,13 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
   const { data: cart, isLoading } = useCart();
 
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
-  const [shippingAddress, setShippingAddress] = useState<CartAddress | null>(null);
 
   // Check if Medusa is configured
   const isMedusaConfigured = !!process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL;
+
+  // Use demo user address as initial value when Medusa is not configured
+  const initialAddress = isMedusaConfigured ? null : DEMO_USER_ADDRESS;
+  const [shippingAddress, setShippingAddress] = useState<CartAddress | null>(initialAddress);
 
   // Use demo cart when Medusa is not configured
   const activeCart = isMedusaConfigured ? cart : DEMO_CART;
