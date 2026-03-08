@@ -55,7 +55,7 @@
     "itemCount": "{count, plural, =0 {カートは空です} one {1点} other {{count}点}}"
   },
   "checkout": {
-    "title": "チェックアウト",
+    "title": "配送先情報",
     "shippingAddress": "配送先情報",
     "shippingMethod": "配送方法",
     "payment": "お支払い",
