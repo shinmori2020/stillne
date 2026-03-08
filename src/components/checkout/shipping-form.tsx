@@ -101,37 +101,39 @@ export function ShippingForm({
         </div>
       </div>
 
-      {/* Postal Code */}
-      <div className="space-y-2">
-        <Label htmlFor="postalCode">{tAddress("postalCode")}</Label>
-        <Input
-          id="postalCode"
-          {...register("postalCode", {
-            required: tValidation("required"),
-            pattern: {
-              value: /^\d{3}-?\d{4}$/,
-              message: tValidation("invalidPostalCode"),
-            },
-          })}
-          placeholder="123-4567"
-          className={`max-w-[200px] ${errors.postalCode ? "border-destructive" : ""}`}
-        />
-        {errors.postalCode && (
-          <p className="text-xs text-destructive">{errors.postalCode.message}</p>
-        )}
-      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {/* Postal Code */}
+        <div className="space-y-2">
+          <Label htmlFor="postalCode">{tAddress("postalCode")}</Label>
+          <Input
+            id="postalCode"
+            {...register("postalCode", {
+              required: tValidation("required"),
+              pattern: {
+                value: /^\d{3}-?\d{4}$/,
+                message: tValidation("invalidPostalCode"),
+              },
+            })}
+            placeholder="123-4567"
+            className={errors.postalCode ? "border-destructive" : ""}
+          />
+          {errors.postalCode && (
+            <p className="text-xs text-destructive">{errors.postalCode.message}</p>
+          )}
+        </div>
 
-      {/* Prefecture */}
-      <div className="space-y-2">
-        <Label htmlFor="province">{tAddress("prefecture")}</Label>
-        <Input
-          id="province"
-          {...register("province", { required: tValidation("required") })}
-          className={`max-w-[200px] ${errors.province ? "border-destructive" : ""}`}
-        />
-        {errors.province && (
-          <p className="text-xs text-destructive">{errors.province.message}</p>
-        )}
+        {/* Prefecture */}
+        <div className="space-y-2">
+          <Label htmlFor="province">{tAddress("prefecture")}</Label>
+          <Input
+            id="province"
+            {...register("province", { required: tValidation("required") })}
+            className={errors.province ? "border-destructive" : ""}
+          />
+          {errors.province && (
+            <p className="text-xs text-destructive">{errors.province.message}</p>
+          )}
+        </div>
       </div>
 
       {/* City */}
