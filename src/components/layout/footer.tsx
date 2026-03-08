@@ -21,7 +21,6 @@ export async function Footer({ locale }: FooterProps) {
     { label: t("contact"), href: "/contact" },
     { label: tCart("title"), href: "/cart" },
     { label: tCheckout("shippingAddress"), href: "/checkout" },
-    { label: tCheckout("orderReview"), href: "/checkout" },
     { label: tCheckout("success"), href: "/checkout/success" },
     { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },
     { label: locale === "ja" ? "管理画面" : "Admin", href: "/admin" },

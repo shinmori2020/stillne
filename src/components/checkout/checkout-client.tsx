@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, ShoppingBag, MapPin, CreditCard, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import { OrderSummary } from "./order-summary";
 import { CheckoutSteps } from "./checkout-steps";
 import type { Cart, CartAddress } from "@/types/cart";
 
-type CheckoutStep = "shipping" | "review" | "confirmation";
+type CheckoutStep = "shipping" | "review";
 
 // Demo cart data for when Medusa is not configured
 const DEMO_CART: Cart = {
@@ -130,6 +131,7 @@ interface CheckoutClientProps {
 export function CheckoutClient({ locale }: CheckoutClientProps) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
+  const router = useRouter();
   const { data: cart, isLoading } = useCart();
 
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
@@ -175,7 +177,7 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
   };
 
   const handlePlaceOrder = () => {
-    setCurrentStep("confirmation");
+    router.push(`/${locale}/checkout/success`);
   };
 
   const handleBackToShipping = () => {
@@ -215,10 +217,6 @@ export function CheckoutClient({ locale }: CheckoutClientProps) {
               onBackToShipping={handleBackToShipping}
               locale={locale}
             />
-          )}
-
-          {currentStep === "confirmation" && (
-            <ConfirmationSection locale={locale} />
           )}
         </div>
 
@@ -354,61 +352,3 @@ function OrderReviewSection({
   );
 }
 
-// Confirmation section (注文完了)
-function ConfirmationSection({ locale }: { locale: string }) {
-  const t = useTranslations("checkout");
-
-  // Generate a fake order number
-  const orderNumber = `STL-${Date.now().toString(36).toUpperCase()}`;
-
-  return (
-    <div className="space-y-6 rounded-lg border border-border p-6 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
-        <svg
-          className="h-8 w-8 text-green-600 dark:text-green-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-      </div>
-
-      <div className="space-y-2">
-        <h2 className="text-xl font-medium">{t("success")}</h2>
-        <p className="text-muted-foreground">
-          {t("orderNumber")}: <span className="font-mono">{orderNumber}</span>
-        </p>
-        <p className="text-sm text-muted-foreground">{t("confirmationEmail")}</p>
-      </div>
-
-      {/* Demo notice */}
-      <div className="rounded-md border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
-        <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-          {t("demoNoticeTitle")}
-        </p>
-        <p className="mt-1 text-sm text-amber-700 dark:text-amber-300">
-          {t("demoNoticeBody")}
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-        <Button asChild>
-          <Link href={`/${locale}/account/orders`}>
-            {t("viewOrder")}
-          </Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href={`/${locale}/products`}>
-            {locale === "ja" ? "買い物を続ける" : "Continue Shopping"}
-          </Link>
-        </Button>
-      </div>
-    </div>
-  );
-}
