@@ -128,32 +128,32 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Inquiry Category */}
-              <div className="space-y-2">
-                <Label htmlFor="category">{t("form.category")}</Label>
-                <Select name="category" required disabled={isSubmitting}>
-                  <SelectTrigger className="sm:max-w-[320px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {INQUIRY_CATEGORIES.map((cat) => (
-                      <SelectItem key={cat} value={cat}>
-                        {t(`form.categoryOptions.${cat}`)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Subject */}
-              <div className="space-y-2">
-                <Label htmlFor="subject">{t("form.subject")}</Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  required
-                  disabled={isSubmitting}
-                />
+              {/* Inquiry Category & Subject */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="category">{t("form.category")}</Label>
+                  <Select name="category" required disabled={isSubmitting}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {INQUIRY_CATEGORIES.map((cat) => (
+                        <SelectItem key={cat} value={cat}>
+                          {t(`form.categoryOptions.${cat}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="subject">{t("form.subject")}</Label>
+                  <Input
+                    id="subject"
+                    name="subject"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
               </div>
 
               {/* Message */}
