@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle, Package, Mail } from "lucide-react";
+import { PackageCheck, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CheckoutSteps } from "@/components/checkout/checkout-steps";
 import { formatPrice } from "@/lib/format";
@@ -51,8 +51,8 @@ export default async function CheckoutSuccessPage({
       <CheckoutSteps currentStep="confirmation" />
 
       <div className="mx-auto max-w-2xl text-center">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-          <CheckCircle className="h-10 w-10 text-green-600 dark:text-green-400" />
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
+          <PackageCheck className="h-10 w-10 text-primary" />
         </div>
 
         <h1 className="mt-6 font-heading text-3xl lowercase tracking-wide md:text-4xl">
