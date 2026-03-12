@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PackageCheck, Mail } from "lucide-react";
+import { PackageCheck, Package, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CheckoutSteps } from "@/components/checkout/checkout-steps";
 import { formatPrice } from "@/lib/format";
