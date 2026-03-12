@@ -50,7 +50,7 @@ export default async function CheckoutSuccessPage({
       {/* Step indicator */}
       <CheckoutSteps currentStep="confirmation" />
 
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-5xl text-center">
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20">
           <PackageCheck className="h-10 w-10 text-primary" />
         </div>
