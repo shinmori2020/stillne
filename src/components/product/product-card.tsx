@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -14,6 +15,7 @@ export function ProductCard({
   priority = false,
 }: ProductCardProps) {
   const t = useTranslations("product");
+  const [imageError, setImageError] = useState(false);
 
   // Get the lowest price from all variants
   const lowestPrice = product.variants?.reduce((min, variant) => {
@@ -44,7 +46,7 @@ export function ProductCard({
       <article className="space-y-3">
         {/* Image container */}
         <div className="relative aspect-square overflow-hidden rounded-sm bg-secondary">
-          {thumbnailUrl ? (
+          {thumbnailUrl && !imageError ? (
             <Image
               src={thumbnailUrl}
               alt={product.title}
@@ -56,6 +58,7 @@ export function ProductCard({
                 "group-hover:scale-105",
                 isOutOfStock && "opacity-60"
               )}
+              onError={() => setImageError(true)}
             />
           ) : (
             <PlaceholderImage />
