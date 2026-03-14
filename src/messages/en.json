@@ -18,7 +18,27 @@
       "title": "beautiful everyday objects",
       "subtitle": "curated interior and lifestyle goods that blend into your life",
       "cta": "shop now",
-      "secondaryCta": "our concept"
+      "secondaryCta": "our concept",
+      "slide1": {
+        "title": "beautiful everyday objects",
+        "subtitle": "curated interior and lifestyle goods that blend into your life"
+      },
+      "slide2": {
+        "title": "tools that support a mindful life",
+        "subtitle": "carefully selected pieces that enrich daily moments"
+      },
+      "slide3": {
+        "title": "enjoy the texture of materials",
+        "subtitle": "experience comfort every time you touch"
+      },
+      "slide4": {
+        "title": "essential design for lasting use",
+        "subtitle": "timeless beauty beyond trends"
+      },
+      "slide5": {
+        "title": "simple beauty enriching daily life",
+        "subtitle": "refined presence in quiet stillness"
+      }
     },
     "heroTitle": "beautiful everyday objects",
     "heroSubtitle": "curated interior and lifestyle goods that blend into your life",
