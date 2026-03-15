@@ -64,7 +64,7 @@ export default async function TermsPage({ params }: TermsPageProps) {
           <ScrollFadeIn key={section}>
             <section className="border-b px-4 py-6 md:px-6 md:py-8">
               <h2 className="mb-3 font-heading text-xl">
-                <span className="mr-3 text-3xl text-muted-foreground">
+                <span className="mr-3 font-sans text-3xl font-light text-muted-foreground">
                   {`第${index + 1}条`}
                 </span>
                 {t(`${section}.title`)}
