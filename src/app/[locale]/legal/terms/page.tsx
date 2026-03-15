@@ -54,17 +54,17 @@ export default async function TermsPage({ params }: TermsPageProps) {
       </ScrollFadeIn>
 
       <ScrollFadeIn>
-        <p className="mb-8 rounded-lg border bg-card p-6 text-sm leading-relaxed text-muted-foreground md:p-8">
+        <p className="mb-10 text-sm leading-relaxed text-muted-foreground">
           {t("intro")}
         </p>
       </ScrollFadeIn>
 
-      <div className="space-y-6">
+      <div className="border-t">
         {TERMS_SECTIONS.map((section, index) => (
           <ScrollFadeIn key={section}>
-            <section className="rounded-lg border bg-card p-6 md:p-8">
+            <section className="border-b px-4 py-6 md:px-6 md:py-8">
               <h2 className="mb-3 font-heading text-xl">
-                <span className="mr-2 text-muted-foreground">
+                <span className="mr-3 text-3xl text-muted-foreground">
                   {`第${index + 1}条`}
                 </span>
                 {t(`${section}.title`)}
