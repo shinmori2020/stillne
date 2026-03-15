@@ -33,12 +33,12 @@ export default function FaqPage() {
       </ScrollFadeIn>
 
       <ScrollFadeIn>
-        <div className="rounded-lg border bg-card">
+        <div className="border-t">
           {FAQ_KEYS.map((key, index) => (
-            <div key={key} className={index < FAQ_KEYS.length - 1 ? "border-b" : ""}>
+            <div key={key} className="border-b">
               <button
                 onClick={() => handleToggle(index)}
-                className="flex w-full cursor-pointer items-center justify-between px-6 py-5 text-left text-base font-medium transition-colors hover:text-primary md:px-8 md:py-6"
+                className="flex w-full cursor-pointer items-center justify-between px-4 py-5 text-left text-base font-medium transition-colors hover:text-primary md:px-6 md:py-6"
               >
                 {t(`items.${key}.question`)}
                 <ChevronDown
@@ -55,7 +55,7 @@ export default function FaqPage() {
                 )}
               >
                 <div className="overflow-hidden">
-                  <p className="px-6 text-sm leading-relaxed text-muted-foreground md:px-8 md:text-base">
+                  <p className="px-4 text-sm leading-relaxed text-muted-foreground md:px-6 md:text-base">
                     {t(`items.${key}.answer`)}
                   </p>
                 </div>
