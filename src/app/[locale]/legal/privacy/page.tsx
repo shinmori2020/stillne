@@ -54,16 +54,17 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
       </ScrollFadeIn>
 
       <ScrollFadeIn>
-        <p className="mb-8 rounded-lg border bg-card p-6 text-sm leading-relaxed text-muted-foreground md:p-8">
+        <p className="mb-10 text-sm leading-relaxed text-muted-foreground">
           {t("intro")}
         </p>
       </ScrollFadeIn>
 
-      <div className="space-y-6">
-        {PRIVACY_SECTIONS.map((section) => (
+      <div className="space-y-10">
+        {PRIVACY_SECTIONS.map((section, index) => (
           <ScrollFadeIn key={section}>
-            <section className="rounded-lg border bg-card p-6 md:p-8">
+            <section>
               <h2 className="mb-3 font-heading text-xl">
+                <span className="mr-2 text-muted-foreground">{index + 1}.</span>
                 {t(`${section}.title`)}
               </h2>
               <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
