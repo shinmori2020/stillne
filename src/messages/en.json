@@ -233,6 +233,63 @@
         "description": "Returns and exchanges are accepted within 7 days of delivery for unused items only. If there are any defects or damage during shipping, please contact us."
       }
     },
+    "commerce": {
+      "title": "legal notice",
+      "subtitle": "disclosure under the specified commercial transactions act",
+      "seller": { "title": "Seller", "value": "stillne" },
+      "representative": { "title": "Representative", "value": "Taro Yamada" },
+      "address": { "title": "Address", "value": "1-1-1 Jingumae, Shibuya-ku, Tokyo 150-0001, Japan" },
+      "phone": { "title": "Phone", "value": "+81-3-1234-5678 (Weekdays 10:00-18:00)" },
+      "email": { "title": "Email", "value": "contact@stillne.com" },
+      "url": { "title": "URL", "value": "https://stillne-shop.vercel.app" },
+      "price": { "title": "Pricing", "value": "Tax-included prices are displayed on each product page" },
+      "additionalFees": { "title": "Additional Fees", "value": "Shipping: ¥880 flat rate (tax included). Free shipping on orders over ¥10,000." },
+      "payment": { "title": "Payment Methods", "value": "Credit cards (VISA, Mastercard, JCB, AMEX), Apple Pay, Google Pay" },
+      "paymentTiming": { "title": "Payment Timing", "value": "Credit card: Charged at the time of order confirmation." },
+      "delivery": { "title": "Delivery", "value": "Orders are shipped within 3-5 business days after confirmation." },
+      "returns": { "title": "Returns & Exchanges", "value": "Returns and exchanges are accepted within 7 days of delivery for unused items only. Shipping costs for customer-initiated returns are borne by the customer. For defective items or shipping damage, we will cover return shipping costs." },
+      "cancellation": { "title": "Cancellations", "value": "Cancellations are accepted only for orders that have not been shipped. Cancellations after shipment will be treated as returns." }
+    },
+    "privacy": {
+      "title": "privacy policy",
+      "subtitle": "how we handle your personal information",
+      "intro": "stillne (hereinafter \"we\" or \"our store\") considers the protection of personal information an important responsibility and handles it appropriately in accordance with the following policy.",
+      "collection": { "title": "Information We Collect", "description": "We may collect the following personal information when you make purchases or inquiries:\n・Name\n・Address\n・Phone number\n・Email address\n・Payment information" },
+      "purpose": { "title": "Purpose of Use", "description": "Personal information is used only for the following purposes:\n・Shipping products and related communications\n・Order confirmation and responding to inquiries\n・Service improvement and new service announcements\n・Newsletters and notifications (only with your consent)" },
+      "thirdParty": { "title": "Disclosure to Third Parties", "description": "We will not provide personal information to third parties without your consent. However, we may share information with service partners such as shipping carriers to the extent necessary for service delivery." },
+      "management": { "title": "Information Security", "description": "We implement appropriate security measures to prevent unauthorized access, loss, or leakage of personal information." },
+      "disclosure": { "title": "Access, Correction & Deletion", "description": "If you wish to access, correct, or delete your personal information, please contact us through the inquiry form. We will respond promptly after verifying your identity." },
+      "cookies": { "title": "Use of Cookies", "description": "Our website uses cookies to improve user experience. You may disable cookies through your browser settings, though some features may not function properly." },
+      "changes": { "title": "Policy Changes", "description": "This policy may be updated without prior notice due to changes in laws or services. Updated policies take effect upon publication on our website." },
+      "contact": { "title": "Contact", "description": "For inquiries regarding personal information handling, please contact us at:\nEmail: contact@stillne.com" }
+    },
+    "terms": {
+      "title": "terms of service",
+      "subtitle": "terms and conditions for using our service",
+      "intro": "These Terms of Service (hereinafter \"Terms\") set forth the conditions for using the online store service provided by stillne (hereinafter \"our store\"). By using our service, you are deemed to have agreed to these Terms.",
+      "scope": { "title": "Scope", "description": "These Terms apply to the purchase of products and use of related services through our website." },
+      "account": { "title": "Account", "description": "Please provide accurate information when registering an account. You are responsible for managing your account information. If you discover unauthorized use of your account, please contact us immediately." },
+      "order": { "title": "Orders", "description": "An order is considered confirmed when we send an order confirmation email. We may be unable to fulfill orders due to inventory availability." },
+      "payment": { "title": "Payment", "description": "Payment methods are limited to those specified by our store. Credit card information is processed through secure payment services and is not stored by us." },
+      "intellectualProperty": { "title": "Intellectual Property", "description": "Copyrights and other intellectual property rights for images, text, logos, and other content on our website belong to us or their rightful owners. Unauthorized reproduction or redistribution is prohibited." },
+      "disclaimer": { "title": "Disclaimer", "description": "While we make every effort to ensure service continuity and information accuracy, we do not guarantee them completely. We are not liable for damages caused by force majeure such as natural disasters or system failures." },
+      "changes": { "title": "Changes to Terms", "description": "These Terms may be updated without prior notice as needed. Updated terms take effect upon publication on our website." },
+      "law": { "title": "Governing Law & Jurisdiction", "description": "These Terms are governed by Japanese law. The Tokyo District Court shall have exclusive jurisdiction over any disputes related to our store." }
+    },
+    "faq": {
+      "title": "frequently asked questions",
+      "subtitle": "common questions about shopping with us",
+      "items": {
+        "q1": { "question": "How much is shipping?", "answer": "Flat rate shipping of ¥880 (tax included) nationwide. Free shipping on orders over ¥10,000." },
+        "q2": { "question": "How long does delivery take?", "answer": "Orders are shipped within 3-5 business days after confirmation. Delivery takes 1-3 days after shipment." },
+        "q3": { "question": "Can I return or exchange items?", "answer": "Returns and exchanges are accepted within 7 days of delivery for unused items. Please contact us for any defects or shipping damage." },
+        "q4": { "question": "Do you offer gift wrapping?", "answer": "Yes, you can select gift wrapping at checkout. Items will be wrapped in stillne original wrapping paper." },
+        "q5": { "question": "What payment methods do you accept?", "answer": "We accept credit cards (VISA, Mastercard, JCB, AMEX), Apple Pay, and Google Pay." },
+        "q6": { "question": "Can I cancel my order?", "answer": "Cancellations are accepted only for orders that have not been shipped. Please contact us through My Page or the inquiry form." },
+        "q7": { "question": "Do you ship internationally?", "answer": "Currently, we only ship within Japan. International shipping is not available at this time." },
+        "q8": { "question": "How should I care for my products?", "answer": "Care instructions specific to each product's material are listed on the product page. Please contact us if you have any questions." }
+      }
+    },
     "contact": {
       "title": "contact us",
       "subtitle": "feel free to reach out with any questions",

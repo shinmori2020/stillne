@@ -19,11 +19,18 @@ export async function Footer({ locale }: FooterProps) {
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
     { label: t("contact"), href: "/contact" },
+    { label: locale === "ja" ? "よくある質問" : "FAQ", href: "/faq" },
     { label: tCart("title"), href: "/cart" },
     { label: tCheckout("shippingAddress"), href: "/checkout" },
     { label: tCheckout("success"), href: "/checkout/success" },
     { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },
     { label: locale === "ja" ? "管理画面" : "Admin", href: "/admin" },
+  ] as const;
+
+  const legalLinks = [
+    { label: locale === "ja" ? "特定商取引法に基づく表記" : "Legal Notice", href: "/legal/commerce" },
+    { label: locale === "ja" ? "プライバシーポリシー" : "Privacy Policy", href: "/legal/privacy" },
+    { label: locale === "ja" ? "利用規約" : "Terms of Service", href: "/legal/terms" },
   ] as const;
 
   return (
@@ -105,8 +112,19 @@ export async function Footer({ locale }: FooterProps) {
           </div>
         </div>
 
-        {/* Copyright */}
+        {/* Legal Links & Copyright */}
         <div className="mt-8 border-t border-border pt-8">
+          <div className="mb-4 flex flex-wrap justify-center gap-4 text-xs">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={`/${locale}${link.href}`}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
           <p className="text-center text-xs text-muted-foreground">
             {t("copyright", { year: currentYear })}
           </p>
