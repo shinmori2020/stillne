@@ -6,9 +6,22 @@ import { ProductDetail } from "@/components/product/product-detail";
 import { ProductReviews } from "@/components/product/product-reviews";
 import { RelatedProducts } from "@/components/product/related-products";
 import { Breadcrumb } from "@/components/common/breadcrumb";
+import { routing } from "@/i18n/routing";
 
 interface ProductPageProps {
   params: Promise<{ locale: string; handle: string }>;
+}
+
+export async function generateStaticParams() {
+  const { products } = await getProducts({ limit: 100 });
+  const locales = routing.locales;
+
+  return locales.flatMap((locale) =>
+    products.map((product) => ({
+      locale,
+      handle: product.handle,
+    }))
+  );
 }
 
 export async function generateMetadata({

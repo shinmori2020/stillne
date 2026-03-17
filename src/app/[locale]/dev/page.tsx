@@ -11,7 +11,7 @@ const SITE_LINKS = [
     links: [
       { label: "TOPページ", path: "/" },
       { label: "商品一覧", path: "/products" },
-      { label: "商品詳細（例）", path: "/products/ceramic-flower-vase" },
+      { label: "商品詳細（例）", path: "/products/ceramic-flower-vase-a001" },
     ],
   },
   {
