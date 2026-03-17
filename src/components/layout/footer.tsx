@@ -12,19 +12,10 @@ export async function Footer({ locale }: FooterProps) {
 
   const currentYear = new Date().getFullYear();
 
-
-  const tCart = await getTranslations("cart");
-  const tCheckout = await getTranslations("checkout");
-
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
     { label: t("contact"), href: "/contact" },
     { label: locale === "ja" ? "よくある質問" : "FAQ", href: "/faq" },
-    { label: tCart("title"), href: "/cart" },
-    { label: tCheckout("shippingAddress"), href: "/checkout" },
-    { label: tCheckout("success"), href: "/checkout/success" },
-    { label: locale === "ja" ? "マイページ" : "My Page", href: "/account" },
-    { label: locale === "ja" ? "管理画面" : "Admin", href: "/admin" },
   ] as const;
 
   const legalLinks = [
@@ -124,6 +115,14 @@ export async function Footer({ locale }: FooterProps) {
                 {link.label}
               </Link>
             ))}
+          </div>
+          <div className="mb-4 flex justify-center">
+            <Link
+              href={`/${locale}/dev`}
+              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {locale === "ja" ? "サイトマップ" : "Sitemap"}
+            </Link>
           </div>
           <p className="text-center text-xs text-muted-foreground">
             {t("copyright", { year: currentYear })}
