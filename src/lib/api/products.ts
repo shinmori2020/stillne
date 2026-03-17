@@ -437,26 +437,84 @@ export async function getProductByHandle(
 }
 
 /**
- * Search products by query string (works with dummy data locally)
+ * Convert katakana to hiragana for unified Japanese search
  */
-export function searchProducts(query: string): Product[] {
+function toHiragana(str: string): string {
+  return str.replace(/[\u30A1-\u30F6]/g, (match) =>
+    String.fromCharCode(match.charCodeAt(0) - 0x60)
+  );
+}
+
+/**
+ * Normalize text for search (lowercase + katakana→hiragana)
+ */
+function normalizeForSearch(str: string): string {
+  return toHiragana(str.toLowerCase().trim());
+}
+
+export interface SearchResult {
+  product: Product;
+  score: number;
+}
+
+export interface SearchOptions {
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
+/**
+ * Search products with relevance scoring, kana normalization, and filters
+ */
+export function searchProducts(query: string, options?: SearchOptions): SearchResult[] {
   if (!query.trim()) return [];
 
-  const normalizedQuery = query.toLowerCase().trim();
+  const normalizedQuery = normalizeForSearch(query);
 
-  return DUMMY_PRODUCTS.filter((product) => {
-    const searchableFields = [
-      product.title,
-      product.description,
-      product.material,
-      ...(product.categories?.map((c) => c.name) ?? []),
-      ...(product.variants?.map((v) => v.title) ?? []),
-    ]
-      .filter(Boolean)
-      .map((field) => (field as string).toLowerCase());
+  const scored: SearchResult[] = [];
 
-    return searchableFields.some((field) => field.includes(normalizedQuery));
-  });
+  for (const product of DUMMY_PRODUCTS) {
+    let score = 0;
+
+    // Title match (highest priority)
+    const title = normalizeForSearch(product.title ?? "");
+    if (title.includes(normalizedQuery)) score += 10;
+
+    // Category match
+    const categories = (product.categories ?? []).map((c) => normalizeForSearch(c.name));
+    if (categories.some((c) => c.includes(normalizedQuery))) score += 5;
+
+    // Material match
+    const material = normalizeForSearch(product.material ?? "");
+    if (material.includes(normalizedQuery)) score += 4;
+
+    // Variant match
+    const variants = (product.variants ?? []).map((v) => normalizeForSearch(v.title));
+    if (variants.some((v) => v.includes(normalizedQuery))) score += 3;
+
+    // Description match (lowest priority)
+    const description = normalizeForSearch(product.description ?? "");
+    if (description.includes(normalizedQuery)) score += 2;
+
+    if (score === 0) continue;
+
+    // Apply filters
+    if (options?.category) {
+      const hasCategory = product.categories?.some((c) => c.handle === options.category);
+      if (!hasCategory) continue;
+    }
+
+    if (options?.minPrice !== undefined || options?.maxPrice !== undefined) {
+      const price = product.variants?.[0]?.prices?.[0]?.amount ?? 0;
+      if (options.minPrice !== undefined && price < options.minPrice) continue;
+      if (options.maxPrice !== undefined && price > options.maxPrice) continue;
+    }
+
+    scored.push({ product, score });
+  }
+
+  // Sort by relevance score (descending)
+  return scored.sort((a, b) => b.score - a.score);
 }
 
 /**

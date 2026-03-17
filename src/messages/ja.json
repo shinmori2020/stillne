@@ -146,7 +146,11 @@
   "search": {
     "placeholder": "商品を検索...",
     "noResults": "該当する商品が見つかりませんでした",
-    "inputLabel": "検索キーワード"
+    "noResultsHint": "別のキーワードをお試しください",
+    "inputLabel": "検索キーワード",
+    "suggested": "おすすめキーワード",
+    "resultCount": "{count}件の商品が見つかりました",
+    "shortcutHint": "「/」キーでいつでも検索を開けます"
   },
   "sort": {
     "newest": "新着順",

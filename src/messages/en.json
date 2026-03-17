@@ -146,7 +146,11 @@
   "search": {
     "placeholder": "Search products...",
     "noResults": "No products found",
-    "inputLabel": "Search keyword"
+    "noResultsHint": "Try a different keyword",
+    "inputLabel": "Search keyword",
+    "suggested": "Suggested keywords",
+    "resultCount": "{count} products found",
+    "shortcutHint": "Press \"/\" to search anytime"
   },
   "sort": {
     "newest": "Newest",
