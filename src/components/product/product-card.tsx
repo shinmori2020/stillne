@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/format";
 import { PlaceholderImage } from "@/components/common/placeholder-image";
+import { WishlistButton } from "@/components/product/wishlist-button";
 import type { ProductCardProps } from "@/types/product";
 
 export function ProductCard({
@@ -63,6 +64,13 @@ export function ProductCard({
           ) : (
             <PlaceholderImage />
           )}
+
+          {/* Wishlist button */}
+          <WishlistButton
+            productId={product.id}
+            size="sm"
+            className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100"
+          />
 
           {/* Stock badges */}
           {isOutOfStock && (

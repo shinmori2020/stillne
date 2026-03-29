@@ -152,6 +152,11 @@
     "resultCount": "{count} products found",
     "shortcutHint": "Press \"/\" to search anytime"
   },
+  "wishlist": {
+    "title": "wishlist",
+    "empty": "No items in your wishlist",
+    "browseProducts": "Browse products"
+  },
   "sort": {
     "newest": "Newest",
     "priceAsc": "Price: Low to High",

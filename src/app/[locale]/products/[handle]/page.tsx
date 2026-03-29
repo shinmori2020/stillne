@@ -5,6 +5,8 @@ import { getProductByHandle, getProducts } from "@/lib/api/products";
 import { ProductDetail } from "@/components/product/product-detail";
 import { ProductReviews } from "@/components/product/product-reviews";
 import { RelatedProducts } from "@/components/product/related-products";
+import { RecentlyViewedProducts } from "@/components/product/recently-viewed-products";
+import { TrackView } from "@/components/product/track-view";
 import { Breadcrumb } from "@/components/common/breadcrumb";
 import { routing } from "@/i18n/routing";
 
@@ -106,6 +108,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <RelatedProducts products={relatedProducts} locale={locale} />
         </div>
       )}
+
+      {/* Recently Viewed Products */}
+      <div className="mt-16">
+        <RecentlyViewedProducts currentProductId={product.id} />
+      </div>
+
+      {/* Track View */}
+      <TrackView productId={product.id} />
     </div>
   );
 }

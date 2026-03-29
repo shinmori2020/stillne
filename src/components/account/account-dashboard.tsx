@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { User, Package, MapPin, LogOut } from "lucide-react";
+import { User, Package, MapPin, Heart, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCustomer, useLogout } from "@/hooks/use-auth";
 
@@ -85,6 +85,13 @@ export function AccountDashboard({ locale }: AccountDashboardProps) {
       label: t("addresses"),
       description:
         locale === "ja" ? "配送先住所を管理" : "Manage your shipping addresses",
+    },
+    {
+      href: `/${locale}/account/wishlist`,
+      icon: Heart,
+      label: locale === "ja" ? "お気に入り" : "Wishlist",
+      description:
+        locale === "ja" ? "お気に入り商品を確認" : "View your saved items",
     },
   ];
 

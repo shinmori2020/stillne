@@ -10,11 +10,11 @@ import { PlaceholderImage } from "@/components/common/placeholder-image";
 import { ProductOptions } from "./product-options";
 import { QuantitySelector } from "./quantity-selector";
 import { ShareButtons } from "./share-buttons";
+import { WishlistButton } from "./wishlist-button";
 import { useAddToCart } from "@/hooks/use-cart";
 import { useUIStore } from "@/lib/stores/ui-store";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import {
-  Heart,
   Truck,
   RotateCcw,
   ShieldCheck,
@@ -36,7 +36,6 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
     useState<ProductVariant | null>(product.variants?.[0] ?? null);
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 });
   const [isZooming, setIsZooming] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -131,9 +130,6 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
       return next;
     });
   };
-
-  // Favorite toggle
-  const toggleFavorite = () => setIsFavorite((prev) => !prev);
 
   // Accordion toggle
   const toggleAccordion = (key: string) => {
@@ -323,20 +319,7 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
                   ? t("addedToCart")
                   : t("addToCart")}
             </Button>
-            <button
-              onClick={toggleFavorite}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border transition-colors hover:bg-secondary"
-              aria-label={isJa ? "お気に入り" : "Favorite"}
-            >
-              <Heart
-                className={cn(
-                  "h-5 w-5 transition-colors",
-                  isFavorite
-                    ? "fill-red-500 text-red-500"
-                    : "text-muted-foreground"
-                )}
-              />
-            </button>
+            <WishlistButton productId={product.id} />
           </div>
 
           {/* Shipping & Returns Info */}

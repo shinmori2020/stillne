@@ -152,6 +152,11 @@
     "resultCount": "{count}件の商品が見つかりました",
     "shortcutHint": "「/」キーでいつでも検索を開けます"
   },
+  "wishlist": {
+    "title": "お気に入り",
+    "empty": "お気に入りに追加された商品はありません",
+    "browseProducts": "商品を見る"
+  },
   "sort": {
     "newest": "新着順",
     "priceAsc": "価格が安い順",

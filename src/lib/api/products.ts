@@ -518,6 +518,17 @@ export function searchProducts(query: string, options?: SearchOptions): SearchRe
 }
 
 /**
+ * Get products by IDs (for wishlist, recently viewed)
+ */
+export function getProductsByIds(ids: string[]): Product[] {
+  if (ids.length === 0) return [];
+  const idSet = new Set(ids);
+  const found = DUMMY_PRODUCTS.filter((p) => idSet.has(p.id));
+  // Preserve the order of the input IDs
+  return ids.map((id) => found.find((p) => p.id === id)).filter(Boolean) as Product[];
+}
+
+/**
  * Fetch new arrival products (sorted by created_at desc)
  */
 export async function getNewArrivals(limit: number = 8): Promise<Product[]> {
