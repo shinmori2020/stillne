@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PackageCheck, Package, Mail } from "lucide-react";
+import { PackageCheck, Package, Mail, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CheckoutSteps } from "@/components/checkout/checkout-steps";
 import { formatPrice } from "@/lib/format";
@@ -13,11 +13,11 @@ interface CheckoutSuccessPageProps {
 
 // Demo order items (matches DEMO_CART in checkout-client.tsx)
 const DEMO_ORDER_ITEMS = [
-  { title: "セラミックフラワーベース A-001", quantity: 1, subtotal: 580000 },
-  { title: "マグカップ C-003", quantity: 2, subtotal: 560000 },
-  { title: "リネンクッションカバー D-004", quantity: 1, subtotal: 380000 },
-  { title: "テーブルランプ J-010", quantity: 1, subtotal: 1850000 },
-  { title: "木製カッティングボード K-011", quantity: 1, subtotal: 580000 },
+  { title: "セラミックフラワーベース A-001", handle: "ceramic-flower-vase-a001", quantity: 1, subtotal: 580000 },
+  { title: "マグカップ C-003", handle: "mug-cup-c003", quantity: 2, subtotal: 560000 },
+  { title: "リネンクッションカバー D-004", handle: "linen-cushion-cover-d004", quantity: 1, subtotal: 380000 },
+  { title: "テーブルランプ J-010", handle: "table-lamp-j010", quantity: 1, subtotal: 1850000 },
+  { title: "木製カッティングボード K-011", handle: "wooden-cutting-board-k011", quantity: 1, subtotal: 580000 },
 ];
 
 const DEMO_ORDER_SUBTOTAL = 3950000;
@@ -89,11 +89,20 @@ export default async function CheckoutSuccessPage({
 
           <div className="mt-4 space-y-3">
             {DEMO_ORDER_ITEMS.map((item) => (
-              <div key={item.title} className="flex justify-between text-sm">
+              <div key={item.title} className="flex items-center justify-between gap-2 text-sm">
                 <span className="text-muted-foreground">
                   {item.title} × {item.quantity}
                 </span>
-                <span className="font-mono">{formatPrice(item.subtotal, "jpy")}</span>
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={`/${locale}/products/${item.handle}#review-form`}
+                    className="flex items-center gap-1 text-xs text-primary transition-colors hover:text-primary/80"
+                  >
+                    <PenLine className="h-3 w-3" />
+                    {locale === "ja" ? "レビュー" : "Review"}
+                  </Link>
+                  <span className="font-mono">{formatPrice(item.subtotal, "jpy")}</span>
+                </div>
               </div>
             ))}
             <div className="border-t pt-3">

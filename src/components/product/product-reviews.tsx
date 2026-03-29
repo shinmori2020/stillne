@@ -2,6 +2,8 @@
 
 import { Star } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
+import { ReviewForm } from "./review-form";
+import { useReviewStore, type UserReview } from "@/lib/stores/review-store";
 
 interface ProductReviewsProps {
   productId: string;
@@ -47,10 +49,89 @@ const DEMO_REVIEWS = [
   },
 ];
 
-export function ProductReviews({ locale }: ProductReviewsProps) {
+function formatDate(isoString: string, locale: string): string {
+  const date = new Date(isoString);
+  if (locale === "ja") {
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  }
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function StarRating({ rating, size = "sm" }: { rating: number; size?: "sm" | "xs" }) {
+  const cls = size === "sm" ? "h-4 w-4" : "h-3.5 w-3.5";
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`${cls} ${
+            i < Math.round(rating)
+              ? "fill-primary text-primary"
+              : "text-muted-foreground/30"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ReviewItem({
+  name,
+  date,
+  rating,
+  text,
+  isUserReview,
+  locale,
+}: {
+  name: string;
+  date: string;
+  rating: number;
+  text: string;
+  isUserReview?: boolean;
+  locale: string;
+}) {
   const isJa = locale === "ja";
-  const avgRating =
-    DEMO_REVIEWS.reduce((sum, r) => sum + r.rating, 0) / DEMO_REVIEWS.length;
+  return (
+    <div className="py-6 first:pt-0">
+      <div className="mb-2 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-xs font-medium">
+            {name.charAt(0)}
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium">{name}</p>
+              {isUserReview && (
+                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] text-primary">
+                  {isJa ? "あなた" : "You"}
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">{date}</p>
+          </div>
+        </div>
+        <StarRating rating={rating} size="xs" />
+      </div>
+      <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
+    </div>
+  );
+}
+
+export function ProductReviews({ productId, locale }: ProductReviewsProps) {
+  const isJa = locale === "ja";
+  const userReviews = useReviewStore((s) => s.getReviewsByProductId(productId));
+
+  // Combine demo + user reviews for average calculation
+  const allRatings = [
+    ...DEMO_REVIEWS.map((r) => r.rating),
+    ...userReviews.map((r) => r.rating),
+  ];
+  const totalCount = allRatings.length;
+  const avgRating = allRatings.reduce((sum, r) => sum + r, 0) / totalCount;
 
   return (
     <ScrollFadeIn>
@@ -60,61 +141,42 @@ export function ProductReviews({ locale }: ProductReviewsProps) {
             {isJa ? "カスタマーレビュー" : "customer reviews"}
           </h2>
           <div className="flex items-center gap-2">
-            <div className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < Math.round(avgRating)
-                      ? "fill-primary text-primary"
-                      : "text-muted-foreground/30"
-                  }`}
-                />
-              ))}
-            </div>
+            <StarRating rating={avgRating} />
             <span className="text-sm text-muted-foreground">
-              {avgRating.toFixed(1)} ({DEMO_REVIEWS.length})
+              {avgRating.toFixed(1)} ({totalCount})
             </span>
           </div>
         </div>
 
         <div className="divide-y">
+          {/* User reviews first (newest) */}
+          {userReviews.map((review: UserReview) => (
+            <ReviewItem
+              key={review.id}
+              name={review.name}
+              date={formatDate(review.createdAt, locale)}
+              rating={review.rating}
+              text={review.text}
+              isUserReview
+              locale={locale}
+            />
+          ))}
+
+          {/* Demo reviews */}
           {DEMO_REVIEWS.map((review) => (
-            <div key={review.id} className="py-6 first:pt-0">
-              <div className="mb-2 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {/* Avatar circle */}
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-xs font-medium">
-                    {(isJa ? review.nameJa : review.nameEn).charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">
-                      {isJa ? review.nameJa : review.nameEn}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {isJa ? review.dateJa : review.dateEn}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3.5 w-3.5 ${
-                        i < review.rating
-                          ? "fill-primary text-primary"
-                          : "text-muted-foreground/30"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {isJa ? review.textJa : review.textEn}
-              </p>
-            </div>
+            <ReviewItem
+              key={review.id}
+              name={isJa ? review.nameJa : review.nameEn}
+              date={isJa ? review.dateJa : review.dateEn}
+              rating={review.rating}
+              text={isJa ? review.textJa : review.textEn}
+              locale={locale}
+            />
           ))}
         </div>
+
+        {/* Review Form */}
+        <ReviewForm productId={productId} locale={locale} />
       </section>
     </ScrollFadeIn>
   );
