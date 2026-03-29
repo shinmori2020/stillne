@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Check } from "lucide-react";
+import { Star, Check, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useReviewStore } from "@/lib/stores/review-store";
+import { usePurchaseStore } from "@/lib/stores/purchase-store";
 
 interface ReviewFormProps {
   productId: string;
@@ -13,6 +14,9 @@ interface ReviewFormProps {
 export function ReviewForm({ productId, locale }: ReviewFormProps) {
   const isJa = locale === "ja";
   const { addReview } = useReviewStore();
+  const purchasedIds = usePurchaseStore((s) => s.purchasedProductIds);
+  const isPurchased = purchasedIds.includes(productId);
+
   const [name, setName] = useState("");
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -39,6 +43,22 @@ export function ReviewForm({ productId, locale }: ReviewFormProps) {
   };
 
   const isValid = rating > 0 && name.trim().length > 0 && text.trim().length > 0;
+
+  // Not purchased — show message instead of form
+  if (!isPurchased) {
+    return (
+      <div id="review-form" className="border-t border-border pt-8">
+        <div className="flex items-center gap-3 rounded-lg border border-border bg-secondary/30 p-4">
+          <ShoppingBag className="h-5 w-5 shrink-0 text-muted-foreground" />
+          <p className="text-sm text-muted-foreground">
+            {isJa
+              ? "この商品を購入された方のみレビューを投稿できます"
+              : "Only verified purchasers can write a review"}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="review-form" className="border-t border-border pt-8">

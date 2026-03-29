@@ -6,6 +6,7 @@ import { PackageCheck, Package, Mail, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CheckoutSteps } from "@/components/checkout/checkout-steps";
 import { formatPrice } from "@/lib/format";
+import { TrackPurchase } from "@/components/checkout/track-purchase";
 
 interface CheckoutSuccessPageProps {
   params: Promise<{ locale: string }>;
@@ -13,11 +14,11 @@ interface CheckoutSuccessPageProps {
 
 // Demo order items (matches DEMO_CART in checkout-client.tsx)
 const DEMO_ORDER_ITEMS = [
-  { title: "セラミックフラワーベース A-001", handle: "ceramic-flower-vase-a001", quantity: 1, subtotal: 580000 },
-  { title: "マグカップ C-003", handle: "mug-cup-c003", quantity: 2, subtotal: 560000 },
-  { title: "リネンクッションカバー D-004", handle: "linen-cushion-cover-d004", quantity: 1, subtotal: 380000 },
-  { title: "テーブルランプ J-010", handle: "table-lamp-j010", quantity: 1, subtotal: 1850000 },
-  { title: "木製カッティングボード K-011", handle: "wooden-cutting-board-k011", quantity: 1, subtotal: 580000 },
+  { title: "セラミックフラワーベース A-001", handle: "ceramic-flower-vase-a001", productId: "prod_01", quantity: 1, subtotal: 580000 },
+  { title: "マグカップ C-003", handle: "mug-cup-c003", productId: "prod_03", quantity: 2, subtotal: 560000 },
+  { title: "リネンクッションカバー D-004", handle: "linen-cushion-cover-d004", productId: "prod_04", quantity: 1, subtotal: 380000 },
+  { title: "テーブルランプ J-010", handle: "table-lamp-j010", productId: "prod_10", quantity: 1, subtotal: 1850000 },
+  { title: "木製カッティングボード K-011", handle: "wooden-cutting-board-k011", productId: "prod_11", quantity: 1, subtotal: 580000 },
 ];
 
 const DEMO_ORDER_SUBTOTAL = 3950000;
@@ -47,6 +48,9 @@ export default async function CheckoutSuccessPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12 lg:px-12">
+      {/* Track purchased products */}
+      <TrackPurchase productIds={DEMO_ORDER_ITEMS.map((item) => item.productId)} />
+
       {/* Step indicator */}
       <CheckoutSteps currentStep="confirmation" />
 
