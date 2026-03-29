@@ -3,7 +3,7 @@
 import { Star } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { ReviewForm } from "./review-form";
-import { useReviewStore, type UserReview } from "@/lib/stores/review-store";
+import { useReviewStore } from "@/lib/stores/review-store";
 
 interface ProductReviewsProps {
   productId: string;
@@ -123,7 +123,8 @@ function ReviewItem({
 
 export function ProductReviews({ productId, locale }: ProductReviewsProps) {
   const isJa = locale === "ja";
-  const userReviews = useReviewStore((s) => s.getReviewsByProductId(productId));
+  const allUserReviews = useReviewStore((s) => s.reviews);
+  const userReviews = allUserReviews.filter((r) => r.productId === productId);
 
   // Combine demo + user reviews for average calculation
   const allRatings = [
@@ -150,7 +151,7 @@ export function ProductReviews({ productId, locale }: ProductReviewsProps) {
 
         <div className="divide-y">
           {/* User reviews first (newest) */}
-          {userReviews.map((review: UserReview) => (
+          {userReviews.map((review) => (
             <ReviewItem
               key={review.id}
               name={review.name}
