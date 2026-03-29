@@ -157,6 +157,11 @@
     "empty": "No items in your wishlist",
     "browseProducts": "Browse products"
   },
+  "history": {
+    "title": "recently viewed",
+    "empty": "No products viewed yet",
+    "browseProducts": "Browse products"
+  },
   "sort": {
     "newest": "Newest",
     "priceAsc": "Price: Low to High",

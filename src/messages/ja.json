@@ -157,6 +157,11 @@
     "empty": "お気に入りに追加された商品はありません",
     "browseProducts": "商品を見る"
   },
+  "history": {
+    "title": "閲覧履歴",
+    "empty": "まだ商品を閲覧していません",
+    "browseProducts": "商品を見る"
+  },
   "sort": {
     "newest": "新着順",
     "priceAsc": "価格が安い順",

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { User, Package, MapPin, Heart, LogOut } from "lucide-react";
+import { User, Package, MapPin, Heart, Clock, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCustomer, useLogout } from "@/hooks/use-auth";
 
@@ -92,6 +92,13 @@ export function AccountDashboard({ locale }: AccountDashboardProps) {
       label: locale === "ja" ? "お気に入り" : "Wishlist",
       description:
         locale === "ja" ? "お気に入り商品を確認" : "View your saved items",
+    },
+    {
+      href: `/${locale}/account/history`,
+      icon: Clock,
+      label: locale === "ja" ? "閲覧履歴" : "Recently Viewed",
+      description:
+        locale === "ja" ? "最近見た商品を確認" : "View your browsing history",
     },
   ];
 

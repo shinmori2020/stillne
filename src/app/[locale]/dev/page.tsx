@@ -30,6 +30,7 @@ const SITE_LINKS = [
       { label: "配送先情報", path: "/account/addresses" },
       { label: "注文履歴", path: "/account/orders" },
       { label: "お気に入り", path: "/account/wishlist" },
+      { label: "閲覧履歴", path: "/account/history" },
       { label: "ログイン", path: "/account/login" },
       { label: "新規登録", path: "/account/register" },
     ],
