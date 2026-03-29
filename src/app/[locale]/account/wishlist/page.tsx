@@ -3,18 +3,23 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { Heart } from "lucide-react";
+import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { ProductCard } from "@/components/product/product-card";
+import { Button } from "@/components/ui/button";
 import { useWishlistStore } from "@/lib/stores/wishlist-store";
 import { getProductsByIds } from "@/lib/api/products";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
+
+const ITEMS_PER_PAGE = 12;
 
 export default function WishlistPage() {
   const locale = useLocale();
   const t = useTranslations("wishlist");
   const { wishlistIds } = useWishlistStore();
   const [products, setProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (wishlistIds.length > 0) {
@@ -22,7 +27,12 @@ export default function WishlistPage() {
     } else {
       setProducts([]);
     }
+    setCurrentPage(1);
   }, [wishlistIds]);
+
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedProducts = products.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
@@ -34,21 +44,67 @@ export default function WishlistPage() {
           <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">
             {t("title")}
           </h1>
+          {products.length > 0 && (
+            <p className="mt-2 text-sm text-muted-foreground">
+              {products.length}{locale === "ja" ? "件" : " items"}
+            </p>
+          )}
         </header>
       </ScrollFadeIn>
 
-      {products.length > 0 ? (
-        <ScrollFadeIn>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                locale={locale}
-              />
-            ))}
-          </div>
-        </ScrollFadeIn>
+      {paginatedProducts.length > 0 ? (
+        <>
+          <ScrollFadeIn>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
+              {paginatedProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </ScrollFadeIn>
+
+          {totalPages > 1 && (
+            <nav className="mt-12 flex items-center justify-center gap-1" aria-label="Pagination">
+              <Button
+                variant="ghost"
+                size="icon"
+                disabled={currentPage <= 1}
+                onClick={() => setCurrentPage((p) => p - 1)}
+                className="h-9 w-9"
+                aria-label="Previous page"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  variant={page === currentPage ? "secondary" : "ghost"}
+                  size="icon"
+                  onClick={() => setCurrentPage(page)}
+                  className={cn("h-9 w-9", page === currentPage && "pointer-events-none")}
+                  aria-current={page === currentPage ? "page" : undefined}
+                >
+                  {page}
+                </Button>
+              ))}
+
+              <Button
+                variant="ghost"
+                size="icon"
+                disabled={currentPage >= totalPages}
+                onClick={() => setCurrentPage((p) => p + 1)}
+                className="h-9 w-9"
+                aria-label="Next page"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </nav>
+          )}
+        </>
       ) : (
         <ScrollFadeIn>
           <div className="py-16 text-center">

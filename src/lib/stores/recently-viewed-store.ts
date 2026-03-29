@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const STORAGE_KEY = "stillne_recently_viewed";
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 12;
 
 interface RecentlyViewedState {
   viewedIds: string[];
