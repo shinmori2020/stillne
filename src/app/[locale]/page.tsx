@@ -9,6 +9,8 @@ import { Testimonials } from "@/components/home/testimonials";
 import { LifestyleGallery } from "@/components/home/lifestyle-gallery";
 import { FaqSection } from "@/components/home/faq-section";
 import { Newsletter } from "@/components/home/newsletter";
+import { WishlistSection } from "@/components/home/wishlist-section";
+import { RecentlyViewedSection } from "@/components/home/recently-viewed-section";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
 import { getNewArrivals } from "@/lib/api/products";
 
@@ -49,6 +51,8 @@ export default async function HomePage({ params }: HomePageProps) {
         <NewArrivals products={newArrivals} locale={locale} />
       )}
       <StaffPicks products={newArrivals} locale={locale} />
+      <WishlistSection />
+      <RecentlyViewedSection />
       <Testimonials locale={locale} />
       <LifestyleGallery locale={locale} />
       <BrandValues locale={locale} />
