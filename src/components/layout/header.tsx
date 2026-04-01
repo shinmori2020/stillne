@@ -54,44 +54,43 @@ export function Header() {
           stillne
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex lg:items-center lg:gap-8" aria-label="Main navigation">
-          <Link
-            href={`/${locale}/products`}
-            className={cn(
-              "text-sm transition-colors hover:text-foreground",
-              isProductsPage ? "text-foreground" : "text-muted-foreground"
-            )}
-          >
-            {t("common.all")}
-          </Link>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {t("navigation.categories")}
-                <ChevronDown className="h-3.5 w-3.5" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" className="min-w-[160px]">
-              {CATEGORIES.map((cat) => (
-                <DropdownMenuItem key={cat.key} asChild>
-                  <Link
-                    href={`/${locale}/products?category=${cat.handle}`}
-                    className="cursor-pointer"
-                  >
-                    {t(`category.${cat.key}`)}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </nav>
-
-        {/* Right side icons */}
+        {/* Right side: Navigation + Icons */}
         <div className="flex items-center gap-1">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex lg:items-center lg:gap-6 mr-2" aria-label="Main navigation">
+            <Link
+              href={`/${locale}/products`}
+              className={cn(
+                "text-sm transition-colors hover:text-foreground",
+                isProductsPage ? "text-foreground" : "text-muted-foreground"
+              )}
+            >
+              {t("common.all")}
+            </Link>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {t("navigation.categories")}
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[160px]">
+                {CATEGORIES.map((cat) => (
+                  <DropdownMenuItem key={cat.key} asChild>
+                    <Link
+                      href={`/${locale}/products?category=${cat.handle}`}
+                      className="cursor-pointer"
+                    >
+                      {t(`category.${cat.key}`)}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </nav>
           {/* Search */}
           <Button
             variant="ghost"
