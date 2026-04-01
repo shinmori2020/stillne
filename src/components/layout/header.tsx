@@ -169,9 +169,6 @@ export function Header() {
         )}
       >
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 lg:px-12">
-          <p className="mb-6 text-[11px] uppercase tracking-widest text-muted-foreground/60">
-            {t("navigation.categories")}
-          </p>
           <div className="grid grid-cols-4 gap-x-8 gap-y-3">
             {CATEGORIES.map((cat) => (
               <Link
