@@ -40,7 +40,7 @@ export default function NewProductPage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
+    <div className="space-y-6">
       <ScrollFadeIn>
         <Button asChild variant="ghost" className="mb-4">
           <Link href={`/${locale}/admin/products`}>
