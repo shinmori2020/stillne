@@ -32,7 +32,7 @@ export async function Footer({ locale }: FooterProps) {
           <div>
             <Link
               href={`/${locale}`}
-              className="font-heading text-xl lowercase tracking-wide"
+              className="font-heading text-2xl lowercase tracking-wide md:text-3xl"
             >
               stillne
             </Link>
