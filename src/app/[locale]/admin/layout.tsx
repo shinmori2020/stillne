@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <div className="min-h-screen bg-secondary/30">
       {/* Admin Header */}
       <header className="sticky top-0 z-50 border-b bg-background">
-        <div className="flex h-16 items-center justify-between px-4 md:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8 lg:px-12">
           <div className="flex items-center gap-4">
             <Link
               href={`/${locale}`}
@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="mx-auto flex max-w-7xl">
         {/* Sidebar */}
         <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r bg-background md:block">
           <nav className="space-y-1 p-4">
