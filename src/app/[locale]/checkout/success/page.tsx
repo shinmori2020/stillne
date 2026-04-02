@@ -93,11 +93,11 @@ export default async function CheckoutSuccessPage({
 
           <div className="mt-4 space-y-3">
             {DEMO_ORDER_ITEMS.map((item) => (
-              <div key={item.title} className="flex items-center justify-between gap-2 text-sm">
+              <div key={item.title} className="flex flex-col gap-1 text-sm min-[390px]:flex-row min-[390px]:items-center min-[390px]:justify-between min-[390px]:gap-2">
                 <span className="text-muted-foreground">
                   {item.title} × {item.quantity}
                 </span>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between gap-3 min-[390px]:justify-end">
                   <Link
                     href={`/${locale}/products/${item.handle}#review-form`}
                     className="flex items-center gap-1 text-xs text-primary transition-colors hover:text-primary/80"
