@@ -93,7 +93,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </aside>
 
         {/* Mobile Navigation */}
-        <div className="sticky top-16 z-40 flex w-full justify-around border-b bg-background p-2 md:hidden">
+        <div className="sticky top-16 z-40 flex w-full border-b bg-background p-2 md:hidden">
           {navItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -104,7 +104,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+                  "flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm transition-colors",
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted"
