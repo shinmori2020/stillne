@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface WishlistButtonProps {
   productId: string;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "full";
   className?: string;
 }
 
@@ -23,6 +23,29 @@ export function WishlistButton({
     e.stopPropagation();
     toggleWishlist(productId);
   };
+
+  if (size === "full") {
+    return (
+      <button
+        onClick={handleClick}
+        className={cn(
+          "flex h-12 w-full items-center justify-center gap-2 rounded-md border transition-colors hover:bg-secondary",
+          className
+        )}
+        aria-label={active ? "お気に入りから削除" : "お気に入りに追加"}
+      >
+        <Heart
+          className={cn(
+            "h-5 w-5 transition-colors",
+            active ? "fill-red-500 text-red-500" : "text-muted-foreground"
+          )}
+        />
+        <span className="text-sm">
+          {active ? "お気に入りから削除" : "お気に入りに追加"}
+        </span>
+      </button>
+    );
+  }
 
   if (size === "sm") {
     return (

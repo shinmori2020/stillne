@@ -298,19 +298,20 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
           )}
 
           {/* Quantity & Add to Cart & Favorite */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 min-[390px]:flex-row min-[390px]:items-center min-[390px]:gap-4">
             <QuantitySelector
               value={quantity}
               onChange={setQuantity}
               max={selectedVariant?.inventory_quantity ?? 99}
               disabled={isOutOfStock ?? false}
+              className="w-full justify-between min-[390px]:w-auto min-[390px]:justify-start"
             />
             <Button
               onClick={handleAddToCart}
               disabled={
                 !selectedVariant || isOutOfStock || addToCart.isPending
               }
-              className="flex-1"
+              className="h-12 w-full min-[390px]:h-auto min-[390px]:w-auto min-[390px]:flex-1"
               size="lg"
             >
               {addToCart.isPending
@@ -319,7 +320,12 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
                   ? t("addedToCart")
                   : t("addToCart")}
             </Button>
-            <WishlistButton productId={product.id} />
+            <div className="min-[390px]:hidden">
+              <WishlistButton productId={product.id} size="full" />
+            </div>
+            <div className="hidden min-[390px]:block">
+              <WishlistButton productId={product.id} />
+            </div>
           </div>
 
           {/* Shipping & Returns Info */}

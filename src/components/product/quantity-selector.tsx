@@ -2,6 +2,7 @@
 
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
 interface QuantitySelectorProps {
@@ -10,6 +11,7 @@ interface QuantitySelectorProps {
   min?: number;
   max?: number;
   disabled?: boolean;
+  className?: string;
 }
 
 export function QuantitySelector({
@@ -18,6 +20,7 @@ export function QuantitySelector({
   min = 1,
   max = 99,
   disabled = false,
+  className,
 }: QuantitySelectorProps) {
   const t = useTranslations("product");
 
@@ -34,7 +37,7 @@ export function QuantitySelector({
   };
 
   return (
-    <div className="flex items-center">
+    <div className={cn("flex items-center", className)}>
       <span className="mr-3 text-sm text-muted-foreground">{t("quantity")}</span>
       <div className="flex items-center rounded-sm border border-border">
         <Button
