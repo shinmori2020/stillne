@@ -39,7 +39,7 @@ export function RecentlyViewedProducts({
         <h2 className="mb-8 font-heading text-xl lowercase tracking-wide md:text-2xl">
           {isJa ? "最近見た商品" : "recently viewed"}
         </h2>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} locale={locale} />
           ))}

@@ -68,7 +68,7 @@ export function LifestyleGallery({ locale }: LifestyleGalleryProps) {
           </div>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
           {GALLERY_ITEMS.map((item, index) => (
             <ScrollFadeIn key={index} delay={index * 0.05}>
               <div
