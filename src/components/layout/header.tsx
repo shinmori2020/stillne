@@ -169,7 +169,7 @@ export function Header() {
         )}
       >
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 lg:px-12">
-          <div className="grid grid-cols-4 gap-x-8 gap-y-3">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-3 xl:grid-cols-4">
             {CATEGORIES.map((cat) => (
               <Link
                 key={cat.key}

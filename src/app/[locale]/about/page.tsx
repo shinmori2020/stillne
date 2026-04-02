@@ -26,7 +26,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const t = await getTranslations({ locale, namespace: "pages.about" });
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16">
+    <div className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
       <ScrollFadeIn>
         <header className="mb-12 text-center">
           <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">
@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <h2 className="mb-8 font-heading text-2xl lowercase tracking-wide">
             {t("values.title")}
           </h2>
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
             <div className="rounded-lg border bg-card p-6">
               <h3 className="mb-3 font-heading text-lg">
                 {t("values.quality.title")}

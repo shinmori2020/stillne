@@ -162,7 +162,7 @@ export default function ContactPage() {
                 <Textarea
                   id="message"
                   name="message"
-                  rows={8}
+                  rows={5}
                   required
                   disabled={isSubmitting}
                 />

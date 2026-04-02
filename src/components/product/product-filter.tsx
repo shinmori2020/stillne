@@ -47,7 +47,7 @@ export function ProductFilter({ locale, currentCategory }: ProductFilterProps) {
         value={currentCategory ?? "all"}
         onValueChange={handleCategoryChange}
       >
-        <SelectTrigger className="w-[160px]">
+        <SelectTrigger className="w-[140px] sm:w-[160px]">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

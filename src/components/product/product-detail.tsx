@@ -212,7 +212,7 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
               {/* Thumbnails */}
               <div
                 ref={thumbContainerRef}
-                className="flex gap-3 overflow-x-auto scroll-smooth px-8 py-1 scrollbar-hide"
+                className="flex gap-3 overflow-x-auto scroll-smooth px-6 py-1 scrollbar-hide sm:px-8"
                 style={{ scrollbarWidth: "none" }}
               >
                 {displayImages.map((image, index) => (
@@ -323,7 +323,7 @@ export function ProductDetail({ product, locale }: ProductDetailProps) {
           </div>
 
           {/* Shipping & Returns Info */}
-          <div className="grid grid-cols-3 gap-3 border-t border-border pt-6">
+          <div className="grid grid-cols-3 gap-2 border-t border-border pt-6 sm:gap-3">
             <div className="flex flex-col items-center gap-1.5 text-center">
               <Truck className="h-5 w-5 text-muted-foreground" />
               <span className="text-xs text-muted-foreground">

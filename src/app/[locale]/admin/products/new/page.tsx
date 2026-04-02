@@ -55,10 +55,10 @@ export default function NewProductPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Product Image */}
         <ScrollFadeIn>
-          <div className="rounded-lg border bg-card p-6">
+          <div className="rounded-lg border bg-card p-4 md:p-6">
             <Label>{locale === "ja" ? "商品画像" : "Product Image"}</Label>
             <div className="mt-4 flex justify-center">
-              <div className="h-48 w-48 overflow-hidden rounded-lg border-2 border-dashed">
+              <div className="h-40 w-40 overflow-hidden rounded-lg border-2 border-dashed sm:h-48 sm:w-48">
                 <PlaceholderImage
                   width={192}
                   height={192}
@@ -78,7 +78,7 @@ export default function NewProductPage() {
 
         {/* Basic Info */}
         <ScrollFadeIn>
-          <div className="rounded-lg border bg-card p-6 space-y-4">
+          <div className="rounded-lg border bg-card p-4 space-y-4 md:p-6">
             <div className="space-y-2">
               <Label htmlFor="title">{t("productName")}</Label>
               <Input
