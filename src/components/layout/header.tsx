@@ -164,7 +164,7 @@ export function Header() {
       <div
         ref={megaMenuRef}
         className={cn(
-          "hidden lg:block overflow-hidden border-b border-border bg-secondary/60 shadow-sm transition-all duration-300 ease-in-out",
+          "absolute left-0 right-0 hidden lg:block overflow-hidden border-b border-border bg-background/95 shadow-sm backdrop-blur-sm transition-all duration-300 ease-in-out",
           megaMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-b-0"
         )}
       >
