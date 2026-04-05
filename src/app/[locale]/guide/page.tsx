@@ -37,7 +37,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
+    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16 lg:px-12">
       <ScrollFadeIn>
         <header className="mb-12 text-center">
           <h1 className="font-heading text-3xl lowercase tracking-wide md:text-4xl">

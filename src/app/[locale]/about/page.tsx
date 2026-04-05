@@ -49,7 +49,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </section>
       </ScrollFadeIn>
 
-      <div className="mx-auto max-w-4xl px-4 py-16 md:px-8 md:py-20 lg:px-12">
+      <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20 lg:px-12">
         {/* Concept */}
         <ScrollFadeIn>
           <section className="mb-20">
