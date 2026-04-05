@@ -165,19 +165,21 @@ export function Header() {
         ref={megaMenuRef}
         className={cn(
           "hidden lg:block overflow-hidden border-b border-border bg-secondary/60 shadow-sm transition-all duration-300 ease-in-out",
-          megaMenuOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0 border-b-0"
+          megaMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-b-0"
         )}
       >
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 lg:px-12">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-4 xl:grid-cols-4">
             {CATEGORIES.map((cat) => (
               <Link
                 key={cat.key}
                 href={`/${locale}/products?category=${cat.handle}`}
-                className="group flex items-center gap-2 py-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
+                className="group flex items-center gap-3 rounded-lg py-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground"
                 onClick={() => setMegaMenuOpen(false)}
               >
-                <span className="h-px w-3 bg-border transition-all group-hover:w-5 group-hover:bg-foreground" />
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-muted/60 transition-colors group-hover:bg-muted">
+                  <span className="text-xs text-muted-foreground">No img</span>
+                </div>
                 {t(`category.${cat.key}`)}
               </Link>
             ))}
