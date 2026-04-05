@@ -210,6 +210,11 @@
         "title": "our concept",
         "description": "stillne is an online store that delivers interior goods and daily essentials that blend into your everyday life while providing a small sense of satisfaction every time you reach for them. We carefully curate products that speak through their materials and form, without excessive decoration."
       },
+      "story": {
+        "title": "our story",
+        "paragraph1": "stillne was born from a word meaning \"stillness.\" Even in the midst of a busy day, we wanted to offer everyday tools that bring a moment of calm simply by holding them.",
+        "paragraph2": "Working directly with workshops across Japan and artisans abroad, we carefully select products that prioritize texture and comfort. We deliver timeless staples that are loved for years, unaffected by passing trends."
+      },
       "values": {
         "title": "our values",
         "quality": {
@@ -223,6 +228,120 @@
         "sustainability": {
           "title": "sustainability",
           "description": "We value environmentally conscious material selection and products built to last."
+        }
+      },
+      "materials": {
+        "title": "our materials",
+        "ceramic": {
+          "title": "Ceramics",
+          "description": "Vessels where the warmth of clay and beauty of glaze harmonize"
+        },
+        "wood": {
+          "title": "Natural Wood",
+          "description": "Solid wood furniture and goods that age beautifully"
+        },
+        "fabric": {
+          "title": "Textiles",
+          "description": "Natural fabric with a focus on touch and comfort"
+        },
+        "glass": {
+          "title": "Glass",
+          "description": "Glassware that captures light and adds transparency to spaces"
+        }
+      },
+      "cta": {
+        "title": "products for your everyday life",
+        "description": "Discover items carefully curated by stillne to enrich your daily life.",
+        "shop": "Browse Products",
+        "contact": "Contact Us"
+      }
+    },
+    "guide": {
+      "title": "size & care guide",
+      "subtitle": "a guide to help you enjoy your products for years to come",
+      "size": {
+        "title": "size guide",
+        "description": "Please refer to the general size ranges by category. Detailed measurements for each product are listed on their respective product pages.",
+        "table": {
+          "item": "Product"
+        },
+        "furniture": {
+          "title": "Furniture",
+          "col1": "Width",
+          "col2": "Depth",
+          "col3": "Height",
+          "row1": { "item": "Dining Table", "val1": "120–180cm", "val2": "80–90cm", "val3": "72cm" },
+          "row2": { "item": "Desk", "val1": "100–140cm", "val2": "50–60cm", "val3": "72cm" },
+          "row3": { "item": "Shelf", "val1": "60–90cm", "val2": "30–40cm", "val3": "120–180cm" }
+        },
+        "tableware": {
+          "title": "Tableware",
+          "col1": "Diameter",
+          "col2": "Height",
+          "col3": "Capacity",
+          "row1": { "item": "Dinner Plate", "val1": "24–27cm", "val2": "2–3cm", "val3": "—" },
+          "row2": { "item": "Mug", "val1": "8–9cm", "val2": "9–10cm", "val3": "250–350ml" },
+          "row3": { "item": "Bowl", "val1": "14–16cm", "val2": "6–8cm", "val3": "400–600ml" }
+        },
+        "fabric": {
+          "title": "Fabric",
+          "col1": "Width",
+          "col2": "Length",
+          "col3": "Material",
+          "row1": { "item": "Cushion Cover", "val1": "45cm", "val2": "45cm", "val3": "Linen / Cotton" },
+          "row2": { "item": "Blanket", "val1": "130cm", "val2": "180cm", "val3": "Wool / Cotton" },
+          "row3": { "item": "Table Runner", "val1": "33cm", "val2": "150cm", "val3": "Linen" }
+        }
+      },
+      "care": {
+        "title": "care guide by material",
+        "description": "Proper care for each material will help keep your products beautiful for a long time.",
+        "ceramic": {
+          "title": "Ceramic Care",
+          "tip1": "Wash gently with a soft sponge after use and dry thoroughly",
+          "tip2": "Avoid sudden temperature changes (except microwave-safe items)",
+          "tip3": "When stacking, place a cloth between items to prevent scratches"
+        },
+        "wood": {
+          "title": "Natural Wood Care",
+          "tip1": "Wipe with a dry or well-wrung cloth. Avoid leaving moisture on surfaces",
+          "tip2": "Apply a thin coat of wood oil every six months to maintain shine",
+          "tip3": "Avoid prolonged direct sunlight or proximity to heaters"
+        },
+        "fabric": {
+          "title": "Fabric Care",
+          "tip1": "Check care labels and hand wash or use delicate cycle",
+          "tip2": "Avoid tumble dryer. Reshape and dry in shade",
+          "tip3": "Iron on low heat with a pressing cloth"
+        },
+        "glass": {
+          "title": "Glass Care",
+          "tip1": "Hand wash with a soft sponge and dry immediately to prevent water marks",
+          "tip2": "Avoid dishwashers (except dishwasher-safe items)",
+          "tip3": "Non-heat-resistant glass should not be subjected to sudden temperature changes"
+        }
+      },
+      "symbols": {
+        "title": "care symbols",
+        "noWash": {
+          "icon": "🚫",
+          "label": "No Washing",
+          "description": "Do not wash with water"
+        },
+        "wipeDry": {
+          "icon": "🧹",
+          "label": "Dry Wipe",
+          "description": "Wipe with a dry cloth"
+        },
+        "avoidSun": {
+          "icon": "☀️",
+          "label": "Avoid Sunlight",
+          "description": "Store away from direct sunlight"
+        },
+        "handleCare": {
+          "icon": "🤲",
+          "label": "Handle with Care",
+          "description": "Avoid impact and shock"
         }
       }
     },

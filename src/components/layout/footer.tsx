@@ -14,6 +14,7 @@ export async function Footer({ locale }: FooterProps) {
 
   const helpLinks = [
     { label: t("shipping"), href: "/shipping" },
+    { label: locale === "ja" ? "サイズ・ケアガイド" : "Size & Care Guide", href: "/guide" },
     { label: t("contact"), href: "/contact" },
     { label: locale === "ja" ? "よくある質問" : "FAQ", href: "/faq" },
   ] as const;
