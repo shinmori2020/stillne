@@ -132,7 +132,7 @@ export function HeroBanner({ locale }: HeroBannerProps) {
       {/* Content - text changes, buttons stay fixed */}
       <div className="relative flex h-full items-center">
         <div className="mx-auto w-full max-w-7xl px-4 md:px-8 lg:px-12">
-          <div className="max-w-xl">
+          <div>
             {/* Animated text */}
             <div
               className={cn(
@@ -142,10 +142,10 @@ export function HeroBanner({ locale }: HeroBannerProps) {
                   : "translate-y-3 opacity-0 blur-[2px]"
               )}
             >
-              <h1 className="font-heading text-4xl lowercase tracking-wide md:text-5xl lg:text-6xl">
+              <h1 className="font-heading text-2xl lowercase tracking-wide md:text-3xl lg:text-4xl">
                 {t(slide.titleKey as any)}
               </h1>
-              <p className="mt-4 text-lg text-muted-foreground md:mt-6 md:text-xl">
+              <p className="mt-3 text-sm text-muted-foreground md:mt-4 md:text-base">
                 {t(slide.subtitleKey as any)}
               </p>
             </div>
