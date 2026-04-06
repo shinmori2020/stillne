@@ -4,6 +4,62 @@ import type { Metadata } from "next";
 import { ScrollFadeIn } from "@/components/common/scroll-fade-in";
 import { Ruler, Droplets, Wind, ShieldCheck } from "lucide-react";
 
+function NoWashIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2c-3 4-6 6.5-6 10a6 6 0 0 0 12 0c0-3.5-3-6-6-10Z" />
+      <line x1="4" y1="4" x2="20" y2="20" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function WipeDryIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="6" width="18" height="12" rx="2" />
+      <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+      <line x1="8" y1="12" x2="16" y2="12" />
+      <line x1="8" y1="15" x2="13" y2="15" />
+    </svg>
+  );
+}
+
+function AvoidSunIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2" />
+      <path d="M12 20v2" />
+      <path d="m4.93 4.93 1.41 1.41" />
+      <path d="m17.66 17.66 1.41 1.41" />
+      <path d="M2 12h2" />
+      <path d="M20 12h2" />
+      <path d="m6.34 17.66-1.41 1.41" />
+      <path d="m19.07 4.93-1.41 1.41" />
+      <line x1="4" y1="4" x2="20" y2="20" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function HandleCareIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 11c-1.5 0-3 1-3 3s1.5 3 3 3" />
+      <path d="M17 11c1.5 0 3 1 3 3s-1.5 3-3 3" />
+      <path d="M7 17h10" />
+      <path d="M12 7l-3 4h6l-3-4Z" />
+      <line x1="12" y1="3" x2="12" y2="5" />
+    </svg>
+  );
+}
+
+const careSymbolIcons = {
+  noWash: NoWashIcon,
+  wipeDry: WipeDryIcon,
+  avoidSun: AvoidSunIcon,
+  handleCare: HandleCareIcon,
+};
+
 interface GuidePageProps {
   params: Promise<{ locale: string }>;
 }
@@ -165,22 +221,25 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {(["noWash", "wipeDry", "avoidSun", "handleCare"] as const).map(
-              (sym) => (
-                <div
-                  key={sym}
-                  className="flex flex-col items-center rounded-lg border p-4 text-center"
-                >
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-secondary/60">
-                    <span className="text-lg">{t(`symbols.${sym}.icon`)}</span>
+              (sym) => {
+                const SymIcon = careSymbolIcons[sym];
+                return (
+                  <div
+                    key={sym}
+                    className="flex flex-col items-center rounded-lg border p-4 text-center"
+                  >
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-secondary/60">
+                      <SymIcon className="h-6 w-6 text-primary" />
+                    </div>
+                    <span className="text-xs font-medium">
+                      {t(`symbols.${sym}.label`)}
+                    </span>
+                    <span className="mt-1 text-xs text-muted-foreground">
+                      {t(`symbols.${sym}.description`)}
+                    </span>
                   </div>
-                  <span className="text-xs font-medium">
-                    {t(`symbols.${sym}.label`)}
-                  </span>
-                  <span className="mt-1 text-xs text-muted-foreground">
-                    {t(`symbols.${sym}.description`)}
-                  </span>
-                </div>
-              )
+                );
+              }
             )}
           </div>
         </section>
