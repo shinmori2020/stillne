@@ -38,9 +38,6 @@ export async function Footer({ locale }: FooterProps) {
             >
               stillne
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground">
-              {t("concept")}
-            </p>
             <div className="mt-4 space-y-1 text-xs text-muted-foreground">
               <p>{locale === "ja" ? "〒150-0001 東京都渋谷区神宮前3-1-1" : "3-1-1 Jingumae, Shibuya-ku, Tokyo 150-0001"}</p>
               <p>TEL: 03-1234-5678</p>
