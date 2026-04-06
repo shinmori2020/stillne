@@ -34,9 +34,12 @@ export async function Footer({ locale }: FooterProps) {
           <div>
             <Link
               href={`/${locale}`}
-              className="font-heading text-2xl lowercase tracking-wide md:text-3xl"
+              className="group inline-flex flex-col items-start"
             >
-              stillne
+              <span className="font-heading text-2xl lowercase tracking-[0.25em] md:text-3xl">
+                stillne
+              </span>
+              <span className="mt-0.5 h-px w-full bg-foreground/40 transition-colors group-hover:bg-foreground" />
             </Link>
             <div className="mt-4 space-y-1 text-xs text-muted-foreground">
               <p>{locale === "ja" ? "〒150-0001 東京都渋谷区神宮前3-1-1" : "3-1-1 Jingumae, Shibuya-ku, Tokyo 150-0001"}</p>

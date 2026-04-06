@@ -72,9 +72,12 @@ export function Header() {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="font-heading text-2xl lowercase tracking-wide md:text-3xl"
+            className="group inline-flex flex-col items-center"
           >
-            stillne
+            <span className="font-heading text-2xl lowercase tracking-[0.25em] md:text-3xl">
+              stillne
+            </span>
+            <span className="mt-0.5 h-px w-full bg-foreground/40 transition-colors group-hover:bg-foreground" />
           </Link>
 
           {/* Right side: Navigation + Icons */}
